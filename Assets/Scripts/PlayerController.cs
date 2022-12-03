@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
-        //inputSystem.Transformation.ToWater.performed += context => Jump();
+
         inputSystem.Transformation.ToWater.performed += context => TransformaitionToWater();
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAire();
