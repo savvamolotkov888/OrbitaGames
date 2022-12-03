@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire
 {
-    public void Move(Vector2 moveVector)
+    public void Move(Vector2 moveVector , Rigidbody iceRigidbody)
     {
         Debug.Log("IceMove" + moveVector);
     }

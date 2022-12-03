@@ -4,38 +4,46 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody WaterRigidbody;
+    private Rigidbody iceRigidbody;
+    private Rigidbody airRigidbody;
+    private Rigidbody currentRigidbody;
+
+
     private InputSystem inputSystem;
+    private PlayerState currentState = PlayerState.Water;
     public PlayerState CurrentState
     {
         get => currentState;
         set
         {
             currentState = value;
-
             water.gameObject.SetActive(false);
             ice.gameObject.SetActive(false);
             air.gameObject.SetActive(false);
-
 
             switch (currentState)
             {
                 case PlayerState.Water:
                     water.gameObject.SetActive(true);
+                    currentRigidbody = WaterRigidbody;
                     break;
                 case PlayerState.Ice:
                     ice.gameObject.SetActive(true);
+                    currentRigidbody = iceRigidbody;
                     break;
                 case PlayerState.Air:
                     air.gameObject.SetActive(true);
+                    currentRigidbody = airRigidbody;
                     break;
                 default:
                     break;
             }
-
-
         }
     }
-    private PlayerState currentState = PlayerState.Water;
+
+
+
     public Water water;
     public Ice ice;
     public Air air;
@@ -45,9 +53,15 @@ public class PlayerController : MonoBehaviour
     public IJump jump;
 
     void Jump(IJump jump) => jump.Jump();
-    void Move(IMove movable) => movable.Move(moveDirection);
+    void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody);
     private void Awake()
     {
+        WaterRigidbody = water.GetComponent<Rigidbody>();
+        iceRigidbody = ice.GetComponent<Rigidbody>();
+        airRigidbody = water.GetComponent<Rigidbody>();
+
+        currentRigidbody = WaterRigidbody;
+
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
 
@@ -58,16 +72,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-     
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
         Move();
-       
+        UpdatePosition();
+    }
 
-    }
-    private void LateUpdate()
-    {
-          UpdatePosition();
-    }
     void Move()
     {
         switch (currentState)

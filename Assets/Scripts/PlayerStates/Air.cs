@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce 
 {
-    public void Move(Vector2 moveVector)
+    public void Move(Vector2 moveVector,Rigidbody airRigidbody)
     {
         Debug.Log("AirMove" + moveVector);
     }
