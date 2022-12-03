@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
         Move();
-        UpdatePosition();
     }
 
     void Move()
@@ -116,14 +115,15 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                Debug.Log(PlayerData.position);
+                gameObject.transform.position = water.transform.position;
                 break;
             case PlayerState.Ice:
-                Debug.Log(PlayerData.position);
+                gameObject.transform.position = ice.transform.position;
+
 
                 break;
             case PlayerState.Air:
-                Debug.Log(PlayerData.position);
+                gameObject.transform.position = air.transform.position;
 
                 break;
             default:
