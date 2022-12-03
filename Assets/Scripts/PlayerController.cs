@@ -5,8 +5,37 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private InputSystem inputSystem;
-    public PlayerState currentState = PlayerState.Water;
+    public PlayerState CurrentState
+    {
+        get => currentState;
+        set
+        {
+            currentState = value;
 
+            water.gameObject.SetActive(false);
+            ice.gameObject.SetActive(false);
+            air.gameObject.SetActive(false);
+
+
+            switch (currentState)
+            {
+                case PlayerState.Water:
+                    water.gameObject.SetActive(true);
+                    break;
+                case PlayerState.Ice:
+                    ice.gameObject.SetActive(true);
+                    break;
+                case PlayerState.Air:
+                    air.gameObject.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+    }
+    private PlayerState currentState = PlayerState.Water;
     public Water water;
     public Ice ice;
     public Air air;
@@ -29,11 +58,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+      //  UpdatePosition();
+        gameObject.transform.position = PlayerData.position;
+        this.gameObject.transform.position = PlayerData.position;
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
-        Move(moveDirection);
+        Move();
+       
 
     }
-    void Move(Vector2 moveDirection)
+    void Move()
     {
         switch (currentState)
         {
@@ -43,7 +76,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Ice:
                 Move(ice);
                 break;
-            case PlayerState.Aire:
+            case PlayerState.Air:
                 Move(air);
                 break;
             default:
@@ -60,8 +93,27 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Ice:
                 Jump(ice);
                 break;
-            case PlayerState.Aire:
+            case PlayerState.Air:
                 Jump(air);
+                break;
+            default:
+                break;
+        }
+    }
+    void UpdatePosition()
+    {
+        switch (currentState)
+        {
+            case PlayerState.Water:
+                Debug.Log(PlayerData.position);
+                break;
+            case PlayerState.Ice:
+                Debug.Log(PlayerData.position);
+
+                break;
+            case PlayerState.Air:
+                Debug.Log(PlayerData.position);
+
                 break;
             default:
                 break;
@@ -71,18 +123,18 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
-        currentState = PlayerState.Water;
+        CurrentState = PlayerState.Water;
     }
 
     void TransformaitionToIce()
     {
         Debug.Log("TransformaitionToIce");
-        currentState = PlayerState.Ice;
+        CurrentState = PlayerState.Ice;
     }
     void TransformaitionToAire()
     {
         Debug.Log("TransformaitionToAire");
-        currentState = PlayerState.Aire;
+        CurrentState = PlayerState.Air;
     }
 
 
@@ -96,4 +148,4 @@ public class PlayerController : MonoBehaviour
         inputSystem.Disable();
     }
 }
-public enum PlayerState { Water, Ice, Aire }
+public enum PlayerState { Water, Ice, Air }
