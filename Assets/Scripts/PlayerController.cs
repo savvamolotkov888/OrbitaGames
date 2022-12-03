@@ -58,13 +58,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-      //  UpdatePosition();
-        gameObject.transform.position = PlayerData.position;
-        this.gameObject.transform.position = PlayerData.position;
+     
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
         Move();
        
 
+    }
+    private void LateUpdate()
+    {
+          UpdatePosition();
     }
     void Move()
     {
