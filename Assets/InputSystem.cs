@@ -206,10 +206,10 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a5327e36-74a7-4297-8965-7d273f084d76"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""ToWater"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -217,7 +217,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""66768e3f-0e7a-4a63-83d3-268ef4e531dd"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -228,7 +228,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""60d9e1f6-4034-43e1-97d5-ed7834d676bc"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

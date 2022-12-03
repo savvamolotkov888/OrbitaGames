@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.26792946, g: 0.463935, b: 0.61439043, a: 1}
+  m_IndirectSpecularColor: {r: 0.56158954, g: 0.72180885, b: 0.817857, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 1987914}
   - component: {fileID: 1987913}
   - component: {fileID: 1987912}
+  - component: {fileID: 1987915}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -220,6 +221,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987910}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1987915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b65b3470896e52409c25abcbb6ea5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &299169697
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25338187b12d264791833a21253e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: {fileID: 0}
+  currentState: 0
+  water: {fileID: 804669117}
+  ice: {fileID: 1987915}
+  air: {fileID: 657360847}
 --- !u!1 &497694824
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +410,6 @@ GameObject:
   - component: {fileID: 570007310}
   - component: {fileID: 570007309}
   - component: {fileID: 570007313}
-  - component: {fileID: 570007312}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -468,18 +483,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 18.25, y: 0, z: 0}
---- !u!114 &570007312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570007308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52d3a52ce0632945a378bc661014d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &570007313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +528,7 @@ GameObject:
   - component: {fileID: 657360846}
   - component: {fileID: 657360845}
   - component: {fileID: 657360844}
+  - component: {fileID: 657360847}
   m_Layer: 0
   m_Name: Air
   m_TagString: Untagged
@@ -613,6 +617,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657360842}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &657360847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657360842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1339d386dc5ea0a42bd67ecdd9221f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &804669111
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +640,7 @@ GameObject:
   - component: {fileID: 804669114}
   - component: {fileID: 804669116}
   - component: {fileID: 804669115}
+  - component: {fileID: 804669117}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -1023,6 +1040,18 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &804669117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804669111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ae2cdb453505241a75a15caa87c57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &909353719
 GameObject:
   m_ObjectHideFlags: 0
