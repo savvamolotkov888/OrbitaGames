@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Water : MonoBehaviour, IMove, IJump, IChangeState
+public class Water : MonoBehaviour, IMove, IJump 
 {
     public void Move()
     {
@@ -12,9 +12,4 @@ public class Water : MonoBehaviour, IMove, IJump, IChangeState
     {
         Debug.Log("WaterJump");
     }
-    public void ChangeState()
-    {
-        Debug.Log("WaterJump");
-    }
-
 }

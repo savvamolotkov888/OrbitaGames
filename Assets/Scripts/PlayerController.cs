@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+  //  private InputSystem inputSystem;
 
-    // Update is called once per frame
-    void Update()
+    public Water water;
+    public Ice ice;
+    public Air air;
+    private void Awake()
+    {
+    }
+    private void Update()
     {
         
+
+
     }
 }

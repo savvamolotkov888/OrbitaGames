@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public Vector3 rotation;
 
     public int health;
-
-    public PlayerState currentState;
-    public enum PlayerState { Water, Ice, Ire }
 }
+
+public enum PlayerState { Water, Ice, Ire }

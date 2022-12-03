@@ -162,7 +162,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Steam",
+                    "name": "ToSteam",
                     "type": "Button",
                     "id": "fb1f144e-5f3a-4505-af99-c01c3bf5d7f6",
                     "expectedControlType": "Button",
@@ -190,7 +190,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Steam",
+                    "action": "ToSteam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ice : MonoBehaviour
+public class Ice : IMove, IJump
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Move()
     {
-        
+        Debug.Log("IceMove");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Jump()
     {
-        
+        Debug.Log("IceJump");
     }
 }
