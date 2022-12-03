@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastPosition;
 
     private InputSystem inputSystem;
-    private PlayerState currentState = PlayerState.Water;
+    private PlayerState currentState;
     public PlayerState CurrentState
     {
         get => currentState;
@@ -65,7 +65,12 @@ public class PlayerController : MonoBehaviour
         iceRigidbody = ice.GetComponent<Rigidbody>();
         airRigidbody = water.GetComponent<Rigidbody>();
 
+        currentState= PlayerState.Water;
         currentRigidbody = WaterRigidbody;
+
+
+
+
 
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
