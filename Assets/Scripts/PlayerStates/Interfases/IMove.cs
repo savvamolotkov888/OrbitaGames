@@ -1,5 +1,5 @@
 using UnityEngine;
 public interface IMove
 {
-    public void Move();
+    public void Move(Vector2 moveVector);
 }

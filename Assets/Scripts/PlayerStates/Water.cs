@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Water : MonoBehaviour, IMove, IJump 
 {
-    public void Move()
+    public void Move(Vector2 moveVector)
     {
-        Debug.Log("WaterMove");
+        Debug.Log("WaterMove" + moveVector);
     }
     public void Jump()
     {

@@ -153,18 +153,27 @@
             "id": "c5d85277-26ef-4788-8b90-eaaf7881ade8",
             "actions": [
                 {
-                    "name": "Water_Ice",
+                    "name": "ToWater",
                     "type": "Button",
-                    "id": "7f702676-16d7-4899-8fc0-38c058bc2c55",
+                    "id": "29b16359-1447-40e2-b3ed-8255d286bf9f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "ToSteam",
+                    "name": "ToIce",
                     "type": "Button",
-                    "id": "fb1f144e-5f3a-4505-af99-c01c3bf5d7f6",
+                    "id": "ba0742f5-c491-4ef4-bb4a-f8593f254112",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToAir",
+                    "type": "Button",
+                    "id": "f8732685-2293-4f3d-8f63-d32a37638e96",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -174,23 +183,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "015eee4f-524e-4788-a7f4-df9ac6e5f636",
+                    "id": "a5327e36-74a7-4297-8965-7d273f084d76",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Water_Ice",
+                    "action": "ToWater",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0f1074c2-c2e0-438a-929a-b7a4c931e706",
+                    "id": "66768e3f-0e7a-4a63-83d3-268ef4e531dd",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToSteam",
+                    "action": "ToIce",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60d9e1f6-4034-43e1-97d5-ed7834d676bc",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToAir",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

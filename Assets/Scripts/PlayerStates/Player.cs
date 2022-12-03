@@ -10,4 +10,4 @@ public class Player : MonoBehaviour
     public int health;
 }
 
-public enum PlayerState { Water, Ice, Ire }
+
