@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+
     private Rigidbody WaterRigidbody;
     private Rigidbody iceRigidbody;
     private Rigidbody airRigidbody;
     private Rigidbody currentRigidbody;
 
+    private Vector3 lastPosition;
 
     private InputSystem inputSystem;
     private PlayerState currentState = PlayerState.Water;
@@ -25,14 +27,17 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
+                    water.transform.position = lastPosition;
                     water.gameObject.SetActive(true);
                     currentRigidbody = WaterRigidbody;
                     break;
                 case PlayerState.Ice:
+                    ice.transform.position = lastPosition;
                     ice.gameObject.SetActive(true);
                     currentRigidbody = iceRigidbody;
                     break;
                 case PlayerState.Air:
+                    air.transform.position = lastPosition;
                     air.gameObject.SetActive(true);
                     currentRigidbody = airRigidbody;
                     break;
@@ -67,13 +72,18 @@ public class PlayerController : MonoBehaviour
 
         inputSystem.Transformation.ToWater.performed += context => TransformaitionToWater();
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
-        inputSystem.Transformation.ToAir.performed += context => TransformaitionToAire();
+        inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
     }
 
     private void Update()
     {
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
         Move();
+
+    }
+    private void LateUpdate()
+    {
+        UpdatePosition();
     }
 
     void Move()
@@ -115,35 +125,38 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                gameObject.transform.position = water.transform.position;
+                lastPosition = water.transform.position;
                 break;
             case PlayerState.Ice:
-                gameObject.transform.position = ice.transform.position;
-
+                lastPosition = ice.transform.position;
 
                 break;
             case PlayerState.Air:
-                gameObject.transform.position = air.transform.position;
+                lastPosition = air.transform.position;
 
                 break;
             default:
                 break;
         }
+        Debug.LogError(lastPosition);
     }
 
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
+        gameObject.transform.position = water.transform.position;
         CurrentState = PlayerState.Water;
     }
 
     void TransformaitionToIce()
     {
         Debug.Log("TransformaitionToIce");
+        gameObject.transform.position = ice.transform.position;
         CurrentState = PlayerState.Ice;
     }
-    void TransformaitionToAire()
+    void TransformaitionToAir()
     {
+        gameObject.transform.position = air.transform.position;
         Debug.Log("TransformaitionToAire");
         CurrentState = PlayerState.Air;
     }
