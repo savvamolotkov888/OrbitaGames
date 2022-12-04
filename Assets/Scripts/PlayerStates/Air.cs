@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce 
 {
-    public void Move(Vector2 moveVector,Rigidbody airRigidbody)
+    public void Move(Vector2 moveVector,Rigidbody airRigidbody,float acceleration)
     {
         Debug.Log("AirMove" + moveVector);
+        airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y *acceleration);
     }
     public void Jump()
     {

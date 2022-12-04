@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float waterAcceleration;
+    [SerializeField] private float iceAcceleration;
+    [SerializeField] private float airAcceleration;
 
     private Rigidbody WaterRigidbody;
     private Rigidbody iceRigidbody;
     private Rigidbody airRigidbody;
     private Rigidbody currentRigidbody;
+
+    private float acceleration;
 
     private Vector3 lastPosition;
 
@@ -58,12 +63,12 @@ public class PlayerController : MonoBehaviour
     public IJump jump;
 
     void Jump(IJump jump) => jump.Jump();
-    void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody);
+    void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody , acceleration);
     private void Awake()
     {
         WaterRigidbody = water.GetComponent<Rigidbody>();
         iceRigidbody = ice.GetComponent<Rigidbody>();
-        airRigidbody = water.GetComponent<Rigidbody>();
+        airRigidbody = air.GetComponent<Rigidbody>();
 
         currentState= PlayerState.Water;
         currentRigidbody = WaterRigidbody;
@@ -96,12 +101,15 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
+                acceleration = waterAcceleration;
                 Move(water);
                 break;
             case PlayerState.Ice:
+                acceleration = iceAcceleration;
                 Move(ice);
                 break;
             case PlayerState.Air:
+                acceleration = airAcceleration;
                 Move(air);
                 break;
             default:

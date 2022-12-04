@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire
 {
-    public void Move(Vector2 moveVector , Rigidbody iceRigidbody)
+    public void Move(Vector2 moveVector , Rigidbody iceRigidbody , float acceleration)
     {
         Debug.Log("IceMove" + moveVector);
+        iceRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y * acceleration);
     }
     public void Jump()
     {

@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25338187b12d264791833a21253e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterAcceleration: 2
+  iceAcceleration: 2
+  airAcceleration: 10
   water: {fileID: 1371614328}
   ice: {fileID: 1987915}
   air: {fileID: 657360847}
@@ -660,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &804669114
 Transform:
   m_ObjectHideFlags: 0
@@ -669,13 +672,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804669111}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.044203967, y: 1.1859527, z: 2.1959152}
+  m_LocalPosition: {x: 0.40534988, y: 6.05, z: 0.03132677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1297644504}
-  m_Father: {fileID: 1700960754}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &804669115
 MonoBehaviour:
@@ -6754,7 +6757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CollisionMaterial: {fileID: 0}
-  solverIndices: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f00000040000000410000004200000043000000440000004500000046000000470000004800000049000000
+  solverIndices: 
   m_SoftbodyBlueprint: {fileID: 11400000, guid: 6e349b30235890f48b91a42008c0d1d8, type: 2}
   m_SelfCollisions: 0
   centerBatch: -1
@@ -7237,7 +7240,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1371614326}
-  - {fileID: 804669114}
   - {fileID: 1987911}
   - {fileID: 657360843}
   m_Father: {fileID: 0}
