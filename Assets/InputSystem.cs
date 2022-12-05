@@ -44,6 +44,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""acb6862c-e9f9-49e6-b282-504ed817b0ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +176,17 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bbc705b-76bf-4b1d-8ecb-8f5c2c9e69e3"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -262,6 +282,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
         m_Control_Move = m_Control.FindAction("Move", throwIfNotFound: true);
         m_Control_Jump = m_Control.FindAction("Jump", throwIfNotFound: true);
+        m_Control_Shift = m_Control.FindAction("Shift", throwIfNotFound: true);
         // Transformation
         m_Transformation = asset.FindActionMap("Transformation", throwIfNotFound: true);
         m_Transformation_ToWater = m_Transformation.FindAction("ToWater", throwIfNotFound: true);
@@ -328,12 +349,14 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private IControlActions m_ControlActionsCallbackInterface;
     private readonly InputAction m_Control_Move;
     private readonly InputAction m_Control_Jump;
+    private readonly InputAction m_Control_Shift;
     public struct ControlActions
     {
         private @InputSystem m_Wrapper;
         public ControlActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Control_Move;
         public InputAction @Jump => m_Wrapper.m_Control_Jump;
+        public InputAction @Shift => m_Wrapper.m_Control_Shift;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -349,6 +372,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
+                @Shift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
+                @Shift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
+                @Shift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -359,6 +385,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Shift.started += instance.OnShift;
+                @Shift.performed += instance.OnShift;
+                @Shift.canceled += instance.OnShift;
             }
         }
     }
@@ -425,6 +454,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnShift(InputAction.CallbackContext context);
     }
     public interface ITransformationActions
     {

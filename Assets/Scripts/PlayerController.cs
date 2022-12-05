@@ -8,17 +8,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float iceAcceleration;
     [SerializeField] private float airAcceleration;
 
+    [SerializeField] private float waterJumpBoost;
+    [SerializeField] private float iceJumpBoost;
+    [SerializeField] private float airJumpBoost;
+
+    public bool onFloar = true;
+
     private Rigidbody WaterRigidbody;
     private Rigidbody iceRigidbody;
     private Rigidbody airRigidbody;
     private Rigidbody currentRigidbody;
 
     private float acceleration;
+    private float jumpBoost;
 
     private Vector3 lastPosition;
 
     private InputSystem inputSystem;
     private PlayerState currentState;
+
     public PlayerState CurrentState
     {
         get => currentState;
@@ -28,6 +36,10 @@ public class PlayerController : MonoBehaviour
             water.gameObject.SetActive(false);
             ice.gameObject.SetActive(false);
             air.gameObject.SetActive(false);
+
+            WaterRigidbody.Sleep();
+            iceRigidbody.Sleep();
+            airRigidbody.Sleep();
 
             switch (currentState)
             {
@@ -62,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     public IJump jump;
 
-    void Jump(IJump jump) => jump.Jump();
+    void Jump(IJump jump) => jump.Jump(currentRigidbody,jumpBoost);
     void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody , acceleration);
     private void Awake()
     {
@@ -72,10 +84,6 @@ public class PlayerController : MonoBehaviour
 
         currentState= PlayerState.Water;
         currentRigidbody = WaterRigidbody;
-
-
-
-
 
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
@@ -121,12 +129,15 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
+                jumpBoost = waterJumpBoost;
                 Jump(water);
                 break;
             case PlayerState.Ice:
+                jumpBoost = iceJumpBoost;
                 Jump(ice);
                 break;
             case PlayerState.Air:
+                jumpBoost = airJumpBoost;
                 Jump(air);
                 break;
             default:

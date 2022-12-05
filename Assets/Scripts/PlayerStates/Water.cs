@@ -9,9 +9,10 @@ public class Water : MonoBehaviour, IMove, IJump ,IStateToIce, IStateToAire
         Debug.Log("WaterMove" + moveVector);
         waterRigidbody.AddForce(moveVector.x * acceleration ,0, moveVector.y * acceleration);
     }
-    public void Jump()
+    public void Jump(Rigidbody waterRigidbody, float acceleration)
     {
         Debug.Log("WaterJump");
+        waterRigidbody.AddForce(0, acceleration, 0 ,ForceMode.Impulse);
     }
     public void StateToAire()
     {

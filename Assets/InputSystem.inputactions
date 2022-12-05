@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "acb6862c-e9f9-49e6-b282-504ed817b0ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -143,6 +152,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bbc705b-76bf-4b1d-8ecb-8f5c2c9e69e3",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

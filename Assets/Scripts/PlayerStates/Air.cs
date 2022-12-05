@@ -9,9 +9,10 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
         Debug.Log("AirMove" + moveVector);
         airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y *acceleration);
     }
-    public void Jump()
+    public void Jump(Rigidbody airRigidbody, float acceleration)
     {
         Debug.Log("AirJump");
+        airRigidbody.AddForce(0, acceleration, 0, ForceMode.Force);
     }
     public void Stet()
     {
