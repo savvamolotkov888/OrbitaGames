@@ -1,3 +1,4 @@
+using Obi;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
 
+    private ObiActor obiActor;
     public bool onFloar = true;
 
-    private Rigidbody WaterRigidbody;
+    private ObiActor WaterRigidbody;
     private Rigidbody iceRigidbody;
     private Rigidbody airRigidbody;
     private Rigidbody currentRigidbody;
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
             ice.gameObject.SetActive(false);
             air.gameObject.SetActive(false);
 
-            WaterRigidbody.Sleep();
+           // WaterRigidbody.Sleep();
             iceRigidbody.Sleep();
             airRigidbody.Sleep();
 
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Water:
                     water.transform.position = lastPosition;
                     water.gameObject.SetActive(true);
-                    currentRigidbody = WaterRigidbody;
+                //    currentRigidbody = WaterRigidbody;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = lastPosition;
@@ -78,12 +80,12 @@ public class PlayerController : MonoBehaviour
     void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody , acceleration);
     private void Awake()
     {
-        WaterRigidbody = water.GetComponent<Rigidbody>();
+        WaterRigidbody = water.GetComponent<ObiActor>();
         iceRigidbody = ice.GetComponent<Rigidbody>();
         airRigidbody = air.GetComponent<Rigidbody>();
 
         currentState= PlayerState.Water;
-        currentRigidbody = WaterRigidbody;
+       // currentRigidbody = WaterRigidbody;
 
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
