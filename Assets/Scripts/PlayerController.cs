@@ -16,10 +16,10 @@ public class PlayerController : MonoBehaviour
     private ObiActor obiActor;
     public bool onFloar = true;
 
-    private ObiActor WaterRigidbody;
-    private Rigidbody iceRigidbody;
-    private Rigidbody airRigidbody;
-    private Rigidbody currentRigidbody;
+    private GameObject Water;
+    private GameObject Ice;
+    private GameObject Air;
+    private GameObject currentGameobjectState;
 
     private float acceleration;
     private float jumpBoost;
@@ -40,25 +40,25 @@ public class PlayerController : MonoBehaviour
             air.gameObject.SetActive(false);
 
            // WaterRigidbody.Sleep();
-            iceRigidbody.Sleep();
-            airRigidbody.Sleep();
+            //iceRigidbody.Sleep();
+            //airRigidbody.Sleep();
 
             switch (currentState)
             {
                 case PlayerState.Water:
                     water.transform.position = lastPosition;
                     water.gameObject.SetActive(true);
-                //    currentRigidbody = WaterRigidbody;
+                   currentGameobjectState = Water;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = lastPosition;
                     ice.gameObject.SetActive(true);
-                    currentRigidbody = iceRigidbody;
+                    currentGameobjectState = Ice;
                     break;
                 case PlayerState.Air:
                     air.transform.position = lastPosition;
                     air.gameObject.SetActive(true);
-                    currentRigidbody = airRigidbody;
+                    currentGameobjectState = Air;
                     break;
                 default:
                     break;
@@ -76,16 +76,16 @@ public class PlayerController : MonoBehaviour
 
     public IJump jump;
 
-    void Jump(IJump jump) => jump.Jump(currentRigidbody,jumpBoost);
-    void Move(IMove movable) => movable.Move(moveDirection, currentRigidbody , acceleration);
+    void Jump(IJump jump) => jump.Jump(currentGameobjectState,jumpBoost);
+    void Move(IMove movable) => movable.Move(moveDirection, currentGameobjectState , acceleration);
     private void Awake()
     {
-        WaterRigidbody = water.GetComponent<ObiActor>();
-        iceRigidbody = ice.GetComponent<Rigidbody>();
-        airRigidbody = air.GetComponent<Rigidbody>();
+        Water = water.gameObject;
+        Ice = ice.gameObject;
+        Air = air.gameObject;
 
-        currentState= PlayerState.Water;
-       // currentRigidbody = WaterRigidbody;
+        currentState = PlayerState.Water;
+        currentGameobjectState = Water;
 
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();

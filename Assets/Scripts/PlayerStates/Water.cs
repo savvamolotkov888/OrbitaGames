@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Obi;
 
-public class Water : MonoBehaviour, IMove, IJump ,IStateToIce, IStateToAire
+public class Water : MonoBehaviour, IMove, IJump, IStateToIce, IStateToAire
 {
-    public void Move(Vector2 moveVector,Rigidbody waterRigidbody , float acceleration)
+    private ObiSoftbody obi;
+    private bool setWaterObi;
+
+    public void Move(Vector2 moveVector, GameObject water, float acceleration)
     {
+        if (!setWaterObi)
+        {
+            obi = water.GetComponent<ObiSoftbody>();
+            setWaterObi = true;
+        }
         Debug.Log("WaterMove" + moveVector);
-        waterRigidbody.AddForce(moveVector.x * acceleration ,0, moveVector.y * acceleration);
+        obi.AddForce(new Vector3(moveVector.x * acceleration, 0, moveVector.y * acceleration), ForceMode.VelocityChange);
     }
-    public void Jump(Rigidbody waterRigidbody, float acceleration)
+    public void Jump(GameObject water, float acceleration)
     {
+        if (!setWaterObi)
+        {
+            obi = water.GetComponent<ObiSoftbody>();
+            setWaterObi = true;
+        }
         Debug.Log("WaterJump");
-        waterRigidbody.AddForce(0, acceleration, 0 ,ForceMode.Impulse);
+        obi.AddForce(new Vector3(0, acceleration,0), ForceMode.VelocityChange);
     }
     public void StateToAire()
     {
