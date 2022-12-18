@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce 
 {
+    private Rigidbody airRigidbody;
+    private bool setAirRigidbody;
+
     public void Move(Vector2 moveVector, GameObject air, float acceleration)
     {
         Debug.Log("AirMove" + moveVector);
-    //    airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y *acceleration);
+        if (!setAirRigidbody)
+        {
+            airRigidbody = air.GetComponent<Rigidbody>();
+            setAirRigidbody = true;
+        }
+        airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y * acceleration);
     }
     public void Jump(GameObject air, float acceleration)
     {
         Debug.Log("AirJump");
-     //   airRigidbody.AddForce(0, acceleration, 0, ForceMode.Force);
+        if (!setAirRigidbody)
+        {
+            airRigidbody = air.GetComponent<Rigidbody>();
+            setAirRigidbody = true;
+        }
+        airRigidbody.AddForce(0, acceleration, 0, ForceMode.Impulse);
     }
     public void Stet()
     {
