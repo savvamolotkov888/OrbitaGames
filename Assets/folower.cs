@@ -6,16 +6,16 @@ using Obi;
 public class folower : MonoBehaviour
 {
     public GameObject ggg;
-    ObiSoftbody obi;
+   Transform obi;
     
     
     private void Start()
     {
-        obi = gameObject.GetComponent<ObiSoftbody>();
+        obi = gameObject.GetComponent<ObiSoftbody>().transform;
     }
 
     private void Update()
     {
-        ggg.transform.position = obi.transform.position;
+        ggg.transform.position = obi.position;
     }
 }
