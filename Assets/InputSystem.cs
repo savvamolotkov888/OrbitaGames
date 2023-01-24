@@ -28,10 +28,10 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
             ""id"": ""f13aaf27-d6b9-419c-860a-08e7b7659bb0"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""MoveVertical"",
                     ""type"": ""Value"",
                     ""id"": ""924b925d-8623-474e-a230-fd5d35b83461"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -53,116 +53,48 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveGorizontal"",
+                    ""type"": ""Button"",
+                    ""id"": ""2046dcfc-6478-4124-8e5d-6a685475ccec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""WASD"",
+                    ""name"": ""WS"",
                     ""id"": ""b1b56364-871c-48bb-a77e-658a57a0d6cb"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveVertical"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""positive"",
                     ""id"": ""e14824ec-43a7-4d35-a82c-a95b15144a2e"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveVertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""negative"",
                     ""id"": ""f1ff90e6-5de9-40ba-b1b1-b929cc55cdaf"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""af29fea9-446c-43b8-9534-71632f8d72b9"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0b234d0d-36cf-4588-ad66-10fc0dfc376a"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Arrows"",
-                    ""id"": ""a613bd5c-7c56-4b1c-8d60-27d6dfdabedb"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""2a57e4e7-a0a4-46b1-8df3-b2da569a139a"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1af5a084-ebae-4db8-abae-eb68e2fe6c74"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d4fe382c-ebfb-4a07-90d0-60aca63b70a8"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""f7379fe7-722f-414e-b871-8a2b6121631a"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveVertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -187,6 +119,39 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""Shift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""AD"",
+                    ""id"": ""0f8998ea-3f8c-49b3-b03f-e0160ee8322b"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveGorizontal"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""af0ed425-b914-44da-9ad3-6ba384b9a3ef"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MoveGorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b3cee074-07f0-4c57-b4d1-02ef9aa915a8"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""MoveGorizontal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -280,9 +245,10 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
 }");
         // Control
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
-        m_Control_Move = m_Control.FindAction("Move", throwIfNotFound: true);
+        m_Control_MoveVertical = m_Control.FindAction("MoveVertical", throwIfNotFound: true);
         m_Control_Jump = m_Control.FindAction("Jump", throwIfNotFound: true);
         m_Control_Shift = m_Control.FindAction("Shift", throwIfNotFound: true);
+        m_Control_MoveGorizontal = m_Control.FindAction("MoveGorizontal", throwIfNotFound: true);
         // Transformation
         m_Transformation = asset.FindActionMap("Transformation", throwIfNotFound: true);
         m_Transformation_ToWater = m_Transformation.FindAction("ToWater", throwIfNotFound: true);
@@ -347,16 +313,18 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     // Control
     private readonly InputActionMap m_Control;
     private IControlActions m_ControlActionsCallbackInterface;
-    private readonly InputAction m_Control_Move;
+    private readonly InputAction m_Control_MoveVertical;
     private readonly InputAction m_Control_Jump;
     private readonly InputAction m_Control_Shift;
+    private readonly InputAction m_Control_MoveGorizontal;
     public struct ControlActions
     {
         private @InputSystem m_Wrapper;
         public ControlActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Control_Move;
+        public InputAction @MoveVertical => m_Wrapper.m_Control_MoveVertical;
         public InputAction @Jump => m_Wrapper.m_Control_Jump;
         public InputAction @Shift => m_Wrapper.m_Control_Shift;
+        public InputAction @MoveGorizontal => m_Wrapper.m_Control_MoveGorizontal;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -366,28 +334,34 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_ControlActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMove;
+                @MoveVertical.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
+                @MoveVertical.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
+                @MoveVertical.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
                 @Jump.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Shift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
+                @MoveGorizontal.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
+                @MoveGorizontal.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
+                @MoveGorizontal.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                @MoveVertical.started += instance.OnMoveVertical;
+                @MoveVertical.performed += instance.OnMoveVertical;
+                @MoveVertical.canceled += instance.OnMoveVertical;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
                 @Shift.started += instance.OnShift;
                 @Shift.performed += instance.OnShift;
                 @Shift.canceled += instance.OnShift;
+                @MoveGorizontal.started += instance.OnMoveGorizontal;
+                @MoveGorizontal.performed += instance.OnMoveGorizontal;
+                @MoveGorizontal.canceled += instance.OnMoveGorizontal;
             }
         }
     }
@@ -452,9 +426,10 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     }
     public interface IControlActions
     {
-        void OnMove(InputAction.CallbackContext context);
+        void OnMoveVertical(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
+        void OnMoveGorizontal(InputAction.CallbackContext context);
     }
     public interface ITransformationActions
     {

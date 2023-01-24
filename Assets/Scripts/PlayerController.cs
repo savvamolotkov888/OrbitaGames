@@ -65,12 +65,13 @@ public class PlayerController : MonoBehaviour
     public Ice ice;
     public Air air;
 
-    private Vector2 moveDirection;
+    private float MoveGorizontalDirection;
+    
 
     public IJump jump;
 
     void Jump(IJump jump) => jump.Jump(currentGameobjectState,jumpBoost);
-    void Move(IMove movable) => movable.Move(moveDirection, currentGameobjectState , acceleration);
+    void MoveForward(IMove movable) => movable.Move(new Vector2(), currentGameobjectState , acceleration);
     private void Awake()
     {
         Water = water.gameObject;
@@ -90,29 +91,54 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
-        Move();
+        MoveGorizontalDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
+        Debug.LogError(Input.GetAxis("Mouse X"));
+        if (MoveGorizontalDirection == 1)
+            MoveForward();
+        if (MoveGorizontalDirection == -1)
+            MoveBack();
+   
     }
     private void LateUpdate()
     {
         UpdatePosition();
     }
 
-    void Move()
+    void MoveForward()
     {
+        Debug.Log("F");
         switch (currentState)
         {
             case PlayerState.Water:
                 acceleration = waterAcceleration;
-                Move(water);
+                MoveForward(water);
                 break;
             case PlayerState.Ice:
                 acceleration = iceAcceleration;
-                Move(ice);
+                MoveForward(ice);
                 break;
             case PlayerState.Air:
                 acceleration = airAcceleration;
-                Move(air);
+                MoveForward(air);
+                break;
+        }
+    }
+    void MoveBack()
+    {
+        Debug.Log("B");
+        switch (currentState)
+        {
+            case PlayerState.Water:
+                acceleration = waterAcceleration;
+                MoveForward(water);
+                break;
+            case PlayerState.Ice:
+                acceleration = iceAcceleration;
+                MoveForward(ice);
+                break;
+            case PlayerState.Air:
+                acceleration = airAcceleration;
+                MoveForward(air);
                 break;
         }
     }
