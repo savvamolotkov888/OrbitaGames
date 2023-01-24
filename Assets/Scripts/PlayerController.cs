@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airJumpBoost;
 
     private ObiActor obiActor;
-    public bool onFloar = true;
 
     private GameObject Water;
     private GameObject Ice;
@@ -39,10 +38,6 @@ public class PlayerController : MonoBehaviour
             ice.gameObject.SetActive(false);
             air.gameObject.SetActive(false);
 
-           // WaterRigidbody.Sleep();
-            //iceRigidbody.Sleep();
-            //airRigidbody.Sleep();
-
             switch (currentState)
             {
                 case PlayerState.Water:
@@ -59,8 +54,6 @@ public class PlayerController : MonoBehaviour
                     air.transform.position = lastPosition;
                     air.gameObject.SetActive(true);
                     currentGameobjectState = Air;
-                    break;
-                default:
                     break;
             }
         }
@@ -84,8 +77,8 @@ public class PlayerController : MonoBehaviour
         Ice = ice.gameObject;
         Air = air.gameObject;
 
-        currentState = PlayerState.Water;
-        currentGameobjectState = Water;
+        currentState = PlayerState.Ice;
+        currentGameobjectState = Ice;
 
         inputSystem = new InputSystem();
         inputSystem.Control.Jump.performed += context => Jump();
@@ -99,7 +92,6 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = inputSystem.Control.Move.ReadValue<Vector2>();
         Move();
-
     }
     private void LateUpdate()
     {
@@ -122,8 +114,6 @@ public class PlayerController : MonoBehaviour
                 acceleration = airAcceleration;
                 Move(air);
                 break;
-            default:
-                break;
         }
     }
     void Jump()
@@ -142,8 +132,6 @@ public class PlayerController : MonoBehaviour
                 jumpBoost = airJumpBoost;
                 Jump(air);
                 break;
-            default:
-                break;
         }
     }
     void UpdatePosition()
@@ -161,10 +149,7 @@ public class PlayerController : MonoBehaviour
                 lastPosition = air.transform.position;
 
                 break;
-            default:
-                break;
         }
-        Debug.LogError(lastPosition);
     }
 
     void TransformaitionToWater()
