@@ -7,7 +7,7 @@ public class Water : MonoBehaviour, IMove, IJump, IStateToIce, IStateToAire
 {
     private ObiSoftbody obi;
 
-    public void Move(PlayerDirection forwardMoveDirection, GameObject water, float acceleration, RotateDirection rotationDirection)
+    public void Move(PlayerDirection forwardMoveDirection, GameObject water, float MoveAcceleration ,float RotationAcceleration, RotateDirection rotationDirection)
     {
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();

@@ -12,10 +12,15 @@ public class PlayerController : MonoBehaviour
     public Transform Target;
     public PlayerRotationController playerRotationController;
 
-    [SerializeField] private float waterAcceleration;
-    [SerializeField] private float iceAcceleration;
-    [SerializeField] private float airAcceleration;
-
+    [SerializeField] private float waterMoveAcceleration;
+    [SerializeField] private float waterRotationAcceleration;
+     
+    [SerializeField] private float iceMoveAcceleration;
+    [SerializeField] private float iceRotationAcceleration;
+    
+    [SerializeField] private float airMoveAcceleration;
+    [SerializeField] private float airRotationAcceleration;
+    
     [SerializeField] private float waterJumpBoost;
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
@@ -29,7 +34,8 @@ public class PlayerController : MonoBehaviour
     private GameObject Air;
     private GameObject currentGameobjectState;
 
-    private float acceleration;
+    private float moveAcceleration;
+    private float RotationAcceleration;
     private float jumpBoost;
 
     private Vector3 lastPosition;
@@ -79,7 +85,7 @@ public class PlayerController : MonoBehaviour
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
     void MoveForward(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, acceleration , playerRotationController.rorator);
+        movable.Move(Direction, currentGameobjectState, moveAcceleration,RotationAcceleration , playerRotationController.rorator);
 
     private void Awake()
     {
@@ -133,15 +139,18 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                acceleration = waterAcceleration;
+                moveAcceleration = waterMoveAcceleration;
+                RotationAcceleration = waterRotationAcceleration;
                 MoveForward(water);
                 break;
             case PlayerState.Ice:
-                acceleration = iceAcceleration;
+                moveAcceleration = iceMoveAcceleration;
+                RotationAcceleration = iceRotationAcceleration;
                 MoveForward(ice);
                 break;
             case PlayerState.Air:
-                acceleration = airAcceleration;
+                moveAcceleration = airMoveAcceleration;
+                RotationAcceleration = airRotationAcceleration;
                 MoveForward(air);
                 break;
         }
