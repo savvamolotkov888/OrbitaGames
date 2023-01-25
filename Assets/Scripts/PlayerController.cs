@@ -102,8 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
-        Target.position = LookAtpoz;
+
 
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
@@ -117,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
+        Target.position = LookAtpoz;
         MoveForward();
 
 

@@ -13,7 +13,10 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
         
-        if (direction.Forward!=1)
+        
+        iceRigidbody.AddRelativeForce(direction.Lateral * acceleration, 0, 0);
+        
+        if (direction.Forward!=1 && direction.Forward!= -1 )
         {
             return;
         }
@@ -26,13 +29,6 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         {
             iceRigidbody.AddRelativeForce(direction.Lateral * acceleration, 0, direction.Forward * acceleration);
         }
-
-       
-
-        
-
-        
-        
     }
 
     public void Jump(GameObject ice, float acceleration)
