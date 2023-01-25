@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerController : MonoBehaviour
 {
+    public PlayerDirection Direction;
     public Transform T2;
+    public Transform TargetDirection;
+
     [SerializeField] private float waterAcceleration;
     [SerializeField] private float iceAcceleration;
     [SerializeField] private float airAcceleration;
@@ -13,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float waterJumpBoost;
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
-    
+
     [SerializeField] private Transform targetDirection;
 
     private ObiActor obiActor;
@@ -46,7 +50,7 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Water:
                     water.transform.position = lastPosition;
                     water.gameObject.SetActive(true);
-                   currentGameobjectState = Water;
+                    currentGameobjectState = Water;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = lastPosition;
@@ -63,20 +67,21 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     public Water water;
     public Ice ice;
     public Air air;
 
-    private float forwardMoveDirection;
-    
 
     public IJump jump;
 
-    void Jump(IJump jump) => jump.Jump(currentGameobjectState,jumpBoost);
-    void MoveForward(IMove movable) => movable.Move(forwardMoveDirection, currentGameobjectState , acceleration , targetDirection.position);
+    void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
+
+    void MoveForward(IMove movable) =>
+        movable.Move(Direction, currentGameobjectState, acceleration, targetDirection.position);
+
     private void Awake()
     {
+        Direction = new PlayerDirection();
         //Cursor.lockState = CursorLockMode.Locked;
         Water = water.gameObject;
         Ice = ice.gameObject;
@@ -98,14 +103,16 @@ public class PlayerController : MonoBehaviour
         var LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
         T2.position = LookAtpoz;
         ice.transform.LookAt(LookAtpoz);
+
+        Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
+        Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         
-        forwardMoveDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
-        if (forwardMoveDirection == 1)
-            MoveForward();
-        if (forwardMoveDirection == -1)
-            MoveBack();
-   
+        Direction.TargetDirection.x = TargetDirection.position.x;
+        Direction.TargetDirection.z = TargetDirection.position.z;
+
+        MoveForward();
     }
+
     private void LateUpdate()
     {
         UpdatePosition();
@@ -129,25 +136,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-    void MoveBack()
-    {
-        Debug.Log("B");
-        switch (currentState)
-        {
-            case PlayerState.Water:
-                acceleration = waterAcceleration;
-                MoveForward(water);
-                break;
-            case PlayerState.Ice:
-                acceleration = iceAcceleration;
-                MoveForward(ice);
-                break;
-            case PlayerState.Air:
-                acceleration = airAcceleration;
-                MoveForward(air);
-                break;
-        }
-    }
+
     void Jump()
     {
         switch (currentState)
@@ -166,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
     void UpdatePosition()
     {
         switch (currentState)
@@ -197,6 +187,7 @@ public class PlayerController : MonoBehaviour
         gameObject.transform.position = ice.transform.position;
         CurrentState = PlayerState.Ice;
     }
+
     void TransformaitionToAir()
     {
         gameObject.transform.position = air.transform.position;
@@ -205,14 +196,20 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     private void OnEnable()
     {
         inputSystem.Enable();
     }
+
     private void OnDisable()
     {
         inputSystem.Disable();
     }
 }
-public enum PlayerState { Water, Ice, Air }
+
+public enum PlayerState
+{
+    Water,
+    Ice,
+    Air
+}

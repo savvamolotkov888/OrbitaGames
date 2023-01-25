@@ -37,6 +37,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""MoveGorizontal"",
+                    ""type"": ""Value"",
+                    ""id"": ""2046dcfc-6478-4124-8e5d-6a685475ccec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""2c12c2f3-53bc-4955-b28c-3a5245238f5b"",
@@ -49,15 +58,6 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""name"": ""Shift"",
                     ""type"": ""Button"",
                     ""id"": ""acb6862c-e9f9-49e6-b282-504ed817b0ea"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveGorizontal"",
-                    ""type"": ""Button"",
-                    ""id"": ""2046dcfc-6478-4124-8e5d-6a685475ccec"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -123,7 +123,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""AD"",
                     ""id"": ""0f8998ea-3f8c-49b3-b03f-e0160ee8322b"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,7 +132,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""left"",
+                    ""name"": ""negative"",
                     ""id"": ""af0ed425-b914-44da-9ad3-6ba384b9a3ef"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -143,7 +143,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
+                    ""name"": ""positive"",
                     ""id"": ""b3cee074-07f0-4c57-b4d1-02ef9aa915a8"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -246,9 +246,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         // Control
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
         m_Control_MoveVertical = m_Control.FindAction("MoveVertical", throwIfNotFound: true);
+        m_Control_MoveGorizontal = m_Control.FindAction("MoveGorizontal", throwIfNotFound: true);
         m_Control_Jump = m_Control.FindAction("Jump", throwIfNotFound: true);
         m_Control_Shift = m_Control.FindAction("Shift", throwIfNotFound: true);
-        m_Control_MoveGorizontal = m_Control.FindAction("MoveGorizontal", throwIfNotFound: true);
         // Transformation
         m_Transformation = asset.FindActionMap("Transformation", throwIfNotFound: true);
         m_Transformation_ToWater = m_Transformation.FindAction("ToWater", throwIfNotFound: true);
@@ -314,17 +314,17 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Control;
     private IControlActions m_ControlActionsCallbackInterface;
     private readonly InputAction m_Control_MoveVertical;
+    private readonly InputAction m_Control_MoveGorizontal;
     private readonly InputAction m_Control_Jump;
     private readonly InputAction m_Control_Shift;
-    private readonly InputAction m_Control_MoveGorizontal;
     public struct ControlActions
     {
         private @InputSystem m_Wrapper;
         public ControlActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveVertical => m_Wrapper.m_Control_MoveVertical;
+        public InputAction @MoveGorizontal => m_Wrapper.m_Control_MoveGorizontal;
         public InputAction @Jump => m_Wrapper.m_Control_Jump;
         public InputAction @Shift => m_Wrapper.m_Control_Shift;
-        public InputAction @MoveGorizontal => m_Wrapper.m_Control_MoveGorizontal;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,15 +337,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @MoveVertical.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
                 @MoveVertical.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
                 @MoveVertical.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveVertical;
+                @MoveGorizontal.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
+                @MoveGorizontal.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
+                @MoveGorizontal.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
                 @Jump.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Shift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
-                @MoveGorizontal.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
-                @MoveGorizontal.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
-                @MoveGorizontal.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnMoveGorizontal;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -353,15 +353,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @MoveVertical.started += instance.OnMoveVertical;
                 @MoveVertical.performed += instance.OnMoveVertical;
                 @MoveVertical.canceled += instance.OnMoveVertical;
+                @MoveGorizontal.started += instance.OnMoveGorizontal;
+                @MoveGorizontal.performed += instance.OnMoveGorizontal;
+                @MoveGorizontal.canceled += instance.OnMoveGorizontal;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
                 @Shift.started += instance.OnShift;
                 @Shift.performed += instance.OnShift;
                 @Shift.canceled += instance.OnShift;
-                @MoveGorizontal.started += instance.OnMoveGorizontal;
-                @MoveGorizontal.performed += instance.OnMoveGorizontal;
-                @MoveGorizontal.canceled += instance.OnMoveGorizontal;
             }
         }
     }
@@ -427,9 +427,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     public interface IControlActions
     {
         void OnMoveVertical(InputAction.CallbackContext context);
+        void OnMoveGorizontal(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
-        void OnMoveGorizontal(InputAction.CallbackContext context);
     }
     public interface ITransformationActions
     {

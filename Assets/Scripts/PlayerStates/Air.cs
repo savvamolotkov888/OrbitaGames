@@ -6,7 +6,7 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
 {
     private Rigidbody airRigidbody;
 
-    public void Move(float forwardMoveDirection, GameObject air, float acceleration , Vector3 targetDirection)
+    public void Move(PlayerDirection direction, GameObject air, float acceleration , Vector3 targetDirection)
     {
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
