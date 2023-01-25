@@ -246,7 +246,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 15
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -335,7 +335,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20229223, y: 1e-45, z: -0, w: 0.97932523}
+  m_LocalRotation: {x: 0.20229223, y: -4.3975578e-23, z: 2.0808063e-23, w: 0.97932523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -610,7 +610,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291637, y: -0.000000028584736, z: 0.000000008431565, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: 0.000000028584738, z: -0.000000008431564, w: 0.95914465}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1355,7 +1355,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28291637, y: -0.000000028584736, z: 0.000000008431565, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291637, y: -0.000000028584738, z: 0.000000008431566, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   Target: {fileID: 1023544307}
   playerRotationController: {fileID: 1987917}
   waterAcceleration: 0.1
-  iceAcceleration: 10
+  iceAcceleration: 50
   airAcceleration: 3
   waterJumpBoost: 5
   iceJumpBoost: 5

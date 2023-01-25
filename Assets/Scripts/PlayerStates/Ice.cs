@@ -19,13 +19,12 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         }
         if (rotationDirection!= RotateDirection.DontRotate)
         {
-            iceRigidbody.AddTorque(0,5 * (float)rotationDirection,0);
+            iceRigidbody.AddTorque(0,40 * (float)rotationDirection,0);
         }
 
         if (rotationDirection == RotateDirection.DontRotate)
         {
             iceRigidbody.AddRelativeForce(direction.Lateral * acceleration, 0, direction.Forward * acceleration);
-
         }
 
        
