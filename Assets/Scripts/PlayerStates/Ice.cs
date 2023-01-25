@@ -13,9 +13,9 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
         
-        iceRigidbody.transform.LookAt(iceRigidbody.position , targetDirection);
+      //  ice.transform.LookAt( targetDirection);
         
-        iceRigidbody.AddRelativeForce(forwardMoveDirection * acceleration, 0, 0 * acceleration);
+        iceRigidbody.AddRelativeForce(0 * acceleration, 0, forwardMoveDirection * acceleration);
     }
 
     public void Jump(GameObject ice, float acceleration)

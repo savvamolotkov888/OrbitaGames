@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        ice.transform.LookAt( targetDirection);
         forwardMoveDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
         if (forwardMoveDirection == 1)
             MoveForward();

@@ -912,7 +912,6 @@
         </e>
         <e p="Scenes" t="Include" />
         <e p="Scripts" t="Include">
-          <e p="Gizmo.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PlayerStates" t="Include">
             <e p="Air.cs" t="Include" />
@@ -926,6 +925,7 @@
             <e p="PlayerData.cs" t="Include" />
             <e p="Water.cs" t="Include" />
           </e>
+          <e p="TargetDirection.cs" t="Include" />
           <e p="ThirdPersonCam.cs" t="Include" />
         </e>
         <e p="Settings" t="Include" />

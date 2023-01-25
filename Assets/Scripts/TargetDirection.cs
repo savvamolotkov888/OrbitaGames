@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gizmo : MonoBehaviour
+public class TargetDirection : MonoBehaviour
 {
     public Transform player;
-    public Transform taget;
+    public Transform camera;
 
-    private Ray _ray;
     
     
     // Update is called once per frame
     void Update()
     {
-        taget.localPosition =  - new Vector3(transform.position.x,0,transform.position.z);
+        transform.position = player.position - new Vector3(camera.position.x,0,camera.position.z);
     }
 }
