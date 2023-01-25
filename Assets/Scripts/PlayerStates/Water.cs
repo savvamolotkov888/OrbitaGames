@@ -6,24 +6,19 @@ using Obi;
 public class Water : MonoBehaviour, IMove, IJump, IStateToIce, IStateToAire
 {
     private ObiSoftbody obi;
-    private bool setWaterObi;
 
-    public void Move(Vector2 moveVector, GameObject water, float acceleration)
+    public void Move(float forwardMoveDirection, GameObject water, float acceleration,Vector3 targetDirection)
     {
-        if (!setWaterObi)
-        {
+        if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
-            setWaterObi = true;
-        }
-        Debug.Log("WaterMove" + moveVector);
-        obi.AddForce(new Vector3(moveVector.x * acceleration, 0, moveVector.y * acceleration), ForceMode.VelocityChange);
+        
+     //   obi.AddForce(new Vector3(moveVector.x * acceleration, 0, moveVector.y * acceleration), ForceMode.VelocityChange);
     }
     public void Jump(GameObject water, float acceleration)
     {
-        if (!setWaterObi)
+        if (!obi)
         {
             obi = water.GetComponent<ObiSoftbody>();
-            setWaterObi = true;
         }
         Debug.Log("WaterJump");
         obi.AddForce(new Vector3(0, acceleration,0), ForceMode.VelocityChange);

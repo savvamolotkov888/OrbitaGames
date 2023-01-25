@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float waterJumpBoost;
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
+    
+    [SerializeField] private Transform targetDirection;
 
     private ObiActor obiActor;
 
@@ -65,13 +67,13 @@ public class PlayerController : MonoBehaviour
     public Ice ice;
     public Air air;
 
-    private float MoveGorizontalDirection;
+    private float forwardMoveDirection;
     
 
     public IJump jump;
 
     void Jump(IJump jump) => jump.Jump(currentGameobjectState,jumpBoost);
-    void MoveForward(IMove movable) => movable.Move(new Vector2(), currentGameobjectState , acceleration);
+    void MoveForward(IMove movable) => movable.Move(forwardMoveDirection, currentGameobjectState , acceleration , targetDirection.position);
     private void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -92,11 +94,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MoveGorizontalDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
-        Debug.LogError(Input.GetAxis("Mouse X")*Time.deltaTime);
-        if (MoveGorizontalDirection == 1)
+        forwardMoveDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
+        if (forwardMoveDirection == 1)
             MoveForward();
-        if (MoveGorizontalDirection == -1)
+        if (forwardMoveDirection == -1)
             MoveBack();
    
     }
@@ -107,7 +108,6 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        Debug.Log("F");
         switch (currentState)
         {
             case PlayerState.Water:

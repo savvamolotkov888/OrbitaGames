@@ -13,6 +13,6 @@ public class Gizmo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        taget.position = player.position - new Vector3(transform.position.x,0,transform.position.z);
+        taget.localPosition =  - new Vector3(transform.position.x,0,transform.position.z);
     }
 }
