@@ -113,8 +113,6 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         
-        Debug.Log(Direction.Forward );
-        
         Direction.TargetDirection.x = Target.position.x;
         Direction.TargetDirection.z = Target.position.z;
 
