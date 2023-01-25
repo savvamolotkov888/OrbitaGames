@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 1987912}
   - component: {fileID: 1987915}
   - component: {fileID: 1987916}
-  - component: {fileID: 1987917}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -252,20 +251,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1987917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad398fbd8b53bc44895bb5e22c483a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 1023544307}
-  rorator: 0
 --- !u!1 &139563484
 GameObject:
   m_ObjectHideFlags: 3
@@ -335,7 +320,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20229223, y: -0, z: -0, w: 0.97932523}
+  m_LocalRotation: {x: 0.20229223, y: 3.5647378e-23, z: -1.2124738e-23, w: 0.97932523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -610,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291637, y: -0.00000002858474, z: 0.000000008431566, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291637, y: -1.1093749e-15, z: -1.3752534e-15, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2633,6 +2618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1700960754}
   - component: {fileID: 1700960755}
+  - component: {fileID: 1700960756}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2668,7 +2654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1023544307}
-  playerRotationController: {fileID: 1987917}
+  playerRotationController: {fileID: 1700960756}
   waterMoveAcceleration: 0
   waterRotationAcceleration: 0
   iceMoveAcceleration: 45.88
@@ -2682,6 +2668,21 @@ MonoBehaviour:
   water: {fileID: 1817215732}
   ice: {fileID: 1987915}
   air: {fileID: 657360847}
+--- !u!114 &1700960756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700960753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad398fbd8b53bc44895bb5e22c483a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1023544307}
+  rorator: 0
+  Ice: {fileID: 1987915}
 --- !u!1 &1753220573
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,10 +10,13 @@ public class PlayerRotationController : MonoBehaviour
     public RotateDirection rorator;
     private float angle;
 
+    public Ice Ice;
+
     void Update()
     {
-        angle = -Vector3.SignedAngle(Target.position - transform.position, transform.forward, Vector3.up);
+        angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, Ice.transform.forward, Vector3.up);
 
+     
         if (angle > 5 && angle < 180)
         {
             rorator = RotateDirection.Right;
@@ -25,6 +28,7 @@ public class PlayerRotationController : MonoBehaviour
         else
         {
             rorator = RotateDirection.DontRotate;
+            Debug.Log(00);
         }
     }
 }
