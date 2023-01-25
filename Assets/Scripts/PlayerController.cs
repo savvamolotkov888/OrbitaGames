@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerDirection Direction;
     public Transform T2;
-    public Transform TargetDirection;
+    public PlayerRotationController playerRotationController;
 
     [SerializeField] private float waterAcceleration;
     [SerializeField] private float iceAcceleration;
@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
 
 
     public IJump jump;
-
+    private Vector3 LookAtpoz;
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
     void MoveForward(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, acceleration, targetDirection.position);
+        movable.Move(Direction, currentGameobjectState, acceleration, targetDirection.position , playerRotationController.rorator);
 
     private void Awake()
     {
@@ -100,15 +100,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        var LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
+        LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
         T2.position = LookAtpoz;
-        ice.transform.LookAt(LookAtpoz);
 
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         
-        Direction.TargetDirection.x = TargetDirection.position.x;
-        Direction.TargetDirection.z = TargetDirection.position.z;
+        Direction.TargetDirection.x = T2.position.x;
+        Direction.TargetDirection.z = T2.position.z;
 
         MoveForward();
     }

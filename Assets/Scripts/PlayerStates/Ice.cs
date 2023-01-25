@@ -7,7 +7,7 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
 {
     private Rigidbody iceRigidbody;
 
-    public void Move(PlayerDirection direction, GameObject ice, float acceleration,Vector3 targetDirection)
+    public void Move(PlayerDirection direction, GameObject ice, float acceleration,Vector3 targetDirection , RotateDirection rotationDirection)
     {
         //TODO Поворот
 
@@ -15,9 +15,19 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
             iceRigidbody = ice.GetComponent<Rigidbody>();
         
       //  ice.transform.LookAt( targetDirection);
-        
         iceRigidbody.AddRelativeForce(direction.Lateral * acceleration, 0, direction.Forward * acceleration);
-        Debug.LogError(direction.TargetDirection.x + " "+direction.TargetDirection.z );
+
+        if (rotationDirection!= RotateDirection.DontRotate)
+        {
+            iceRigidbody.AddTorque(0,10 * (float)rotationDirection,0);
+            Debug.Log(rotationDirection);
+
+        }
+
+        
+
+        
+        
     }
 
     public void Jump(GameObject ice, float acceleration)

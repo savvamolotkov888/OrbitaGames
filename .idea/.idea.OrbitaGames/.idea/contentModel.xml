@@ -914,6 +914,7 @@
         <e p="Scripts" t="Include">
           <e p="PlayerController.cs" t="Include" />
           <e p="PlayerDirection.cs" t="Include" />
+          <e p="PlayerRotationController.cs" t="Include" />
           <e p="PlayerStates" t="Include">
             <e p="Air.cs" t="Include" />
             <e p="Ice.cs" t="Include" />
