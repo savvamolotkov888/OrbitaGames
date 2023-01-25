@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    public Transform T2;
     [SerializeField] private float waterAcceleration;
     [SerializeField] private float iceAcceleration;
     [SerializeField] private float airAcceleration;
@@ -94,7 +95,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        ice.transform.LookAt( targetDirection);
+        var LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
+        T2.position = LookAtpoz;
+        ice.transform.LookAt(LookAtpoz);
+        
         forwardMoveDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
         if (forwardMoveDirection == 1)
             MoveForward();
