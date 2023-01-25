@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     void MoveForward(IMove movable) => movable.Move(new Vector2(), currentGameobjectState , acceleration);
     private void Awake()
     {
+        //Cursor.lockState = CursorLockMode.Locked;
         Water = water.gameObject;
         Ice = ice.gameObject;
         Air = air.gameObject;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MoveGorizontalDirection = inputSystem.Control.MoveVertical.ReadValue<float>();
-        Debug.LogError(Input.GetAxis("Mouse X"));
+        Debug.LogError(Input.GetAxis("Mouse X")*Time.deltaTime);
         if (MoveGorizontalDirection == 1)
             MoveForward();
         if (MoveGorizontalDirection == -1)

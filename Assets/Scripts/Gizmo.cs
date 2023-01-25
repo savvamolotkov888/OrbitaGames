@@ -5,15 +5,14 @@ using UnityEngine;
 public class Gizmo : MonoBehaviour
 {
     public Transform player;
-    
-    void Start()
-    {
-        
-    }
+    public Transform taget;
 
+    private Ray _ray;
+    
+    
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawLine(transform.position,player.position,Color.green);
+        taget.position = player.position - new Vector3(transform.position.x,0,transform.position.z);
     }
 }
