@@ -12,17 +12,7 @@ public class PlayerRotationController : MonoBehaviour
 
     void Update()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        Debug.DrawRay(transform.position, transform.forward * 1000f, Color.blue);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Target")
-        {
-            rorator = RotateDirection.DontRotate;
-        }
-
-
         angle = -Vector3.SignedAngle(Target.position - transform.position, transform.forward, Vector3.up);
-
 
         if (angle > 5 && angle < 180)
         {

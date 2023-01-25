@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerDirection Direction;
-    public Transform T2;
+    public Transform Target;
     public PlayerRotationController playerRotationController;
 
     [SerializeField] private float waterAcceleration;
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
     void MoveForward(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, acceleration, targetDirection.position , playerRotationController.rorator);
+        movable.Move(Direction, currentGameobjectState, acceleration , playerRotationController.rorator);
 
     private void Awake()
     {
@@ -101,13 +102,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
-        T2.position = LookAtpoz;
+        Target.position = LookAtpoz;
 
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         
-        Direction.TargetDirection.x = T2.position.x;
-        Direction.TargetDirection.z = T2.position.z;
+        Direction.TargetDirection.x = Target.position.x;
+        Direction.TargetDirection.z = Target.position.z;
 
         MoveForward();
     }

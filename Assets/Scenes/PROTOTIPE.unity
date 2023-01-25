@@ -250,7 +250,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1987917
 MonoBehaviour:
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1023544307}
+  rorator: 0
 --- !u!1 &139563484
 GameObject:
   m_ObjectHideFlags: 3
@@ -1956,8 +1957,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1023544307}
   m_Layer: 0
-  m_Name: T2
-  m_TagString: Untagged
+  m_Name: Target
+  m_TagString: Target
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1970,7 +1971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023544306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.012607098, y: 6.610203, z: -7.0652475}
+  m_LocalPosition: {x: -0.012607098, y: -0.86, z: 3.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2669,7 +2670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25338187b12d264791833a21253e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T2: {fileID: 1023544307}
+  Target: {fileID: 1023544307}
+  playerRotationController: {fileID: 1987917}
   waterAcceleration: 0.1
   iceAcceleration: 10
   airAcceleration: 3
@@ -2912,7 +2914,7 @@ GameObject:
   - component: {fileID: 2126007519}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
