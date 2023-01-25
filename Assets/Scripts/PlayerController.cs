@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour
     private float RotationAcceleration;
     private float jumpBoost;
 
-    private Vector3 lastPosition;
-
     private InputSystem inputSystem;
     private PlayerState currentState;
 
@@ -56,17 +54,14 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
-                    water.transform.position = lastPosition;
                     water.gameObject.SetActive(true);
                     currentGameobjectState = Water;
                     break;
                 case PlayerState.Ice:
-                    ice.transform.position = lastPosition;
                     ice.gameObject.SetActive(true);
                     currentGameobjectState = Ice;
                     break;
                 case PlayerState.Air:
-                    air.transform.position = lastPosition;
                     air.gameObject.SetActive(true);
                     currentGameobjectState = Air;
                     break;
@@ -178,14 +173,14 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                lastPosition = water.transform.position;
+                transform.position = water.transform.position;
                 break;
             case PlayerState.Ice:
-                lastPosition = ice.transform.position;
+                transform.position = ice.transform.position;
 
                 break;
             case PlayerState.Air:
-                lastPosition = air.transform.position;
+                transform.position = air.transform.position;
 
                 break;
         }
