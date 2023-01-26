@@ -125,23 +125,26 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        switch (currentState)
+        if (playerSensor.OnTheFloar)
         {
-            case PlayerState.Water:
-                moveAcceleration = waterMoveAcceleration;
-                RotationAcceleration = waterRotationAcceleration;
-                MoveForward(water);
-                break;
-            case PlayerState.Ice:
-                moveAcceleration = iceMoveAcceleration;
-                RotationAcceleration = iceRotationAcceleration;
-                MoveForward(ice);
-                break;
-            case PlayerState.Air:
-                moveAcceleration = airMoveAcceleration;
-                RotationAcceleration = airRotationAcceleration;
-                MoveForward(air);
-                break;
+            switch (currentState)
+            {
+                case PlayerState.Water:
+                    moveAcceleration = waterMoveAcceleration;
+                    RotationAcceleration = waterRotationAcceleration;
+                    MoveForward(water);
+                    break;
+                case PlayerState.Ice:
+                    moveAcceleration = iceMoveAcceleration;
+                    RotationAcceleration = iceRotationAcceleration;
+                    MoveForward(ice);
+                    break;
+                case PlayerState.Air:
+                    moveAcceleration = airMoveAcceleration;
+                    RotationAcceleration = airRotationAcceleration;
+                    MoveForward(air);
+                    break;
+            }
         }
     }
 
