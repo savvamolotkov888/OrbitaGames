@@ -128,8 +128,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (playerSensor.OnTheFloar)
-        {
+       
             switch (currentState)
             {
                 case PlayerState.Water:
@@ -138,9 +137,13 @@ public class PlayerController : MonoBehaviour
                     Move(water);
                     break;
                 case PlayerState.Ice:
-                    moveAcceleration = iceMoveAcceleration;
-                    RotationAcceleration = iceRotationAcceleration;
-                    Move(ice);
+                    if (playerSensor.OnTheFloar)
+                    {
+                        moveAcceleration = iceMoveAcceleration;
+                        RotationAcceleration = iceRotationAcceleration;
+                        Move(ice);
+                    }
+
                     break;
                 case PlayerState.Air:
                     moveAcceleration = airMoveAcceleration;
@@ -149,7 +152,7 @@ public class PlayerController : MonoBehaviour
                     Move(air);
                     break;
             }
-        }
+        
     }
 
     void Jump()
