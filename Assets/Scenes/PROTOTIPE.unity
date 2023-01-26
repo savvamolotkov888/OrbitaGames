@@ -235,6 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b65b3470896e52409c25abcbb6ea5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxJumpTime: 0
+  maxJumpHeight: 0
 --- !u!54 &1987916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987910}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 15
   m_UseGravity: 1
@@ -320,7 +322,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20229223, y: 3.5647378e-23, z: -1.2124738e-23, w: 0.97932523}
+  m_LocalRotation: {x: 0.20229223, y: 1.02e-43, z: -2e-44, w: 0.97932523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -595,7 +597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291637, y: -1.1093749e-15, z: -1.3752534e-15, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: 1.4514759e-16, z: -7.71236e-16, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -851,9 +853,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 0
   m_FollowOffset: {x: 0, y: 4.2, z: -6.5}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.4
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -981,8 +983,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.28291634, y: -0.00000002858474, z: 0.000000008431565, w: 0.9591446}
-  m_LocalPosition: {x: 3.123166e-15, y: 5.879833, z: -5.4145694}
+  m_LocalRotation: {x: 0.2829164, y: -0.00000002858474, z: 0.000000008431567, w: 0.9591446}
+  m_LocalPosition: {x: -0.00000006469673, y: 5.879833, z: -5.414569}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1340,7 +1342,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28291634, y: 1.4514759e-16, z: -7.71236e-16, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291637, y: -0.00000002858474, z: 0.000000008431566, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1494,9 +1496,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 0
   m_FollowOffset: {x: 0, y: 4.2, z: -6.5}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.4
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -1880,9 +1882,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 0
   m_FollowOffset: {x: 0, y: 4.2, z: -6.5}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.4
+  m_YDamping: 0.4
+  m_ZDamping: 0.4
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2600,14 +2602,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592505792}
-  m_LocalRotation: {x: 0.8040224, y: -0, z: -0, w: 0.59459895}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -14.54, y: 0.53000003, z: 5.2}
   m_LocalScale: {x: 6.98, y: 9.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 107.032, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1700960753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2621,7 @@ GameObject:
   - component: {fileID: 1700960754}
   - component: {fileID: 1700960755}
   - component: {fileID: 1700960756}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,15 +2656,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1023544307}
-  playerRotationController: {fileID: 1700960756}
+  playerSensor: {fileID: 1700960756}
   waterMoveAcceleration: 0
   waterRotationAcceleration: 0
-  iceMoveAcceleration: 45.88
-  iceRotationAcceleration: 41.7
+  iceMoveAcceleration: 600
+  iceRotationAcceleration: 600
   airMoveAcceleration: 0
   airRotationAcceleration: 0
-  waterJumpBoost: 5
-  iceJumpBoost: 5
+  waterJumpBoost: 70
+  iceJumpBoost: 140
   airJumpBoost: 2
   targetDirection: {fileID: 687259672}
   water: {fileID: 1817215732}
@@ -2681,8 +2683,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1023544307}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   rorator: 0
+  rayDist: 6.01
   Ice: {fileID: 1987915}
+  OnTheFloar: 0
 --- !u!1 &1753220573
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,17 +10,17 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerDirection Direction;
     public Transform Target;
-    public PlayerRotationController playerRotationController;
+    public PlayerSensor playerSensor;
 
     [SerializeField] private float waterMoveAcceleration;
     [SerializeField] private float waterRotationAcceleration;
-     
+
     [SerializeField] private float iceMoveAcceleration;
     [SerializeField] private float iceRotationAcceleration;
-    
+
     [SerializeField] private float airMoveAcceleration;
     [SerializeField] private float airRotationAcceleration;
-    
+
     [SerializeField] private float waterJumpBoost;
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
     void MoveForward(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, moveAcceleration,RotationAcceleration , playerRotationController.rorator);
+        movable.Move(Direction, currentGameobjectState, moveAcceleration, RotationAcceleration,
+            playerSensor.rorator);
 
     private void Awake()
     {
@@ -103,14 +104,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
-
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
-        
+
         Direction.TargetDirection.x = Target.position.x;
         Direction.TargetDirection.z = Target.position.z;
-
     }
 
     private void FixedUpdate()
@@ -118,8 +116,6 @@ public class PlayerController : MonoBehaviour
         LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
         Target.position = LookAtpoz;
         MoveForward();
-
-
     }
 
     private void LateUpdate()
@@ -151,20 +147,23 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        switch (currentState)
+        if (playerSensor.OnTheFloar)
         {
-            case PlayerState.Water:
-                jumpBoost = waterJumpBoost;
-                Jump(water);
-                break;
-            case PlayerState.Ice:
-                jumpBoost = iceJumpBoost;
-                Jump(ice);
-                break;
-            case PlayerState.Air:
-                jumpBoost = airJumpBoost;
-                Jump(air);
-                break;
+            switch (currentState)
+            {
+                case PlayerState.Water:
+                    jumpBoost = waterJumpBoost;
+                    Jump(water);
+                    break;
+                case PlayerState.Ice:
+                    jumpBoost = iceJumpBoost;
+                    Jump(ice);
+                    break;
+                case PlayerState.Air:
+                    jumpBoost = airJumpBoost;
+                    Jump(air);
+                    break;
+            }
         }
     }
 

@@ -12,12 +12,12 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
             airRigidbody = air.GetComponent<Rigidbody>();
        // airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y * acceleration);
     }
-    public void Jump(GameObject air, float acceleration)
+    public void Jump(GameObject air, float jumpAcceleration)
     {
         Debug.Log("AirJump");
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
-        airRigidbody.AddForce(0, acceleration, 0, ForceMode.Impulse);
+        airRigidbody.AddForce(0, jumpAcceleration, 0, ForceMode.Impulse);
     }
     public void Stet()
     {

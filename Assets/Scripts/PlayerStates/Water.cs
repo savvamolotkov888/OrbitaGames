@@ -14,14 +14,14 @@ public class Water : MonoBehaviour, IMove, IJump, IStateToIce, IStateToAire
         
      //   obi.AddForce(new Vector3(moveVector.x * acceleration, 0, moveVector.y * acceleration), ForceMode.VelocityChange);
     }
-    public void Jump(GameObject water, float acceleration)
+    public void Jump(GameObject water, float jumpAcceleration)
     {
         if (!obi)
         {
             obi = water.GetComponent<ObiSoftbody>();
         }
         Debug.Log("WaterJump");
-        obi.AddForce(new Vector3(0, acceleration,0), ForceMode.VelocityChange);
+        obi.AddForce(new Vector3(0, jumpAcceleration,0), ForceMode.VelocityChange);
     }
     public void StateToAire()
     {

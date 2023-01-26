@@ -6,7 +6,10 @@ using UnityEngine;
 public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, IShift
 {
     private Rigidbody iceRigidbody;
-
+    
+    [Header("Jump stats")]
+    [SerializeField] private float maxJumpTime;
+    [SerializeField] private float maxJumpHeight;
     public void Move(PlayerDirection direction, GameObject ice, float MoveAcceleration ,float RotationAcceleration, RotateDirection rotationDirection)
     {
                 
@@ -31,14 +34,13 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         }
     }
 
-    public void Jump(GameObject ice, float acceleration)
+    public void Jump(GameObject ice, float jumpAcceleration)
     {
         Debug.Log("IceJump");
-
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
-        
-        iceRigidbody.AddForce(0, acceleration, 0, ForceMode.Impulse);
+
+        iceRigidbody.AddForce(0, jumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(Rigidbody iceRigidbody, float acceleration)
