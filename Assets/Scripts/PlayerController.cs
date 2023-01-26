@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-       // if (playerSensor.OnTheFloar)
+        if (playerSensor.OnTheFloar)
         {
             switch (currentState)
             {
