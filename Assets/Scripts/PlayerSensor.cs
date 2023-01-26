@@ -17,6 +17,7 @@ public class PlayerSensor : MonoBehaviour
     void FixedUpdate()
     {
         Ray ray = new Ray(transform.position,-Vector3.up);
+        Debug.DrawLine(transform.position,-Vector3.up,Color.blue);
         RaycastHit hit; 
         
         if (Physics.Raycast(ray, out hit,rayDist))
