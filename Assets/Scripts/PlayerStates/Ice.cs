@@ -31,6 +31,12 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         if (rotationDirection == RotateDirection.DontRotate)
         {
             iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, direction.Forward * MoveAcceleration);
+
+            if (direction.Lateral==1&&direction.Forward==1)
+            {
+                Debug.Log("->");
+             //   iceRigidbody.gameObject.transform.rotation = Quaternion.Euler(0,45, 0);
+            }
         }
     }
 

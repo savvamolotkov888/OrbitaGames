@@ -10,24 +10,16 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
     {
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
+        
         airRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
         
-        // if (direction.Forward!=1 && direction.Forward!= -1 )
-        // {
-        //     Debug.Log(1);
-        //     return;
-        //     
-        // }
-        if (rotationDirection!= RotateDirection.DontRotate)
+        if (direction.Forward!=1 && direction.Forward!= -1 )
         {
-            airRigidbody.AddTorque(0,RotationAcceleration * (float)rotationDirection,0);
+            return;
         }
-
-        if (rotationDirection == RotateDirection.DontRotate)
-        {
-            Debug.Log(3);
+      
             airRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, direction.Forward * MoveAcceleration);
-        }
+        
     }
     public void Jump(GameObject air, float jumpAcceleration)
     {

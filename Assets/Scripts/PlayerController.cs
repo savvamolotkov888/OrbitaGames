@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Air:
                     moveAcceleration = airMoveAcceleration;
                     RotationAcceleration = airRotationAcceleration;
+                    air.transform.LookAt(Target);
                     Move(air);
                     break;
             }
