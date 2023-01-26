@@ -45,4 +45,14 @@ public class BreakGlass : MonoBehaviour {
 	void OnMouseDown () {
 		if(BreakByClick) BreakIt();	
 	}
+	  void OnCollisionEnter( Collision collision) {
+		// Debug-draw all contact points and normals
+		foreach (var contact  in collision.contacts) 
+		{
+			Debug.DrawRay(contact.point, contact.normal, Color.white);
+		}
+	 	if (collision.relativeVelocity.magnitude > 15)
+		    BreakIt();
+	}
+	
 }
