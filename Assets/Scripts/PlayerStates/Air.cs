@@ -6,11 +6,28 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
 {
     private Rigidbody airRigidbody;
 
-    public void Move(PlayerDirection direction, GameObject air, float MoveAcceleration ,float RotaationAcceleration ,RotateDirection rotationDirection )
+    public void Move(PlayerDirection direction, GameObject air, float MoveAcceleration ,float RotationAcceleration ,RotateDirection rotationDirection )
     {
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
-       // airRigidbody.AddForce(moveVector.x * acceleration, 0, moveVector.y * acceleration);
+        airRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
+        
+        // if (direction.Forward!=1 && direction.Forward!= -1 )
+        // {
+        //     Debug.Log(1);
+        //     return;
+        //     
+        // }
+        if (rotationDirection!= RotateDirection.DontRotate)
+        {
+            airRigidbody.AddTorque(0,RotationAcceleration * (float)rotationDirection,0);
+        }
+
+        if (rotationDirection == RotateDirection.DontRotate)
+        {
+            Debug.Log(3);
+            airRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, direction.Forward * MoveAcceleration);
+        }
     }
     public void Jump(GameObject air, float jumpAcceleration)
     {

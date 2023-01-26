@@ -58,10 +58,13 @@ public class PlayerController : MonoBehaviour
                     currentGameobjectState = Water;
                     break;
                 case PlayerState.Ice:
+                    ice.transform.position = transform.position;
                     ice.gameObject.SetActive(true);
+                    
                     currentGameobjectState = Ice;
                     break;
                 case PlayerState.Air:
+                    air.transform.position = transform.position;
                     air.gameObject.SetActive(true);
                     currentGameobjectState = Air;
                     break;
@@ -79,7 +82,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 LookAtpoz;
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
-    void MoveForward(IMove movable) =>
+    void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, moveAcceleration, RotationAcceleration,
             playerSensor.rorator);
 
@@ -115,7 +118,7 @@ public class PlayerController : MonoBehaviour
     {
         LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
         Target.position = LookAtpoz;
-        MoveForward();
+        Move();
     }
 
     private void LateUpdate()
@@ -123,26 +126,26 @@ public class PlayerController : MonoBehaviour
         UpdatePosition();
     }
 
-    void MoveForward()
+    void Move()
     {
-        if (playerSensor.OnTheFloar)
+       // if (playerSensor.OnTheFloar)
         {
             switch (currentState)
             {
                 case PlayerState.Water:
                     moveAcceleration = waterMoveAcceleration;
                     RotationAcceleration = waterRotationAcceleration;
-                    MoveForward(water);
+                    Move(water);
                     break;
                 case PlayerState.Ice:
                     moveAcceleration = iceMoveAcceleration;
                     RotationAcceleration = iceRotationAcceleration;
-                    MoveForward(ice);
+                    Move(ice);
                     break;
                 case PlayerState.Air:
                     moveAcceleration = airMoveAcceleration;
                     RotationAcceleration = airRotationAcceleration;
-                    MoveForward(air);
+                    Move(air);
                     break;
             }
         }
@@ -198,13 +201,11 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToIce()
     {
         Debug.Log("TransformaitionToIce");
-        gameObject.transform.position = ice.transform.position;
         CurrentState = PlayerState.Ice;
     }
 
     void TransformaitionToAir()
     {
-        gameObject.transform.position = air.transform.position;
         Debug.Log("TransformaitionToAire");
         CurrentState = PlayerState.Air;
     }
