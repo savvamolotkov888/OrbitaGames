@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Ice : MonoBehaviour, IMove, IJump, IShift
 {
+    [SerializeField] private float MoveAcceleration;
+    [SerializeField] private float RotationAcceleration;
+    [SerializeField] private float JumpAcceleration;
+    
     private Rigidbody iceRigidbody;
 
     [Header("Jump stats")] [SerializeField]
@@ -12,7 +16,7 @@ public class Ice : MonoBehaviour, IMove, IJump, IShift
 
     [SerializeField] private float maxJumpHeight;
 
-    public void Move(PlayerDirection direction, GameObject ice, float MoveAcceleration, float RotationAcceleration,
+    public void Move(PlayerDirection direction, GameObject ice,
         RotateDirection rotationDirection)
     {
         if (!iceRigidbody)
@@ -44,13 +48,13 @@ public class Ice : MonoBehaviour, IMove, IJump, IShift
         }
     }
 
-    public void Jump(GameObject ice, float jumpAcceleration)
+    public void Jump(GameObject ice)
     {
         Debug.Log("IceJump");
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
 
-        iceRigidbody.AddForce(0, jumpAcceleration, 0, ForceMode.Impulse);
+        iceRigidbody.AddForce(0,JumpAcceleration , 0, ForceMode.Impulse);
     }
 
     public void Shift(Rigidbody iceRigidbody, float acceleration)

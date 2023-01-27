@@ -3,41 +3,29 @@ using Obi;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerDirection Direction;
+    private PlayerDirection Direction;
 
-    public PlayerSensor playerSensor;
-
-    [SerializeField] private float waterMoveAcceleration;
-    [SerializeField] private float waterRotationAcceleration;
-
-    [SerializeField] private float iceMoveAcceleration;
-    [SerializeField] private float iceRotationAcceleration;
-
-    [SerializeField] private float airMoveAcceleration;
-    [SerializeField] private float airRotationAcceleration;
-
-    [SerializeField] private float waterJumpBoost;
-    [SerializeField] private float iceJumpBoost;
-    [SerializeField] private float airJumpBoost;
-
+    [SerializeField] private PlayerSensor playerSensor;
+    
     public float smoothFacor;
+    
     [SerializeField] private Transform targetA;
     public Transform targetB;
 
     public ObiSolver WaterSolwer;
-    public ObiActor waterActor;
 
-    public ObiSoftbody softbody;
+
+    public ObiActor waterActor;
 
 
     private GameObject Water;
     private GameObject Ice;
     private GameObject Air;
+    
     private GameObject currentGameobjectState;
 
     private float moveAcceleration;
@@ -47,34 +35,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem inputSystem;
     private PlayerState currentState;
 
-    public PlayerState CurrentState
-    {
-        get => currentState;
-        set
-        {
-            currentState = value;
-            WaterSolwer.gameObject.SetActive(false);
-            ice.gameObject.SetActive(false);
-            air.gameObject.SetActive(false);
-
-            switch (currentState)
-            {
-                case PlayerState.Water:
-                    break;
-                case PlayerState.Ice:
-                    ice.transform.position = transform.position;
-                    ice.gameObject.SetActive(true);
-                    currentGameobjectState = Ice;
-                    break;
-                case PlayerState.Air:
-                    air.transform.position = transform.position;
-                    air.gameObject.SetActive(true);
-                    currentGameobjectState = Air;
-                    break;
-            }
-        }
-    }
-
+    
 
     public Water water;
     public Ice ice;
@@ -82,10 +43,10 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 LookAtpoz;
-    void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
+    void Jump(IJump jump) => jump.Jump(currentGameobjectState);
 
     void Move(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, moveAcceleration, RotationAcceleration,
+        movable.Move(Direction, currentGameobjectState,
             playerSensor.rorator);
 
     private void Awake()
@@ -97,8 +58,8 @@ public class PlayerController : MonoBehaviour
         Ice = ice.gameObject;
         Air = air.gameObject;
 
-        CurrentState = PlayerState.Ice;
         currentGameobjectState = Ice;
+        currentState = PlayerState.Ice;
 
         inputSystem = new InputSystem();
 
@@ -142,22 +103,16 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                moveAcceleration = waterMoveAcceleration;
-                RotationAcceleration = waterRotationAcceleration;
                 Move(water);
                 break;
             case PlayerState.Ice:
                 if (playerSensor.OnTheFloar)
                 {
-                    moveAcceleration = iceMoveAcceleration;
-                    RotationAcceleration = iceRotationAcceleration;
                     Move(ice);
                 }
 
                 break;
             case PlayerState.Air:
-                moveAcceleration = airMoveAcceleration;
-                RotationAcceleration = airRotationAcceleration;
                 air.transform.LookAt(targetB);
                 Move(air);
                 break;
@@ -169,20 +124,15 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                jumpBoost = waterJumpBoost;
+                if (playerSensor.OnTheFloar && Direction.Up > 0)
                 Jump(water);
                 break;
             case PlayerState.Ice:
                 if (playerSensor.OnTheFloar && Direction.Up > 0)
-                {
-                    jumpBoost = iceJumpBoost;
                     Jump(ice);
-                }
-
                 break;
 
             case PlayerState.Air:
-                jumpBoost = airJumpBoost;
                 Jump(air);
                 break;
         }
@@ -211,9 +161,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("TransformaitionToWater");
         Ice.SetActive(false);
         Air.SetActive(false);
+        
         currentState = PlayerState.Water;
+        currentGameobjectState = waterActor.gameObject;
         WaterSolwer.gameObject.SetActive(true);
-        softbody.Teleport(transform.position, transform.rotation);
+        waterActor.Teleport(transform.position, transform.rotation);
         gameObject.transform.position = water.transform.position;
     }
 
@@ -227,7 +179,7 @@ public class PlayerController : MonoBehaviour
         currentState = PlayerState.Ice;
         ice.transform.position = transform.position;
         ice.gameObject.SetActive(true);
-        currentGameobjectState = Air;
+        currentState = PlayerState.Ice;
     }
 
     void TransformaitionToAir()

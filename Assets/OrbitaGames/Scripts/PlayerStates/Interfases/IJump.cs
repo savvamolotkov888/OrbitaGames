@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IJump
 {
-    void Jump(GameObject gameObject, float jumpAcceleration);
+    void Jump(GameObject gameObject);
 }
 

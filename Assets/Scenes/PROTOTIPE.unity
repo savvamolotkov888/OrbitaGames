@@ -234,6 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b65b3470896e52409c25abcbb6ea5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveAcceleration: 500
+  RotationAcceleration: 500
+  JumpAcceleration: 20
   maxJumpTime: 0
   maxJumpHeight: 0
 --- !u!54 &1987916
@@ -321,7 +324,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20229223, y: 1e-45, z: -0, w: 0.97932523}
+  m_LocalRotation: {x: 0.20229223, y: -0, z: -0, w: 0.97932523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -596,7 +599,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291634, y: -1.4514759e-16, z: 7.71236e-16, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: 1.4514759e-16, z: -7.71236e-16, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -984,8 +987,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.2829164, y: -0.00000002858474, z: 0.000000008431567, w: 0.9591446}
-  m_LocalPosition: {x: -0.00000006469673, y: 5.879833, z: -5.414569}
+  m_LocalRotation: {x: 0.28291634, y: 0.00000002858474, z: -0.000000008431565, w: 0.9591446}
+  m_LocalPosition: {x: -3.123166e-15, y: 5.879833, z: -5.4145694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1238,6 +1241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1339d386dc5ea0a42bd67ecdd9221f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveAcceleration: 2
+  FlyAcceleration: 2
 --- !u!54 &657360848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1368,7 +1373,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28291637, y: -0.00000002858474, z: 0.000000008431566, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: -1.4514759e-16, z: 7.71236e-16, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7829,6 +7834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ae2cdb453505241a75a15caa87c57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveAcceleration: 0
+  RotationAcceleration: 0
 --- !u!1 &976307237
 GameObject:
   m_ObjectHideFlags: 3
@@ -8848,21 +8855,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSensor: {fileID: 1700960756}
-  waterMoveAcceleration: 0
-  waterRotationAcceleration: 0
-  iceMoveAcceleration: 600
-  iceRotationAcceleration: 600
-  airMoveAcceleration: 10
-  airRotationAcceleration: 20
-  waterJumpBoost: 70
-  iceJumpBoost: 50
-  airJumpBoost: 2
   smoothFacor: 60
   targetA: {fileID: 687259672}
   targetB: {fileID: 1023544307}
   WaterSolwer: {fileID: 2086290327}
   waterActor: {fileID: 933856619}
-  softbody: {fileID: 933856619}
   water: {fileID: 933856624}
   ice: {fileID: 1987915}
   air: {fileID: 657360847}
