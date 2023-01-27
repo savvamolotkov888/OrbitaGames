@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, IShift
+public class Ice : MonoBehaviour, IMove, IJump, IShift
 {
     private Rigidbody iceRigidbody;
 
@@ -59,11 +59,5 @@ public class Ice : MonoBehaviour, IMove, IJump, IStateToWater, IStateToAire, ISh
         iceRigidbody.AddForce(0, acceleration, 0, ForceMode.Impulse);
     }
 
-    public void StateToAire()
-    {
-    }
-
-    public void StateToWater()
-    {
-    }
+   
 }

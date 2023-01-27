@@ -161,30 +161,30 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""ToWater"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""29b16359-1447-40e2-b3ed-8255d286bf9f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""ToIce"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""ba0742f5-c491-4ef4-bb4a-f8593f254112"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""ToAir"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""f8732685-2293-4f3d-8f63-d32a37638e96"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [

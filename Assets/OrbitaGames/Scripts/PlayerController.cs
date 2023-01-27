@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     public ObiActor waterActor;
 
     public ObiSoftbody softbody;
-    
-    
+
+
     private GameObject Water;
     private GameObject Ice;
     private GameObject Air;
@@ -60,9 +60,6 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
-                  //  softbody.Teleport(new  Vector3(3,3,3),transform.rotation);
-                  //  WaterSolwer.gameObject.SetActive(true);
-                  //  currentGameobjectState = water.gameObject;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = transform.position;
@@ -93,11 +90,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
         Direction = new PlayerDirection();
         //Cursor.lockState = CursorLockMode.Locked;
-       // Water = water.gameObject;
-        
+        // Water = water.gameObject;
+
         Ice = ice.gameObject;
         Air = air.gameObject;
 
@@ -106,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         inputSystem = new InputSystem();
 
-        inputSystem.Transformation.ToWater.performed += context => TransformaitionToWater();
+
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
     }
@@ -116,22 +112,13 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
-        Debug.LogError(transform.position);
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.LogError(transform.position);
-            Ice.SetActive(false);
-            Air.SetActive(false);
-            WaterSolwer.gameObject.SetActive(true);
-            softbody.Teleport(transform.position, transform.rotation);
-            gameObject.transform.position = water.transform.position;
-            
-        }
 
-
-//        Debug.Log(Direction.Up);
-
-
+        if (inputSystem.Transformation.ToWater.ReadValue<float>() > 0)
+            TransformaitionToWater();
+        if (inputSystem.Transformation.ToIce.ReadValue<float>() > 0)
+            TransformaitionToIce();
+        if (inputSystem.Transformation.ToAir.ReadValue<float>() > 0)
+            TransformaitionToAir();
         LookAtpoz = Vector3.Lerp(targetB.position,
             new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z), smoothFacor);
         targetB.position = LookAtpoz;
@@ -139,13 +126,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+    {    
+        
         Move();
         Jump();
     }
 
     private void LateUpdate()
     {
+   
     }
 
     void Move()
@@ -184,7 +173,7 @@ public class PlayerController : MonoBehaviour
                 Jump(water);
                 break;
             case PlayerState.Ice:
-                if (playerSensor.OnTheFloar && Direction.Up>0)
+                if (playerSensor.OnTheFloar && Direction.Up > 0)
                 {
                     jumpBoost = iceJumpBoost;
                     Jump(ice);
@@ -220,24 +209,37 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
-  Debug.Log(1);
-            //softbody.Teleport(transform.position, transform.rotation);
-
-          
-     //   gameObject.transform.position = water.transform.position;
-    //    CurrentState = PlayerState.Water;
+        Ice.SetActive(false);
+        Air.SetActive(false);
+        currentState = PlayerState.Water;
+        WaterSolwer.gameObject.SetActive(true);
+        softbody.Teleport(transform.position, transform.rotation);
+        gameObject.transform.position = water.transform.position;
     }
 
     void TransformaitionToIce()
     {
+        
         Debug.Log("TransformaitionToIce");
-        CurrentState = PlayerState.Ice;
+        WaterSolwer.gameObject.SetActive(false);
+        air.gameObject.SetActive(false);
+        
+        currentState = PlayerState.Ice;
+        ice.transform.position = transform.position;
+        ice.gameObject.SetActive(true);
+        currentGameobjectState = Air;
     }
 
     void TransformaitionToAir()
     {
         Debug.Log("TransformaitionToAire");
-        CurrentState = PlayerState.Air;
+        WaterSolwer.gameObject.SetActive(false);
+        Ice.gameObject.SetActive(false);
+        
+        currentState = PlayerState.Air;
+        air.transform.position = transform.position;
+        air.gameObject.SetActive(true);
+        currentGameobjectState = Air;
     }
 
 
