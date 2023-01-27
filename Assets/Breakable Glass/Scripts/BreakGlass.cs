@@ -51,7 +51,7 @@ public class BreakGlass : MonoBehaviour {
 		{
 			Debug.DrawRay(contact.point, contact.normal, Color.white);
 		}
-	 	if (collision.relativeVelocity.magnitude > 15)
+	 	if (collision.relativeVelocity.magnitude > 15 && collision.gameObject.GetComponent<Ice>())
 		    BreakIt();
 	}
 	

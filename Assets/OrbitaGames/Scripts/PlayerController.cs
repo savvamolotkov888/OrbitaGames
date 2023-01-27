@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerDirection Direction;
-    public Transform Target;
+    public PlayerDirection Direction; 
+     
     public PlayerSensor playerSensor;
 
     [SerializeField] private float waterMoveAcceleration;
@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float iceJumpBoost;
     [SerializeField] private float airJumpBoost;
 
-    [SerializeField] private Transform targetDirection;
+    public float smoothFacor;
+    [SerializeField] private Transform targetA;
+    public Transform targetB;
 
     private ObiActor obiActor;
 
@@ -110,14 +112,15 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
 
-        Direction.TargetDirection.x = Target.position.x;
-        Direction.TargetDirection.z = Target.position.z;
+        Direction.TargetDirection.x = targetB.position.x;
+        Direction.TargetDirection.z = targetB.position.z;
     }
 
     private void FixedUpdate()
     {
-        LookAtpoz = new Vector3(targetDirection.position.x, ice.transform.position.y, targetDirection.position.z);
-        Target.position = LookAtpoz;
+        LookAtpoz = Vector3.Lerp(targetB.position, new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z),smoothFacor);
+        
+        targetB.position = LookAtpoz;
         Move();
     }
 
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Air:
                     moveAcceleration = airMoveAcceleration;
                     RotationAcceleration = airRotationAcceleration;
-                    air.transform.LookAt(Target);
+                    air.transform.LookAt(targetB);
                     Move(air);
                     break;
             }
