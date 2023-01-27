@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform targetA;
     public Transform targetB;
 
-    private ObiActor obiActor;
+    public ObiActor obiActor;
 
     private GameObject Water;
     private GameObject Ice;
@@ -56,13 +56,13 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
+                    obiActor.Teleport(new Vector3(0,0,-3),Quaternion.identity);
                     water.gameObject.SetActive(true);
                     currentGameobjectState = Water;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = transform.position;
                     ice.gameObject.SetActive(true);
-
                     currentGameobjectState = Ice;
                     break;
                 case PlayerState.Air:
@@ -92,11 +92,12 @@ public class PlayerController : MonoBehaviour
         Direction = new PlayerDirection();
         //Cursor.lockState = CursorLockMode.Locked;
         Water = water.gameObject;
+        
         Ice = ice.gameObject;
         Air = air.gameObject;
 
-        currentState = PlayerState.Ice;
-        currentGameobjectState = Ice;
+        currentState = PlayerState.Water;
+        currentGameobjectState = Water;
 
         inputSystem = new InputSystem();
 
@@ -202,7 +203,7 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
-        gameObject.transform.position = water.transform.position;
+        //gameObject.transform.position = water.transform.position;
         CurrentState = PlayerState.Water;
     }
 
