@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
         inputSystem.Transformation.ToWater.performed += context => TransformaitionToWater();
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
+        inputSystem.Control.Jump.performed += context => Jump();
     }
 
     private void Update()
@@ -123,7 +124,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        Jump();
     }
 
     private void LateUpdate()

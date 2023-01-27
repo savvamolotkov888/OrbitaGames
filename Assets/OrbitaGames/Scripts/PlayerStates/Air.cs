@@ -26,7 +26,8 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
         Debug.Log("AirJump");
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
-        airRigidbody.AddForce(0, jumpAcceleration, 0, ForceMode.Impulse);
+        
+      //  airRigidbody.AddForce(0, jumpAcceleration, 0, ForceMode.Impulse);
     }
     public void Stet()
     {
