@@ -29,8 +29,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform targetA;
     public Transform targetB;
 
-    public ObiActor obiActor;
+    public ObiSolver WaterSolwer;
+    public ObiActor waterActor;
 
+    public ObiSoftbody softbody;
+    
+    
     private GameObject Water;
     private GameObject Ice;
     private GameObject Air;
@@ -49,16 +53,16 @@ public class PlayerController : MonoBehaviour
         set
         {
             currentState = value;
-            water.gameObject.SetActive(false);
+            WaterSolwer.gameObject.SetActive(false);
             ice.gameObject.SetActive(false);
             air.gameObject.SetActive(false);
 
             switch (currentState)
             {
                 case PlayerState.Water:
-                    obiActor.Teleport(new Vector3(0,0,-3),Quaternion.identity);
-                    water.gameObject.SetActive(true);
-                    currentGameobjectState = Water;
+                  //  softbody.Teleport(new  Vector3(3,3,3),transform.rotation);
+                  //  WaterSolwer.gameObject.SetActive(true);
+                  //  currentGameobjectState = water.gameObject;
                     break;
                 case PlayerState.Ice:
                     ice.transform.position = transform.position;
@@ -89,15 +93,16 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        
         Direction = new PlayerDirection();
         //Cursor.lockState = CursorLockMode.Locked;
-        Water = water.gameObject;
+       // Water = water.gameObject;
         
         Ice = ice.gameObject;
         Air = air.gameObject;
 
-        currentState = PlayerState.Water;
-        currentGameobjectState = Water;
+        CurrentState = PlayerState.Ice;
+        currentGameobjectState = Ice;
 
         inputSystem = new InputSystem();
 
@@ -111,8 +116,20 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
+        Debug.LogError(transform.position);
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.LogError(transform.position);
+            Ice.SetActive(false);
+            Air.SetActive(false);
+            WaterSolwer.gameObject.SetActive(true);
+            softbody.Teleport(transform.position, transform.rotation);
+            gameObject.transform.position = water.transform.position;
+            
+        }
 
-        Debug.Log(Direction.Up);
+
+//        Debug.Log(Direction.Up);
 
 
         LookAtpoz = Vector3.Lerp(targetB.position,
@@ -203,8 +220,12 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
-        //gameObject.transform.position = water.transform.position;
-        CurrentState = PlayerState.Water;
+  Debug.Log(1);
+            //softbody.Teleport(transform.position, transform.rotation);
+
+          
+     //   gameObject.transform.position = water.transform.position;
+    //    CurrentState = PlayerState.Water;
     }
 
     void TransformaitionToIce()
