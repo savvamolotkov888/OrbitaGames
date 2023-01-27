@@ -237,8 +237,6 @@ MonoBehaviour:
   MoveAcceleration: 500
   RotationAcceleration: 500
   JumpAcceleration: 20
-  maxJumpTime: 0
-  maxJumpHeight: 0
 --- !u!54 &1987916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -599,7 +597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291634, y: 1.3409141e-15, z: -3.5082723e-16, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291637, y: -0.000000019099716, z: 0.0000000056337925, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -987,8 +985,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.2829164, y: 0.00000002858474, z: -0.000000008431567, w: 0.9591446}
-  m_LocalPosition: {x: 0.00000006469673, y: 5.879833, z: -5.414569}
+  m_LocalRotation: {x: 0.2829164, y: -0.00000002858474, z: 0.000000008431567, w: 0.9591446}
+  m_LocalPosition: {x: -0.00000006469673, y: 5.879833, z: -5.414569}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1373,7 +1371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28291637, y: 0.00000002858474, z: -0.000000008431566, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291637, y: -0.00000002858474, z: 0.000000008431566, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8855,11 +8853,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSensor: {fileID: 1700960756}
-  smoothFacor: 60
   targetA: {fileID: 687259672}
   targetB: {fileID: 1023544307}
+  smoothFacor: 60
   WaterSolwer: {fileID: 2086290327}
-  waterActor: {fileID: 933856619}
   water: {fileID: 933856624}
   ice: {fileID: 1987915}
   air: {fileID: 657360847}
