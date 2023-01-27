@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
     public Air air;
 
 
-    public IJump jump;
     private Vector3 LookAtpoz;
     void Jump(IJump jump) => jump.Jump(currentGameobjectState, jumpBoost);
 
@@ -111,22 +110,24 @@ public class PlayerController : MonoBehaviour
     {
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
-
-        Direction.TargetDirection.x = targetB.position.x;
-        Direction.TargetDirection.z = targetB.position.z;
+        Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
+        
+        Debug.Log(Direction.Up);
+        
+        
+        LookAtpoz = Vector3.Lerp(targetB.position, new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z),smoothFacor);
+        targetB.position = LookAtpoz;
+        UpdatePosition();
     }
 
     private void FixedUpdate()
     {
-        LookAtpoz = Vector3.Lerp(targetB.position, new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z),smoothFacor);
-        
-        targetB.position = LookAtpoz;
         Move();
     }
 
     private void LateUpdate()
     {
-        UpdatePosition();
+
     }
 
     void Move()

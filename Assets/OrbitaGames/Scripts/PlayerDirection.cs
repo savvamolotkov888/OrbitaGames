@@ -6,13 +6,9 @@ public struct PlayerDirection
 {
     public float Forward;
     public float Lateral;
-    public Vector2XZ TargetDirection;
+    public float Up;
 }
 
-public struct Vector2XZ
-{
-    public float x;
-    public float z;
-}
+
 
 
