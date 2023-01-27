@@ -8,9 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerDirection Direction;
-
     [SerializeField] private PlayerSensor playerSensor;
-    
     public float smoothFacor;
     
     [SerializeField] private Transform targetA;
