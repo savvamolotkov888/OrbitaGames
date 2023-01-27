@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce 
+public class Air : Player , IMove, IJump , IStateToWater, IStateToIce 
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float FlyAcceleration;
     private Rigidbody airRigidbody;
 
-    public void Move(PlayerDirection direction, GameObject air ,RotateDirection rotationDirection )
+    public void Move(PlayerDirection direction, Player air ,RotateDirection rotationDirection )
     {
         if (!airRigidbody)
             airRigidbody = air.GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class Air : MonoBehaviour, IMove, IJump , IStateToWater, IStateToIce
             airRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, direction.Forward * MoveAcceleration);
         
     }
-    public void Jump(GameObject air )
+    public void Jump(Player air )
     {
         Debug.Log("AirJump");
         if (!airRigidbody)

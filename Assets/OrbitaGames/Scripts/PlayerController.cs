@@ -19,12 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public ObiActor waterActor;
 
-
-    private GameObject Water;
-    private GameObject Ice;
-    private GameObject Air;
-    
-    private GameObject currentGameobjectState;
+    private Player currentGameobjectState;
 
     private float moveAcceleration;
     private float RotationAcceleration;
@@ -53,10 +48,7 @@ public class PlayerController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
         // Water = water.gameObject;
 
-        Ice = ice.gameObject;
-        Air = air.gameObject;
-
-        currentGameobjectState = Ice;
+        currentGameobjectState = ice;
         currentState = PlayerState.Ice;
 
         inputSystem = new InputSystem();
@@ -157,11 +149,12 @@ public class PlayerController : MonoBehaviour
     void TransformaitionToWater()
     {
         Debug.Log("TransformaitionToWater");
-        Ice.SetActive(false);
-        Air.SetActive(false);
+        ice.gameObject.SetActive(false);
+        air.gameObject.SetActive(false);
         
         currentState = PlayerState.Water;
-        currentGameobjectState = waterActor.gameObject;
+        
+        currentGameobjectState = water;
         WaterSolwer.gameObject.SetActive(true);
         waterActor.Teleport(transform.position, transform.rotation);
         gameObject.transform.position = water.transform.position;
@@ -184,12 +177,12 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("TransformaitionToAire");
         WaterSolwer.gameObject.SetActive(false);
-        Ice.gameObject.SetActive(false);
+        ice.gameObject.SetActive(false);
         
         currentState = PlayerState.Air;
         air.transform.position = transform.position;
         air.gameObject.SetActive(true);
-        currentGameobjectState = Air;
+        currentGameobjectState = air;
     }
 
 

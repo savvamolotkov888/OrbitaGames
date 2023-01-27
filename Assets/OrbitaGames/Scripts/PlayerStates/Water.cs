@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Obi;
 
-public class Water : MonoBehaviour, IMove, IJump, IStateToIce, IStateToAire
+public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float JumpAcceleration;
     
     private ObiSoftbody obi;
-    public void Move(PlayerDirection forwardMoveDirection, GameObject water , RotateDirection rotationDirection)
+    public void Move(PlayerDirection forwardMoveDirection, Player water , RotateDirection rotationDirection)
     {
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
         
         obi.AddForce(new Vector3(0, 0, 1*MoveAcceleration), ForceMode.VelocityChange);
     }
-    public void Jump(GameObject water)
+    public void Jump(Player water)
     {
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
