@@ -8,6 +8,8 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float JumpAcceleration;
+
+    public Transform TargetB;
     
     private ObiSoftbody obi;
     public void Move(PlayerDirection moveDirection, Player water , RotateDirection rotationDirection)
@@ -15,7 +17,7 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
         
-        obi.AddForce(new Vector3(moveDirection.Lateral *MoveAcceleration, 0, moveDirection.Forward*MoveAcceleration), ForceMode.VelocityChange);
+        obi.AddForce(new Vector3(moveDirection.Lateral *TargetB.position.x, 0, moveDirection.Forward*MoveAcceleration*TargetB.position.z), ForceMode.Force);
     }
     public void Jump(Player water)
     {
