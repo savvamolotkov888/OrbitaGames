@@ -1,8 +1,10 @@
 using System;
+using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Датчики (поворот , высота от пола и т.д.)
@@ -15,28 +17,65 @@ public class PlayerSensor : MonoBehaviour
     public float rayDist;
     public Ice Ice;
 
-    public bool OnTheFloar;
+    private bool rayCheck = true;
+
+    [SerializeField] private float jumpPressedDellayTime;
+
+    [FormerlySerializedAs("jumpPressed")] public bool canJump;
+
+    public bool CanJump
+    {
+        get => canJump;
+
+        set
+        {
+            canJump = value;
+            if (canJump)
+            {
+                canJump = true;
+             
+            }
+            else
+                JumpPressedDelay();
+                
+        }
+    }
 
     void FixedUpdate()
     {
         FloarCheck();
         IceRotationCheck();
     }
+
     private void FloarCheck()
     {
-        Ray ray = new Ray(transform.position, -Vector3.up);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDist))
+        if (rayCheck)
         {
+            Ray ray = new Ray(transform.position, -Vector3.up);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, rayDist))
+            {
 //            Debug.Log(hit.distance);
 
-            if (hit.distance < 0.5)
-                OnTheFloar = true;
-            else
-                OnTheFloar = false;
+                if (hit.distance < 0.5)
+                    CanJump = true;
+
+                else
+                    CanJump = false;
+            }
         }
     }
+
+    private async Task JumpPressedDelay()
+    {
+        rayCheck = false;
+        Debug.Log(" rayCheck = false");
+        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime));
+        rayCheck = true;
+        Debug.Log(" rayCheck = true");
+    }
+
     private void IceRotationCheck()
     {
         angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, Ice.transform.forward, Vector3.up);
@@ -56,9 +95,10 @@ public class PlayerSensor : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-            Debug.Log(other.name);
+        //  Debug.Log(other.name);
     }
 }
+
 
 public enum RotateDirection
 {

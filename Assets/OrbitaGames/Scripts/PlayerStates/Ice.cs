@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public  class Ice : Player, IMove, IJump, IShift
+public class Ice : Player, IMove, IJump, IShift
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
     [SerializeField] private float JumpAcceleration;
-    
+
     private Rigidbody iceRigidbody;
 
-    public void Move(PlayerDirection direction, Player ice,
-        RotateDirection rotationDirection)
+    public void Move(PlayerDirection direction, Player ice, RotateDirection rotationDirection)
     {
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
@@ -49,7 +48,7 @@ public  class Ice : Player, IMove, IJump, IShift
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
 
-        iceRigidbody.AddForce(0,JumpAcceleration , 0, ForceMode.Impulse);
+        iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(Rigidbody iceRigidbody, float acceleration)
@@ -57,6 +56,4 @@ public  class Ice : Player, IMove, IJump, IShift
         Debug.Log("IceJump");
         iceRigidbody.AddForce(0, acceleration, 0, ForceMode.Impulse);
     }
-
-   
 }

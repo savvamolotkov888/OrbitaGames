@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
                 Move(water);
                 break;
             case PlayerState.Ice:
-                if (playerSensor.OnTheFloar)
+                if (playerSensor.CanJump)
                 {
                     Move(ice);
                 }
@@ -118,11 +118,11 @@ public class PlayerController : MonoBehaviour
         switch (currentState)
         {
             case PlayerState.Water:
-                if (playerSensor.OnTheFloar && Direction.Up > 0)
+                if (playerSensor.CanJump && Direction.Up > 0)
                     Jump(water);
                 break;
             case PlayerState.Ice:
-                if (playerSensor.OnTheFloar && Direction.Up > 0)
+                if (playerSensor.CanJump && Direction.Up > 0)
                     Jump(ice);
                 break;
 
