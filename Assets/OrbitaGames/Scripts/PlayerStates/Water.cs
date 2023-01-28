@@ -17,14 +17,14 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
         
-        obi.AddForce(new Vector3(moveDirection.Lateral *TargetB.position.x, 0, moveDirection.Forward*MoveAcceleration*TargetB.position.z), ForceMode.Force);
+                // obi.AddForce(new Vector3(moveDirection.Lateral *TargetB.position.x*MoveAcceleration, 0, moveDirection.Forward*MoveAcceleration*TargetB.position.z), ForceMode.Force);
     }
     public void Jump(Player water)
     {
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
         Debug.Log("WaterJump");
-        obi.AddForce(new Vector3(0, JumpAcceleration,0), ForceMode.Force);
+        obi.AddForce(new Vector3(0, JumpAcceleration,0), ForceMode.Impulse);
     }
     public void StateToAire()
     {
