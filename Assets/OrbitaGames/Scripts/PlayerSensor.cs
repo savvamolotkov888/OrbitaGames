@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +52,11 @@ public class PlayerSensor : MonoBehaviour
         {
             rorator = RotateDirection.DontRotate;
         }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+            Debug.Log(other.name);
     }
 }
 
