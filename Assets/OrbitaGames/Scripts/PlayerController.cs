@@ -74,8 +74,8 @@ public class PlayerController : MonoBehaviour
             TransformaitionToIce();
         if (inputSystem.Transformation.ToAir.ReadValue<float>() > 0)
             TransformaitionToAir();
-        
-        
+
+
         LookAtpoz = Vector3.Lerp(targetB.position,
             new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z), smoothFacor);
         targetB.position = LookAtpoz;
@@ -119,7 +119,11 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.Water:
                 if (playerSensor.CanJump && Direction.Up > 0)
+                {
                     Jump(water);
+                    playerSensor.CanJump = false;
+                }
+
                 break;
             case PlayerState.Ice:
                 if (playerSensor.CanJump && Direction.Up > 0)

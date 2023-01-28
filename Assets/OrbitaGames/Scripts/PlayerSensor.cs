@@ -20,25 +20,26 @@ public class PlayerSensor : MonoBehaviour
     private bool rayCheck = true;
 
     [SerializeField] private float jumpPressedDellayTime;
-
-    [FormerlySerializedAs("jumpPressed")] public bool canJump;
+    public bool canJump;
 
     public bool CanJump
     {
-        get {if(!canJump)Debug.LogError(4);return canJump; }
-
+        get => canJump;
         set
         {
             canJump = value;
-            if (canJump)
-                canJump = true;
-            else
+
+            if (!canJump)
             {
                 canJump = false;
                 JumpPressedDelay();
             }
-
         }
+    }
+
+    private void Awake()
+    {
+        CanJump = true;
     }
 
     void FixedUpdate()
@@ -70,10 +71,8 @@ public class PlayerSensor : MonoBehaviour
     private async Task JumpPressedDelay()
     {
         rayCheck = false;
-        Debug.Log(" rayCheck = false");
-        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime));
+        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime*Time.deltaTime));
         rayCheck = true;
-        Debug.Log(" rayCheck = true");
     }
 
     private void IceRotationCheck()
