@@ -25,19 +25,19 @@ public class PlayerSensor : MonoBehaviour
 
     public bool CanJump
     {
-        get => canJump;
+        get {if(!canJump)Debug.LogError(4);return canJump; }
 
         set
         {
             canJump = value;
             if (canJump)
-            {
                 canJump = true;
-             
-            }
             else
+            {
+                canJump = false;
                 JumpPressedDelay();
-                
+            }
+
         }
     }
 

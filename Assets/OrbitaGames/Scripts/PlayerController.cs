@@ -123,7 +123,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Ice:
                 if (playerSensor.CanJump && Direction.Up > 0)
+                {
                     Jump(ice);
+                    playerSensor.CanJump = false;
+                }
+
                 break;
 
             case PlayerState.Air:
