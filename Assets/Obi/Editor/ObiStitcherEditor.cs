@@ -168,8 +168,8 @@ namespace Obi{
 		}
 
 		public void DrawSewingTool(){
-	        var fmh_171_72_638104402513496626 = Quaternion.identity; sewingToolHandle1 = Handles.FreeMoveHandle(sewingToolHandle1,HandleUtility.GetHandleSize(sewingToolHandle1)*0.05f,new Vector3(.5f,.5f,.5f),Handles.RectangleHandleCap);
-			var fmh_172_66_638104402513518339 = Quaternion.identity; sewingToolHandle2 = Handles.FreeMoveHandle(sewingToolHandle2,HandleUtility.GetHandleSize(sewingToolHandle2)*0.05f,new Vector3(.5f,.5f,.5f),Handles.RectangleHandleCap);
+	        var fmh_171_72_638105503269234452 = Quaternion.identity; sewingToolHandle1 = Handles.FreeMoveHandle(sewingToolHandle1,HandleUtility.GetHandleSize(sewingToolHandle1)*0.05f,new Vector3(.5f,.5f,.5f),Handles.RectangleHandleCap);
+			var fmh_172_66_638105503269253714 = Quaternion.identity; sewingToolHandle2 = Handles.FreeMoveHandle(sewingToolHandle2,HandleUtility.GetHandleSize(sewingToolHandle2)*0.05f,new Vector3(.5f,.5f,.5f),Handles.RectangleHandleCap);
 			Handles.DrawDottedLine(sewingToolHandle1,sewingToolHandle2,2);
 		}
 

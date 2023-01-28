@@ -37,22 +37,18 @@ public class ObstacleCourseController : MonoBehaviour
 
     private void LateUpdate()
     {
-      
+        if (softbody != null && softbodyCOM != null)
+        {
             // restart:
             if (Input.GetKeyDown(KeyCode.R) && spawnPoint != null)
             {
-                Debug.Log(1);
                 softbody.Teleport(spawnPoint.position, spawnPoint.rotation);
 
                 // update the COM after teleporting the softbody, but before
                 // teleporting the camera so that the cam works with up to date COM.
-             //   softbodyCOM.Update();
 
-			//	Camera.main.GetComponent<ExtrapolationCamera>().Teleport(cameraSpawnPoint.position, cameraSpawnPoint.rotation);
-
-				//onRestart.Invoke();
             }
-        
+        }
     }
 
     private void Solver_OnCollision(ObiSolver s, ObiSolver.ObiCollisionEventArgs e)

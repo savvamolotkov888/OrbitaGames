@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
-
+    public ActorCOMTransform softbodyCOM;
+    
     public PlayerState PlayerStateAtStart;
     
     #region CameraDebug
@@ -213,7 +214,11 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.Water;
 
         WaterSolwer.gameObject.SetActive(true);
+        
         waterActor.Teleport(transform.position, transform.rotation);
+        
+        softbodyCOM.Update();
+     
         gameObject.transform.position = water.transform.position;
     }
 
