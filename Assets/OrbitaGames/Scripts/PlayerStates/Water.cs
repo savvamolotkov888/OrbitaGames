@@ -22,7 +22,11 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
 
 
         if (direction.Forward > 0)
-            obi.AddForce(TargetB.position * MoveAcceleration , ForceMode.Force);
+        {
+            obi.AddForce(TargetB.position.normalized * MoveAcceleration, ForceMode.Force);
+            Debug.Log(TargetB.position+"   " + TargetB.position.normalized);
+        }
+
         //   if (direction.Lateral != 0)
         //    obi.AddForce(new Vector3(TargetB.position.x ,0,0)*MoveAcceleration, ForceMode.Force);
     }
