@@ -6,6 +6,8 @@ public class Air : Player , IMove, IJump , IStateToWater, IStateToIce
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float FlyAcceleration;
+     [Range(0,1)]
+    public float airControl = 0.3f;
     private Rigidbody airRigidbody;
 
     public void Move(PlayerDirection direction, Player air ,RotateDirection rotationDirection )

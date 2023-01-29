@@ -8,8 +8,9 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float JumpAcceleration;
+    [Range(0, 1)] public float airControl = 0.3f;
+    public Transform referenceFrame;
 
-    public Transform TargetB;
 
     private ObiSoftbody obi;
 
@@ -23,8 +24,10 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
 
         if (direction.Forward > 0)
         {
-            obi.AddForce(TargetB.position.normalized * MoveAcceleration, ForceMode.Force);
-            Debug.Log(TargetB.position+"   " + TargetB.position.normalized);
+            var _direction = Vector3.zero;
+            _direction += referenceFrame.forward * MoveAcceleration;
+            obi.AddForce(_direction.normalized * MoveAcceleration, ForceMode.Acceleration);
+           // Debug.Log(TargetB.position + "   " + TargetB.position.normalized);
         }
 
         //   if (direction.Lateral != 0)

@@ -39,6 +39,7 @@ public class SoftbodyController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 direction += referenceFrame.forward * acceleration;
+                Debug.Log(referenceFrame.forward);
             }
             if (Input.GetKey(KeyCode.A))
             {
