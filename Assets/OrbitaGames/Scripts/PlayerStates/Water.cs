@@ -20,14 +20,19 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
             obi = water.GetComponent<ObiSoftbody>();
 
         Debug.Log("WaterMoove");
+        var forceDirection = Vector3.zero;
 
-
-        if (direction.Forward > 0)
+        if (direction.Forward != 0)
         {
-            var _direction = Vector3.zero;
-            _direction += referenceFrame.forward * MoveAcceleration;
-            obi.AddForce(_direction.normalized * MoveAcceleration, ForceMode.Acceleration);
+            forceDirection += referenceFrame.forward * MoveAcceleration;
+            obi.AddForce(forceDirection.normalized * MoveAcceleration * direction.Forward, ForceMode.Acceleration);
            // Debug.Log(TargetB.position + "   " + TargetB.position.normalized);
+        }
+        if (direction.Lateral != 0)
+        {
+            forceDirection += referenceFrame.right * MoveAcceleration;
+            obi.AddForce(forceDirection.normalized * MoveAcceleration * direction.Lateral, ForceMode.Acceleration);
+            // Debug.Log(TargetB.position + "   " + TargetB.position.normalized);
         }
 
         //   if (direction.Lateral != 0)

@@ -322,7 +322,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20229223, y: -1e-45, z: -0, w: 0.97932523}
+  m_LocalRotation: {x: 0.20229223, y: 7e-44, z: -2.4e-44, w: 0.97932523}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -528,50 +528,6 @@ Transform:
   m_Father: {fileID: 657360843}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &243002327
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 243002329}
-  - component: {fileID: 243002328}
-  m_Layer: 0
-  m_Name: OniCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &243002328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243002327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02d25c24c8574316883c920912e4fdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &243002329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243002327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 19
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &437076710
 GameObject:
   m_ObjectHideFlags: 3
@@ -641,7 +597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28291637, y: -0.000000028584736, z: 0.000000008431565, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: 0.0000000118401875, z: -0.0000000034924694, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1029,8 +985,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.28291634, y: -0.00000002858474, z: 0.000000008431565, w: 0.9591446}
-  m_LocalPosition: {x: -0.026, y: 5.886833, z: -5.4145694}
+  m_LocalRotation: {x: 0.28291637, y: -0.000000033024424, z: 0.000000009741127, w: 0.9591446}
+  m_LocalPosition: {x: -0.026000038, y: 5.886833, z: -5.4145694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1285,6 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveAcceleration: 2
   FlyAcceleration: 2
+  airControl: 0.3
 --- !u!54 &657360848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1461,7 +1418,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28291634, y: 1.4514759e-16, z: -7.71236e-16, w: 0.9591446}
+  m_LocalRotation: {x: 0.28291634, y: -0.000000016538602, z: 0.000000004878348, w: 0.9591446}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7956,9 +7913,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ae2cdb453505241a75a15caa87c57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAcceleration: 400
+  MoveAcceleration: 10
   JumpAcceleration: 300
-  TargetB: {fileID: 1023544307}
+  airControl: 0.29
+  referenceFrame: {fileID: 570007311}
 --- !u!1 &976307237
 GameObject:
   m_ObjectHideFlags: 3
@@ -8117,6 +8075,50 @@ Transform:
   - {fileID: 2126007518}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1051201774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051201776}
+  - component: {fileID: 1051201775}
+  m_Layer: 0
+  m_Name: OniCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1051201775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051201774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02d25c24c8574316883c920912e4fdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1051201776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051201774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1126832046
 PrefabInstance:
