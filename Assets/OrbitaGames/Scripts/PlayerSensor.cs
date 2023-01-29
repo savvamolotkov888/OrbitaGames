@@ -12,6 +12,8 @@ using UnityEngine.Serialization;
 public class PlayerSensor : MonoBehaviour
 {
     public Transform Target;
+    public Transform Camera;
+    private Vector3 _targetPoz;
     public RotateDirection rorator;
     private float angle;
     public float rayDist;
@@ -78,6 +80,13 @@ public class PlayerSensor : MonoBehaviour
     private void IceRotationCheck()
     {
         angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, Ice.transform.forward, Vector3.up);
+        _targetPoz = Ice.transform.position + Camera.position;
+        
+        
+        var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
+        
+        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
+        
         if (angle > 5 && angle < 180)
         {
             rorator = RotateDirection.Right;

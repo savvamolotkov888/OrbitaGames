@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6400000}
   - component: {fileID: 11400000}
   - component: {fileID: 5400000}
+  - component: {fileID: 953623549837682964}
+  - component: {fileID: 2129329488575082011}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Untagged
@@ -30,11 +32,11 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3300000
 MeshFilter:
@@ -120,13 +122,13 @@ MonoBehaviour:
   BreakSound: 1
   SoundEmitter: {fileID: 100000, guid: f96c4aea1973514408d65f75f5d2dc56, type: 3}
   SoundEmitterLifetime: 2
-  ShardsLifetime: 3
-  ShardMass: 0.5
-  ShardMaterial: {fileID: 2100000, guid: 0ea2cd7dc1577e640909df86696d6d4b, type: 2}
-  BreakByVelocity: 0
-  BreakVelocity: 10
-  BreakByImpulse: 1
-  BreakImpulse: 20
+  ShardsLifetime: 10
+  ShardMass: 0.1
+  ShardMaterial: {fileID: 2100000, guid: 0cb4b4dfd34ab674c9096ca856ba6d45, type: 2}
+  BreakByVelocity: 1
+  BreakVelocity: 1
+  BreakByImpulse: 0
+  BreakImpulse: 0.1
   BreakByClick: 1
   SlowdownCoefficient: 0.6
 --- !u!54 &5400000
@@ -145,3 +147,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &953623549837682964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thickness: 0
+  material: {fileID: 0}
+  filter: -65535
+  m_SourceCollider: {fileID: 6400000}
+  m_DistanceField: {fileID: 0}
+--- !u!114 &2129329488575082011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
