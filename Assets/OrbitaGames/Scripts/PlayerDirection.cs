@@ -7,6 +7,7 @@ public struct PlayerDirection
     public float Forward;
     public float Lateral;
     public float Up;
+    public float Shift;
 }
 
 

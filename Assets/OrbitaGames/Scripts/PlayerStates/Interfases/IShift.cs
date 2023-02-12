@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IShift
 {
-    void Shift(Rigidbody rigidbody, float acceleration);
+    public void Shift(PlayerDirection direction,Player player,RotateDirection rotationDirection );
 }

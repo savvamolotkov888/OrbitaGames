@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, playerSensor.rorator);
+    void Shift(IShift shift) =>
+        shift.Shift(Direction, currentGameobjectState, playerSensor.rorator);
 
     private void Awake()
     {
@@ -109,11 +111,9 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
+       // Shift();
     }
-
-    private void LateUpdate()
-    {
-    }
+    
 
     void Move()
     {
@@ -124,10 +124,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Ice:
                 if (playerSensor.CanJump)
-                {
                     Move(ice);
-                }
-
                 break;
             case PlayerState.Air:
                 air.transform.LookAt(targetB);
@@ -160,6 +157,11 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Air:
                 Jump(air);
                 break;
+        }
+
+        void Shift()
+        {
+            
         }
     }
 
