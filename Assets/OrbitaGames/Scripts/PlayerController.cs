@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 LookAtpoz;
-    void Jump(IJump jump) => jump.Jump(currentGameobjectState);
+    void Jump(IJump jump) => jump.Jump(Direction,currentGameobjectState);
 
     void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, playerSensor.rorator);

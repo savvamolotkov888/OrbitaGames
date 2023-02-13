@@ -45,7 +45,7 @@ public  class Ice : Player, IMove, IJump, IShift
         }
     }
 
-    public void Jump(Player ice)
+    public void Jump(PlayerDirection direction,Player ice)
     {
         Debug.Log("IceJump");
         if (!iceRigidbody)

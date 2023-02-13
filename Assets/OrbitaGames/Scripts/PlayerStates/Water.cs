@@ -39,7 +39,7 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
         //    obi.AddForce(new Vector3(TargetB.position.x ,0,0)*MoveAcceleration, ForceMode.Force);
     }
 
-    public void Jump(Player water)
+    public void Jump(PlayerDirection direction,Player water)
     {
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();

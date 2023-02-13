@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IJump
 {
-    void Jump(Player player);
+    void Jump(PlayerDirection direction,Player player);
 }
 
