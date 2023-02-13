@@ -209,6 +209,7 @@ public class PlayerController : MonoBehaviour
 
     void TransformaitionToWater()
     {
+        if(currentState == PlayerState.Water) return;
         Debug.Log("TransformaitionToWater");
         ice.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -226,6 +227,8 @@ public class PlayerController : MonoBehaviour
 
     void TransformaitionToIce()
     {
+        if(currentState == PlayerState.Ice) return;
+        
         Debug.Log("TransformaitionToIce");
         WaterSolwer.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -238,6 +241,8 @@ public class PlayerController : MonoBehaviour
 
     void TransformaitionToAir()
     {
+        if(currentState == PlayerState.Air) return;
+        
         Debug.Log("TransformaitionToAire");
         WaterSolwer.gameObject.SetActive(false);
         ice.gameObject.SetActive(false);
