@@ -56,9 +56,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Shift"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""acb6862c-e9f9-49e6-b282-504ed817b0ea"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

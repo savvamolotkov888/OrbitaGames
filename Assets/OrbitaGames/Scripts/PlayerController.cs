@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     private PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
     public ActorCOMTransform softbodyCOM;
-    
+
     public PlayerState PlayerStateAtStart;
-    
+
     #region CameraDebug
 
     [SerializeField] private Transform targetA;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem inputSystem;
 
     private PlayerState currentState;
+
     private PlayerState CurrentState
     {
         get => currentState;
@@ -47,13 +48,12 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Ice:
                     currentGameobjectState = ice;
                     break;
-            
+
                 case PlayerState.Air:
                     currentGameobjectState = air;
                     break;
             }
         }
-
     }
 
 
@@ -67,10 +67,11 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 LookAtpoz;
-    void Jump(IJump jump) => jump.Jump(Direction,currentGameobjectState);
+    void Jump(IJump jump) => jump.Jump(Direction, currentGameobjectState);
 
     void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, playerSensor.rorator);
+
     void Shift(IShift shift) =>
         shift.Shift(Direction, currentGameobjectState, playerSensor.rorator);
 
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
+        Direction.Shift = inputSystem.Control.Shift.ReadValue<float>();
 
         if (inputSystem.Transformation.ToWater.ReadValue<float>() > 0)
             TransformaitionToWater();
@@ -111,9 +113,9 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-       // Shift();
+        Shift();
     }
-    
+
 
     void Move()
     {
@@ -158,11 +160,12 @@ public class PlayerController : MonoBehaviour
                 Jump(air);
                 break;
         }
+    }
 
-        void Shift()
-        {
-            
-        }
+    void Shift()
+    {
+        if (CurrentState == PlayerState.Ice)
+            Shift(ice);
     }
 
     void UpdatePosition()
@@ -198,18 +201,17 @@ public class PlayerController : MonoBehaviour
                 CurrentState = PlayerState.Ice;
                 ice.gameObject.SetActive(true);
                 break;
-            
+
             case PlayerState.Air:
                 CurrentState = PlayerState.Air;
                 air.gameObject.SetActive(true);
                 break;
         }
-        
     }
 
     void TransformaitionToWater()
     {
-        if(currentState == PlayerState.Water) return;
+        if (currentState == PlayerState.Water) return;
         Debug.Log("TransformaitionToWater");
         ice.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -217,18 +219,18 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.Water;
 
         WaterSolwer.gameObject.SetActive(true);
-        
+
         waterActor.Teleport(transform.position, transform.rotation);
-        
+
         softbodyCOM.Update();
-     
+
         gameObject.transform.position = water.transform.position;
     }
 
     void TransformaitionToIce()
     {
-        if(currentState == PlayerState.Ice) return;
-        
+        if (currentState == PlayerState.Ice) return;
+
         Debug.Log("TransformaitionToIce");
         WaterSolwer.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -241,8 +243,8 @@ public class PlayerController : MonoBehaviour
 
     void TransformaitionToAir()
     {
-        if(currentState == PlayerState.Air) return;
-        
+        if (currentState == PlayerState.Air) return;
+
         Debug.Log("TransformaitionToAire");
         WaterSolwer.gameObject.SetActive(false);
         ice.gameObject.SetActive(false);
