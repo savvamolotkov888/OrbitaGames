@@ -56,7 +56,7 @@ public class Ice : Player, IMove, IJump, IShift
         iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
-    public void Shift(PlayerDirection direction, Player ice, RotateDirection rotationDirection,float IceAcelerationTime)
+    public void Shift(PlayerDirection direction, Player ice,float IceAcelerationTime)
     {
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();

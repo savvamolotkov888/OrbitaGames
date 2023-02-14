@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public ActorCOMTransform softbodyCOM;
 
     public PlayerState PlayerStateAtStart;
+    
+    [SerializeField] private float IceAcelerationTime;
 
     #region CameraDebug
 
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
         movable.Move(Direction, currentGameobjectState, playerSensor.rorator);
 
     void Shift(IShift shift) =>
-        shift.Shift(Direction, currentGameobjectState, playerSensor.rorator);
+        shift.Shift(Direction, currentGameobjectState, IceAcelerationTime);
 
     private void Awake()
     {
