@@ -41,7 +41,7 @@ public class Ice : Player, IMove, IJump, IShift
             if (direction.Lateral == 1 && direction.Forward == 1)
             {
                 //TODO поворот анимация
-                Debug.Log("->");
+//                Debug.Log("->");
                 //   iceRigidbody.gameObject.transform.rotation = Quaternion.Euler(0,45, 0);
             }
         }
@@ -71,5 +71,9 @@ public class Ice : Player, IMove, IJump, IShift
 
         else if (direction.Shift <= 0)
             shiftAcceleration = 1;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.LogError(iceRigidbody.velocity);
     }
 }

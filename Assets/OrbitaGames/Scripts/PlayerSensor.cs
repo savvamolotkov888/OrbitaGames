@@ -85,7 +85,7 @@ public class PlayerSensor : MonoBehaviour
         
         var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
         
-        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
+//        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
         
         if (angle > 5 && angle < 180)
         {

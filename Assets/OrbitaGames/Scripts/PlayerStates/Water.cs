@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Obi;
 using UnityEngine.EventSystems;
 
-public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
+public class Water : Player, IMove, IJump
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float JumpAcceleration;
@@ -19,7 +20,7 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
         if (!obi)
             obi = water.GetComponent<ObiSoftbody>();
 
-        Debug.Log("WaterMoove");
+//        Debug.Log("WaterMoove");
         var forceDirection = Vector3.zero;
 
         if (direction.Forward != 0)
@@ -47,11 +48,8 @@ public class Water : Player, IMove, IJump, IStateToIce, IStateToAire
         obi.AddForce(new Vector3(0, JumpAcceleration, 0), ForceMode.Impulse);
     }
 
-    public void StateToAire()
+    private void OnTriggerEnter(Collider other)
     {
-    }
-
-    public void StateToIce()
-    {
+        Debug.LogError("s");
     }
 }
