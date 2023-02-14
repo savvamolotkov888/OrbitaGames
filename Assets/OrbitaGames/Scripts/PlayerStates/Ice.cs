@@ -9,6 +9,7 @@ public class Ice : Player, IMove, IJump, IShift
     [SerializeField] private float RotationAcceleration;
     [SerializeField] private float JumpAcceleration;
     [SerializeField] private float ShiftAcceleration;
+    [SerializeField] private float ShiftImpulseAcceleration;
     private float shiftAcceleration = 1f;
 
     private Rigidbody iceRigidbody;
@@ -55,7 +56,7 @@ public class Ice : Player, IMove, IJump, IShift
         iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
-    public void Shift(PlayerDirection direction, Player ice, RotateDirection rotationDirection)
+    public void Shift(PlayerDirection direction, Player ice, RotateDirection rotationDirection,float IceAcelerationTime)
     {
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
@@ -64,6 +65,9 @@ public class Ice : Player, IMove, IJump, IShift
 
         if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0)
             shiftAcceleration = ShiftAcceleration;
+       // if (direction.Forward == 1 && direction.Lateral == 0 &&)
+      //      iceRigidbody.AddRelativeForce(0, 0, ShiftImpulseAcceleration, ForceMode.Impulse); 
+        
 
         else if (direction.Shift <= 0)
             shiftAcceleration = 1;
