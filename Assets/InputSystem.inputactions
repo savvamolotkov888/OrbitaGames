@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shift",
+                    "name": "ShiftValue",
                     "type": "Value",
                     "id": "acb6862c-e9f9-49e6-b282-504ed817b0ea",
                     "expectedControlType": "",
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ShiftButton",
+                    "type": "Button",
+                    "id": "b65299e8-87d8-42df-9c35-16bdd53cd9c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -103,7 +112,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shift",
+                    "action": "ShiftValue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DoubleShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1900b063-4792-4a34-b222-4cfbeb7bb109",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShiftButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

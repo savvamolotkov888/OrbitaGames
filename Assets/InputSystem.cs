@@ -55,7 +55,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Shift"",
+                    ""name"": ""ShiftValue"",
                     ""type"": ""Value"",
                     ""id"": ""acb6862c-e9f9-49e6-b282-504ed817b0ea"",
                     ""expectedControlType"": """",
@@ -71,6 +71,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ShiftButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""b65299e8-87d8-42df-9c35-16bdd53cd9c4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -125,7 +134,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Shift"",
+                    ""action"": ""ShiftValue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -170,6 +179,17 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DoubleShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1900b063-4792-4a34-b222-4cfbeb7bb109"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -268,8 +288,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         m_Control_MoveVertical = m_Control.FindAction("MoveVertical", throwIfNotFound: true);
         m_Control_MoveGorizontal = m_Control.FindAction("MoveGorizontal", throwIfNotFound: true);
         m_Control_Jump = m_Control.FindAction("Jump", throwIfNotFound: true);
-        m_Control_Shift = m_Control.FindAction("Shift", throwIfNotFound: true);
+        m_Control_ShiftValue = m_Control.FindAction("ShiftValue", throwIfNotFound: true);
         m_Control_DoubleShift = m_Control.FindAction("DoubleShift", throwIfNotFound: true);
+        m_Control_ShiftButton = m_Control.FindAction("ShiftButton", throwIfNotFound: true);
         // Transformation
         m_Transformation = asset.FindActionMap("Transformation", throwIfNotFound: true);
         m_Transformation_ToWater = m_Transformation.FindAction("ToWater", throwIfNotFound: true);
@@ -337,8 +358,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Control_MoveVertical;
     private readonly InputAction m_Control_MoveGorizontal;
     private readonly InputAction m_Control_Jump;
-    private readonly InputAction m_Control_Shift;
+    private readonly InputAction m_Control_ShiftValue;
     private readonly InputAction m_Control_DoubleShift;
+    private readonly InputAction m_Control_ShiftButton;
     public struct ControlActions
     {
         private @InputSystem m_Wrapper;
@@ -346,8 +368,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         public InputAction @MoveVertical => m_Wrapper.m_Control_MoveVertical;
         public InputAction @MoveGorizontal => m_Wrapper.m_Control_MoveGorizontal;
         public InputAction @Jump => m_Wrapper.m_Control_Jump;
-        public InputAction @Shift => m_Wrapper.m_Control_Shift;
+        public InputAction @ShiftValue => m_Wrapper.m_Control_ShiftValue;
         public InputAction @DoubleShift => m_Wrapper.m_Control_DoubleShift;
+        public InputAction @ShiftButton => m_Wrapper.m_Control_ShiftButton;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -366,12 +389,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnJump;
-                @Shift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
-                @Shift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
-                @Shift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
+                @ShiftValue.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftValue;
+                @ShiftValue.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftValue;
+                @ShiftValue.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftValue;
                 @DoubleShift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
                 @DoubleShift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
                 @DoubleShift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
+                @ShiftButton.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftButton;
+                @ShiftButton.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftButton;
+                @ShiftButton.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShiftButton;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -385,12 +411,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Shift.started += instance.OnShift;
-                @Shift.performed += instance.OnShift;
-                @Shift.canceled += instance.OnShift;
+                @ShiftValue.started += instance.OnShiftValue;
+                @ShiftValue.performed += instance.OnShiftValue;
+                @ShiftValue.canceled += instance.OnShiftValue;
                 @DoubleShift.started += instance.OnDoubleShift;
                 @DoubleShift.performed += instance.OnDoubleShift;
                 @DoubleShift.canceled += instance.OnDoubleShift;
+                @ShiftButton.started += instance.OnShiftButton;
+                @ShiftButton.performed += instance.OnShiftButton;
+                @ShiftButton.canceled += instance.OnShiftButton;
             }
         }
     }
@@ -458,8 +487,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         void OnMoveVertical(InputAction.CallbackContext context);
         void OnMoveGorizontal(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnShift(InputAction.CallbackContext context);
+        void OnShiftValue(InputAction.CallbackContext context);
         void OnDoubleShift(InputAction.CallbackContext context);
+        void OnShiftButton(InputAction.CallbackContext context);
     }
     public interface ITransformationActions
     {

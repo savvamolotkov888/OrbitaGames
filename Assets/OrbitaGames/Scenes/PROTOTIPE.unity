@@ -425,7 +425,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20930678, y: -0.0000000082544265, z: 0.000000001766843, w: 0.97785}
+  m_LocalRotation: {x: 0.20930679, y: -0.00000000841263, z: 0.0000000018007059, w: 0.97785}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -709,7 +709,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28978413, y: 1.6239172e-15, z: -1.4134174e-16, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.000000016468093, z: -0.0000000049861377, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1095,8 +1095,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.28978416, y: -0.000000017096367, z: 0.0000000051763633, w: 0.95709205}
-  m_LocalPosition: {x: -0.02600004, y: 6.6711006, z: -6.3905997}
+  m_LocalRotation: {x: 0.28978416, y: 0.000000016468091, z: -0.000000004986137, w: 0.95709205}
+  m_LocalPosition: {x: -0.025999963, y: 6.6711006, z: -6.3905997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1409,7 +1409,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28978413, y: -0.000000017096367, z: 0.0000000051763633, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.000000016468091, z: -0.0000000049861364, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1940,14 +1940,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   solverIndices: 
-  m_CollisionMaterial: {fileID: 11400000, guid: 56297c6e785b44eb28e469b62cedc016, type: 2}
+  m_CollisionMaterial: {fileID: 11400000, guid: ab7aedd6eae1dca4fac9d55f27bef8e2, type: 2}
   m_SurfaceCollisions: 0
   m_SoftbodyBlueprint: {fileID: 11400000, guid: f28ba033f1514441b850ab3ed76d0c71, type: 2}
   m_SelfCollisions: 0
   centerBatch: -1
   centerShape: -1
   _shapeMatchingConstraintsEnabled: 1
-  _deformationResistance: 0.3
+  _deformationResistance: 1
   _maxDeformation: 0
   _plasticYield: 0
   _plasticCreep: 0
@@ -7904,8 +7904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ae2cdb453505241a75a15caa87c57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveAcceleration: 10
-  JumpAcceleration: 300
+  moveAcceleration: 10
+  jumpAcceleration: 400
+  stickinessMaterial: {fileID: 11400000, guid: 1b5f7a2aa2caf774cad9935ce44cc85f, type: 2}
   airControl: 0.29
   referenceFrame: {fileID: 570007311}
 --- !u!1 &976307237
@@ -9473,7 +9474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solvers:
   - {fileID: 2086290327}
-  substeps: 1
+  substeps: 3
 --- !u!114 &2086290327
 MonoBehaviour:
   m_ObjectHideFlags: 0

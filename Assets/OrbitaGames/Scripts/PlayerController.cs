@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
 
         inputSystem.Control.DoubleShift.performed += context => DoubleClickCheck(IceDoubleShiftDelay);
+        inputSystem.Control.ShiftButton.performed += context => WaterShift();
     }
 
     private void Update()
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
         Direction.Forward = inputSystem.Control.MoveVertical.ReadValue<float>();
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
-        Direction.Shift = inputSystem.Control.Shift.ReadValue<float>();
+        Direction.Shift = inputSystem.Control.ShiftValue.ReadValue<float>();
 
 
         if (inputSystem.Transformation.ToWater.ReadValue<float>() > 0)
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-        Shift();
+        IceShift();
     }
 
 
@@ -183,7 +184,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Shift()
+    void IceShift()
     {
         if (CurrentState == PlayerState.Ice)
         {
@@ -197,6 +198,12 @@ public class PlayerController : MonoBehaviour
                 Shift(ice);
             }
         }
+    }
+
+    void WaterShift()
+    {
+        if (CurrentState == PlayerState.Water)
+            Shift(water);
     }
 
 
@@ -253,7 +260,7 @@ public class PlayerController : MonoBehaviour
         air.gameObject.SetActive(false);
 
         CurrentState = PlayerState.Water;
-        
+
         WaterSolwer.gameObject.SetActive(true);
         waterActor.Teleport(transform.position, transform.rotation);
         softbodyCOM.Update();
@@ -291,8 +298,7 @@ public class PlayerController : MonoBehaviour
         air.gameObject.SetActive(true);
     }
 
-    
-    
+
     private void DoubleClickCheck(float time)
     {
         ResetClickCount(time);
