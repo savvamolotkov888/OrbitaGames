@@ -62,6 +62,15 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DoubleShift"",
+                    ""type"": ""Button"",
+                    ""id"": ""a65d50ff-ffac-4571-b7d5-522944b22b86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                     ""action"": ""MoveGorizontal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f788d212-7a00-4bcb-bcd0-8b8dd90efb27"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DoubleShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -249,6 +269,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         m_Control_MoveGorizontal = m_Control.FindAction("MoveGorizontal", throwIfNotFound: true);
         m_Control_Jump = m_Control.FindAction("Jump", throwIfNotFound: true);
         m_Control_Shift = m_Control.FindAction("Shift", throwIfNotFound: true);
+        m_Control_DoubleShift = m_Control.FindAction("DoubleShift", throwIfNotFound: true);
         // Transformation
         m_Transformation = asset.FindActionMap("Transformation", throwIfNotFound: true);
         m_Transformation_ToWater = m_Transformation.FindAction("ToWater", throwIfNotFound: true);
@@ -317,6 +338,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
     private readonly InputAction m_Control_MoveGorizontal;
     private readonly InputAction m_Control_Jump;
     private readonly InputAction m_Control_Shift;
+    private readonly InputAction m_Control_DoubleShift;
     public struct ControlActions
     {
         private @InputSystem m_Wrapper;
@@ -325,6 +347,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         public InputAction @MoveGorizontal => m_Wrapper.m_Control_MoveGorizontal;
         public InputAction @Jump => m_Wrapper.m_Control_Jump;
         public InputAction @Shift => m_Wrapper.m_Control_Shift;
+        public InputAction @DoubleShift => m_Wrapper.m_Control_DoubleShift;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +369,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Shift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
                 @Shift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnShift;
+                @DoubleShift.started -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
+                @DoubleShift.performed -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
+                @DoubleShift.canceled -= m_Wrapper.m_ControlActionsCallbackInterface.OnDoubleShift;
             }
             m_Wrapper.m_ControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -362,6 +388,9 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
                 @Shift.started += instance.OnShift;
                 @Shift.performed += instance.OnShift;
                 @Shift.canceled += instance.OnShift;
+                @DoubleShift.started += instance.OnDoubleShift;
+                @DoubleShift.performed += instance.OnDoubleShift;
+                @DoubleShift.canceled += instance.OnDoubleShift;
             }
         }
     }
@@ -430,6 +459,7 @@ public partial class @InputSystem : IInputActionCollection2, IDisposable
         void OnMoveGorizontal(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
+        void OnDoubleShift(InputAction.CallbackContext context);
     }
     public interface ITransformationActions
     {

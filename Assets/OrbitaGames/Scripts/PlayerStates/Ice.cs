@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Ice : Player, IMove, IJump, IShift
+public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
@@ -56,7 +56,7 @@ public class Ice : Player, IMove, IJump, IShift
         iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
-    public void Shift(PlayerDirection direction, Player ice,float IceAcelerationTime)
+    public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
     {
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
@@ -65,13 +65,27 @@ public class Ice : Player, IMove, IJump, IShift
 
         if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0)
             shiftAcceleration = ShiftAcceleration;
-       // if (direction.Forward == 1 && direction.Lateral == 0 &&)
-      //      iceRigidbody.AddRelativeForce(0, 0, ShiftImpulseAcceleration, ForceMode.Impulse); 
-        
+        // if (direction.Forward == 1 && direction.Lateral == 0 &&)
+        //      iceRigidbody.AddRelativeForce(0, 0, ShiftImpulseAcceleration, ForceMode.Impulse); 
+
 
         else if (direction.Shift <= 0)
             shiftAcceleration = 1;
     }
+
+    public void DoubleShift(PlayerDirection direction, Player ice, float IceAcelerationTime)
+    {
+        if (!iceRigidbody)
+            iceRigidbody = ice.GetComponent<Rigidbody>();
+
+        if ((direction.Forward == 1 && direction.Lateral == 0))
+        {
+            Debug.LogError("DoubleShift");
+            iceRigidbody.AddRelativeForce(0, 0,
+                direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Debug.LogError(iceRigidbody.velocity);

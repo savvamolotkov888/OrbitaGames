@@ -2,7 +2,9 @@ using System;
 using Obi;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using Task = System.Threading.Tasks.Task;
 
 
 public class PlayerController : MonoBehaviour
@@ -11,9 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerSensor playerSensor;
     public ActorCOMTransform softbodyCOM;
 
+
     public PlayerState PlayerStateAtStart;
-    
-    [SerializeField] private float IceAcelerationTime;
+
+    [SerializeField] private float IceAcelerationTime; // пока не используем
+    [SerializeField] private float IceDoubleShiftDelay;
+    private short clickCount;
 
     #region CameraDebug
 
@@ -77,6 +82,9 @@ public class PlayerController : MonoBehaviour
     void Shift(IShift shift) =>
         shift.Shift(Direction, currentGameobjectState, IceAcelerationTime);
 
+    void DoubleShift(IDoubleShift doubleShift) =>
+        doubleShift.DoubleShift(Direction, currentGameobjectState, IceAcelerationTime);
+
     private void Awake()
     {
         Direction = new PlayerDirection();
@@ -88,6 +96,8 @@ public class PlayerController : MonoBehaviour
 
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
+
+        inputSystem.Control.DoubleShift.performed += context => DoubleClickCheck(IceDoubleShiftDelay);
     }
 
     private void Update()
@@ -96,6 +106,7 @@ public class PlayerController : MonoBehaviour
         Direction.Lateral = inputSystem.Control.MoveGorizontal.ReadValue<float>();
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
         Direction.Shift = inputSystem.Control.Shift.ReadValue<float>();
+
 
         if (inputSystem.Transformation.ToWater.ReadValue<float>() > 0)
             TransformaitionToWater();
@@ -167,8 +178,19 @@ public class PlayerController : MonoBehaviour
     void Shift()
     {
         if (CurrentState == PlayerState.Ice)
-            Shift(ice);
+        {
+            if (clickCount >=2)
+            {
+                DoubleShift(ice);
+                clickCount = 0;
+            }
+            else
+            {
+                Shift(ice);
+            }
+        }
     }
+    
 
     void UpdatePosition()
     {
@@ -211,7 +233,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void TransformaitionToWater()
+    private void TransformaitionToWater()
     {
         if (currentState == PlayerState.Water) return;
         Debug.Log("TransformaitionToWater");
@@ -229,7 +251,7 @@ public class PlayerController : MonoBehaviour
         gameObject.transform.position = water.transform.position;
     }
 
-    void TransformaitionToIce()
+    private void TransformaitionToIce()
     {
         if (currentState == PlayerState.Ice) return;
 
@@ -243,7 +265,7 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.Ice;
     }
 
-    void TransformaitionToAir()
+    private void TransformaitionToAir()
     {
         if (currentState == PlayerState.Air) return;
 
@@ -254,6 +276,21 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.Air;
         air.transform.position = transform.position;
         air.gameObject.SetActive(true);
+    }
+
+    private void DoubleClickCheck(float time )
+    {
+        ResetClickCount(time);
+        clickCount++;
+    }
+
+    private async void ResetClickCount(float time)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(time));
+        {
+            clickCount = 0;
+//            Debug.LogError("RESSET");   
+        }
     }
 
 
