@@ -14,10 +14,35 @@ public class PlayerSensor : MonoBehaviour
     public Transform Target;
     public Transform Camera;
     private Vector3 _targetPoz;
-    public RotateDirection rorator;
+    private RotateDirection rotator;
+
+    public RotateDirection Rorator
+    {
+        get => rotator;
+        set
+        {
+            rotator = value;
+            switch (rotator)
+            {
+                case RotateDirection.Left :
+                    playerController.Direction.Rotation = RotateDirection.Left ;
+                    break;
+                case RotateDirection.Right :
+                    playerController.Direction.Rotation = RotateDirection.Right ;
+                    break;
+                case RotateDirection.DontRotate :
+                    playerController.Direction.Rotation = RotateDirection.DontRotate ;
+                    break;
+            }
+        }
+
+    }
+        
+        
     private float angle;
     public float rayDist;
     public Ice Ice;
+    private PlayerController playerController;
 
     private bool rayCheck = true;
 
@@ -42,6 +67,7 @@ public class PlayerSensor : MonoBehaviour
     private void Awake()
     {
         CanJump = true;
+        playerController = GetComponent<PlayerController>();
     }
 
     void FixedUpdate()
@@ -73,7 +99,7 @@ public class PlayerSensor : MonoBehaviour
     private async Task JumpPressedDelay()
     {
         rayCheck = false;
-        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime*Time.deltaTime));
+        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime * Time.deltaTime));
         rayCheck = true;
     }
 
@@ -81,23 +107,23 @@ public class PlayerSensor : MonoBehaviour
     {
         angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, Ice.transform.forward, Vector3.up);
         _targetPoz = Ice.transform.position + Camera.position;
-        
-        
+
+
         var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
-        
+
 //        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
-        
+
         if (angle > 5 && angle < 180)
         {
-            rorator = RotateDirection.Right;
+            Rorator = RotateDirection.Right;
         }
         else if (angle < -5 && angle > -180)
         {
-            rorator = RotateDirection.Left;
+            Rorator = RotateDirection.Left;
         }
         else
         {
-            rorator = RotateDirection.DontRotate;
+            Rorator = RotateDirection.DontRotate;
         }
     }
 
@@ -106,7 +132,6 @@ public class PlayerSensor : MonoBehaviour
         //  Debug.Log(other.name);
     }
 }
-
 
 public enum RotateDirection
 {

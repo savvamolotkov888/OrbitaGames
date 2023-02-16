@@ -9,7 +9,7 @@ using Task = System.Threading.Tasks.Task;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerDirection Direction;
+    public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
     public ActorCOMTransform softbodyCOM;
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     void Jump(IJump jump) => jump.Jump(Direction, currentGameobjectState);
 
     void Move(IMove movable) =>
-        movable.Move(Direction, currentGameobjectState, playerSensor.rorator);
+        movable.Move(Direction, currentGameobjectState, playerSensor.Rorator);
 
     void Shift(IShift shift) =>
         shift.Shift(Direction, currentGameobjectState, IceAcelerationTime);

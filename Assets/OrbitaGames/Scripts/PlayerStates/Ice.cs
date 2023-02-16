@@ -78,7 +78,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         if (!iceRigidbody)
             iceRigidbody = ice.GetComponent<Rigidbody>();
 
-        if ((direction.Forward == 1 && direction.Lateral == 0))
+        if ((direction.Forward != 0 && direction.Lateral == 0))
         {
             Debug.LogError("DoubleShift");
             iceRigidbody.AddRelativeForce(0, 0,
