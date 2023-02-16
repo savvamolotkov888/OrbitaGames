@@ -1,8 +1,5 @@
 using System;
 using Obi;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Task = System.Threading.Tasks.Task;
 
@@ -11,14 +8,14 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
-    public ActorCOMTransform softbodyCOM;
-
-
-    public PlayerState PlayerStateAtStart;
+    
+    
+    [SerializeField] private ActorCOMTransform softbodyCOM;
+    [SerializeField] private PlayerState PlayerStateAtStart;
 
     [SerializeField] private float IceAcelerationTime; // пока не используем
     [SerializeField] private float IceDoubleShiftDelay;
-    private short clickCount;
+    private short clickCount; //for double clicks
 
     #region CameraDebug
 
@@ -28,8 +25,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    public ObiSolver WaterSolwer;
-    private ObiActor waterActor;
+    [SerializeField] private  ObiSolver WaterSolwer;
+    [SerializeField] private  ObiActor waterActor;
 
     private Player currentGameobjectState;
 
@@ -80,18 +77,17 @@ public class PlayerController : MonoBehaviour
 
     # endregion
 
-
     private Vector3 LookAtpoz;
-    void Jump(IJump jump) => jump.Jump(Direction, currentGameobjectState);
 
+    #region Interfaces
+    void Jump(IJump jump) => jump.Jump(Direction, currentGameobjectState);
     void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, playerSensor.Rorator);
-
     void Shift(IShift shift) =>
         shift.Shift(Direction, currentGameobjectState, IceAcelerationTime);
-
     void DoubleShift(IDoubleShift doubleShift) =>
         doubleShift.DoubleShift(Direction, currentGameobjectState, IceAcelerationTime);
+    #endregion
 
     private void Awake()
     {
@@ -281,7 +277,6 @@ public class PlayerController : MonoBehaviour
         iceRigidbody.velocity = new Vector3();
         ice.transform.position = transform.position;
         ice.gameObject.SetActive(true);
-        CurrentState = PlayerState.Ice;
     }
 
     private void TransformaitionToAir()
