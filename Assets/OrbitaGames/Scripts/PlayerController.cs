@@ -2,6 +2,7 @@ using System;
 using Obi;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Task = System.Threading.Tasks.Task;
 
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
+
                     currentGameobjectState = water;
                     break;
                 case PlayerState.Ice:
@@ -68,6 +70,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Water water;
     [SerializeField] private Ice ice;
     [SerializeField] private Air air;
+
+    # endregion
+
+    #region Rigidbody
+
+    private Rigidbody iceRigidbody;
+    private Rigidbody airRigidbody;
 
     # endregion
 
@@ -178,7 +187,7 @@ public class PlayerController : MonoBehaviour
     {
         if (CurrentState == PlayerState.Ice)
         {
-            if (clickCount >=2)
+            if (clickCount >= 2)
             {
                 DoubleShift(ice);
                 clickCount = 0;
@@ -189,7 +198,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
 
     void UpdatePosition()
     {
@@ -211,6 +220,10 @@ public class PlayerController : MonoBehaviour
 
     void InitializePlayerState()
     {
+        iceRigidbody = ice.GetComponent<Rigidbody>();
+        airRigidbody = air.GetComponent<Rigidbody>();
+
+
         WaterSolwer.gameObject.SetActive(false);
         ice.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -240,13 +253,10 @@ public class PlayerController : MonoBehaviour
         air.gameObject.SetActive(false);
 
         CurrentState = PlayerState.Water;
-
+        
         WaterSolwer.gameObject.SetActive(true);
-
         waterActor.Teleport(transform.position, transform.rotation);
-
         softbodyCOM.Update();
-
         gameObject.transform.position = water.transform.position;
     }
 
@@ -255,10 +265,13 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.Ice) return;
 
         Debug.Log("TransformaitionToIce");
+
         WaterSolwer.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
 
         CurrentState = PlayerState.Ice;
+
+        iceRigidbody.velocity = new Vector3();
         ice.transform.position = transform.position;
         ice.gameObject.SetActive(true);
         CurrentState = PlayerState.Ice;
@@ -272,12 +285,15 @@ public class PlayerController : MonoBehaviour
         WaterSolwer.gameObject.SetActive(false);
         ice.gameObject.SetActive(false);
 
+        airRigidbody.velocity = new Vector3();
         CurrentState = PlayerState.Air;
         air.transform.position = transform.position;
         air.gameObject.SetActive(true);
     }
 
-    private void DoubleClickCheck(float time )
+    
+    
+    private void DoubleClickCheck(float time)
     {
         ResetClickCount(time);
         clickCount++;
