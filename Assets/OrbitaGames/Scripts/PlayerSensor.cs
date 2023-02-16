@@ -85,8 +85,6 @@ public class PlayerSensor : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, rayDist))
             {
-//            Debug.Log(hit.distance);
-
                 if (hit.distance < 0.5)
                     CanJump = true;
 

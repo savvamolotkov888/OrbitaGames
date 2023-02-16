@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
-    
-    
+
+
     [SerializeField] private ActorCOMTransform softbodyCOM;
     [SerializeField] private PlayerState PlayerStateAtStart;
 
@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private  ObiSolver WaterSolwer;
-    [SerializeField] private  ObiActor waterActor;
+    [SerializeField] private ObiSolver WaterSolwer;
+    [SerializeField] private ObiActor waterActor;
 
     private Player currentGameobjectState;
 
@@ -47,13 +47,11 @@ public class PlayerController : MonoBehaviour
             switch (currentState)
             {
                 case PlayerState.Water:
-
                     currentGameobjectState = water;
                     break;
                 case PlayerState.Ice:
                     currentGameobjectState = ice;
                     break;
-
                 case PlayerState.Air:
                     currentGameobjectState = air;
                     break;
@@ -80,13 +78,18 @@ public class PlayerController : MonoBehaviour
     private Vector3 LookAtpoz;
 
     #region Interfaces
+
     void Jump(IJump jump) => jump.Jump(Direction, currentGameobjectState);
+
     void Move(IMove movable) =>
         movable.Move(Direction, currentGameobjectState, playerSensor.Rorator);
+
     void Shift(IShift shift) =>
         shift.Shift(Direction, currentGameobjectState, IceAcelerationTime);
+
     void DoubleShift(IDoubleShift doubleShift) =>
         doubleShift.DoubleShift(Direction, currentGameobjectState, IceAcelerationTime);
+
     #endregion
 
     private void Awake()
@@ -96,7 +99,9 @@ public class PlayerController : MonoBehaviour
         inputSystem = new InputSystem();
         InitializePlayerState();
 
+        iceRigidbody = ice.GetComponent<Rigidbody>();
         waterActor = water.GetComponent<ObiActor>();
+        airRigidbody = air.GetComponent<Rigidbody>();
 
         inputSystem.Transformation.ToIce.performed += context => TransformaitionToIce();
         inputSystem.Transformation.ToAir.performed += context => TransformaitionToAir();
@@ -223,10 +228,6 @@ public class PlayerController : MonoBehaviour
 
     void InitializePlayerState()
     {
-        iceRigidbody = ice.GetComponent<Rigidbody>();
-        airRigidbody = air.GetComponent<Rigidbody>();
-
-
         WaterSolwer.gameObject.SetActive(false);
         ice.gameObject.SetActive(false);
         air.gameObject.SetActive(false);
@@ -299,13 +300,11 @@ public class PlayerController : MonoBehaviour
         ResetClickCount(time);
         clickCount++;
     }
-
     private async void ResetClickCount(float time)
     {
         await Task.Delay(TimeSpan.FromSeconds(time));
         {
             clickCount = 0;
-//            Debug.LogError("RESSET");   
         }
     }
 
