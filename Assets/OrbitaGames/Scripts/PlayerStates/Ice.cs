@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,60 +15,40 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
     private Rigidbody iceRigidbody;
 
+    private void Awake()
+    {
+        iceRigidbody = GetComponent<Rigidbody>();
+    }
+
     public void Move(PlayerDirection direction, Player ice,
         RotateDirection rotationDirection)
     {
-        if (!iceRigidbody)
-            iceRigidbody = ice.GetComponent<Rigidbody>();
-
-
         iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
 
         if (direction.Forward != 1 && direction.Forward != -1)
-        {
             return;
-        }
+
 
         if (rotationDirection != RotateDirection.DontRotate)
-        {
             iceRigidbody.AddTorque(0, RotationAcceleration * (float)rotationDirection * shiftAcceleration, 0);
-        }
 
         if (rotationDirection == RotateDirection.DontRotate)
         {
             iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0,
                 direction.Forward * MoveAcceleration * shiftAcceleration);
-
-            if (direction.Lateral == 1 && direction.Forward == 1)
-            {
-                //TODO поворот анимация
-//                Debug.Log("->");
-                //   iceRigidbody.gameObject.transform.rotation = Quaternion.Euler(0,45, 0);
-            }
         }
     }
 
     public void Jump(PlayerDirection direction, Player ice)
     {
         Debug.Log("IceJump");
-        if (!iceRigidbody)
-            iceRigidbody = ice.GetComponent<Rigidbody>();
-
         iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
     {
-        if (!iceRigidbody)
-            iceRigidbody = ice.GetComponent<Rigidbody>();
-
-        //  iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
-
         if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0)
             shiftAcceleration = ShiftAcceleration;
-        // if (direction.Forward == 1 && direction.Lateral == 0 &&)
-        //      iceRigidbody.AddRelativeForce(0, 0, ShiftImpulseAcceleration, ForceMode.Impulse); 
-
 
         else if (direction.Shift <= 0)
             shiftAcceleration = 1;
@@ -75,19 +56,10 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
     public void DoubleShift(PlayerDirection direction, Player ice, float IceAcelerationTime)
     {
-        if (!iceRigidbody)
-            iceRigidbody = ice.GetComponent<Rigidbody>();
-
-        if ((direction.Forward != 0 && direction.Lateral == 0))
+        if (direction.Forward != 0 && direction.Lateral == 0)
         {
-            Debug.LogError("DoubleShift");
             iceRigidbody.AddRelativeForce(0, 0,
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.LogError(iceRigidbody.velocity);
     }
 }
