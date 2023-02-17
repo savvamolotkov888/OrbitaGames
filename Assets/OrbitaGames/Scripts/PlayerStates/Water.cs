@@ -12,7 +12,7 @@ public class Water : Player, IMove, IJump, IShift
     [SerializeField] private float jumpAcceleration;
     [SerializeField] private ObiCollisionMaterial stickinessMaterial;
     private ObiCollisionMaterial defaultMaterial;
-    [Range(0, 1)] public float airControl = 0.3f;
+
     public Transform referenceFrame;
 
     private bool isStickiness;
@@ -34,14 +34,13 @@ public class Water : Player, IMove, IJump, IShift
         if (direction.Forward != 0)
         {
             forceDirection += referenceFrame.forward * moveAcceleration;
-            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Forward, ForceMode.Acceleration);
-            // Debug.Log(TargetB.position + "   " + TargetB.position.normalized);
+            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Forward * direction.AirControll, ForceMode.Acceleration);
         }
 
         if (direction.Lateral != 0)
         {
             forceDirection += referenceFrame.right * moveAcceleration;
-            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Lateral, ForceMode.Acceleration);
+            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Lateral * direction.AirControll, ForceMode.Acceleration);
         }
     }
 
@@ -62,7 +61,7 @@ public class Water : Player, IMove, IJump, IShift
 
     public void Jump(PlayerDirection direction, Player water)
     {
-        Debug.Log("WaterJump");
+        Debug.LogError("WaterJump");
         obi.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
 }

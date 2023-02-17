@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private float moveAcceleration;
     private float RotationAcceleration;
     private float jumpBoost;
+    [Range(0, 1)] public float waterAirControl = 0.3f;
 
     private InputSystem inputSystem;
 
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Direction = new PlayerDirection();
+        Direction.AirControll = 1;
         //Cursor.lockState = CursorLockMode.Locked;
         inputSystem = new InputSystem();
         InitializePlayerState();
@@ -165,7 +167,10 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Water:
                 if (playerSensor.CanJump && Direction.Up > 0)
                 {
+                    Direction.AirControll = waterAirControl;
+
                     Jump(water);
+                    Direction.AirControll = waterAirControl = 1;
                     playerSensor.CanJump = false;
                 }
 
@@ -300,6 +305,7 @@ public class PlayerController : MonoBehaviour
         ResetClickCount(time);
         clickCount++;
     }
+
     private async void ResetClickCount(float time)
     {
         await Task.Delay(TimeSpan.FromSeconds(time));

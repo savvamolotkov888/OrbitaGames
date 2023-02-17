@@ -8,6 +8,7 @@ public struct PlayerDirection
     public float Lateral;
     public float Up;
     public float Shift;
+    public float AirControll;
     public RotateDirection Rotation;
 }
 
