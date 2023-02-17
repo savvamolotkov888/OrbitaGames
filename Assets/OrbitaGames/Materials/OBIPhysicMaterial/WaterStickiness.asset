@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9c84cdb747944209b1c8753933c5db, type: 3}
   m_Name: WaterStickiness
   m_EditorClassIdentifier: 
-  dynamicFriction: 10
-  staticFriction: 0
-  stickiness: 1
+  dynamicFriction: 100
+  staticFriction: 19.98
+  stickiness: 0.7
   stickDistance: 1
   frictionCombine: 3
   stickinessCombine: 3
-  rollingContacts: 0
+  rollingContacts: 1
   rollingFriction: 1.45
