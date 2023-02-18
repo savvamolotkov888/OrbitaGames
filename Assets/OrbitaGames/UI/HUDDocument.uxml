@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="-unity-text-align: upper-center; transform-origin: 209% 482%; -unity-background-image-tint-color: rgb(233, 29, 29); align-items: stretch; justify-content: space-around; flex-direction: column; width: 30%; height: 25%; padding-left: 0; margin-left: 70%;">
+        <ui:ProgressBar title="my-progress" />
+        <ui:ProgressBar title="my-progress" />
+        <ui:ProgressBar title="my-progress" />
+    </ui:VisualElement>
+</ui:UXML>
