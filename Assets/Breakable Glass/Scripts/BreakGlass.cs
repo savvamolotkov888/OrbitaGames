@@ -3,10 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class BreakGlass : MonoBehaviour {
-	public List<GameObject> BrokenGlassGO; // The broken glass GameObject
-	GameObject BrokenGlassInstance; 
+	public List<UnityEngine.GameObject> BrokenGlassGO; // The broken glass GameObject
+	UnityEngine.GameObject BrokenGlassInstance; 
 	public bool BreakSound=true;
-	public GameObject SoundEmitter; //An object that will emit sound
+	public UnityEngine.GameObject SoundEmitter; //An object that will emit sound
 	public float SoundEmitterLifetime=2.0f;
 	public float ShardsLifetime=3.0f; //Lifetime of shards in seconds (0 if you don't want shards to disappear)
 	public float ShardMass=0.5f; //Mass of each shard
@@ -28,7 +28,7 @@ public class BreakGlass : MonoBehaviour {
 	/ If you want to break the glass call this function ( myGlass.SendMessage("BreakIt") )
 	*/
 	public void BreakIt(){
-		BrokenGlassInstance = Instantiate(BrokenGlassGO[Random.Range(0,BrokenGlassGO.Count)], transform.position, transform.rotation) as GameObject;
+		BrokenGlassInstance = Instantiate(BrokenGlassGO[Random.Range(0,BrokenGlassGO.Count)], transform.position, transform.rotation) as UnityEngine.GameObject;
 		
 		BrokenGlassInstance.transform.localScale = transform.lossyScale;
 		
@@ -37,7 +37,7 @@ public class BreakGlass : MonoBehaviour {
 			t.GetComponent<Rigidbody>().mass=ShardMass;
 		}
 		
-		if(BreakSound) Destroy(Instantiate(SoundEmitter, transform.position, transform.rotation) as GameObject, SoundEmitterLifetime);
+		if(BreakSound) Destroy(Instantiate(SoundEmitter, transform.position, transform.rotation) as UnityEngine.GameObject, SoundEmitterLifetime);
 		
 		if(ShardsLifetime>0) Destroy(BrokenGlassInstance,ShardsLifetime);
 		Destroy(gameObject);
@@ -55,5 +55,4 @@ public class BreakGlass : MonoBehaviour {
 	 	if (collision.relativeVelocity.magnitude > 15 && collision.gameObject.GetComponent<Ice>())
 		    BreakIt();
 	}
-	
 }
