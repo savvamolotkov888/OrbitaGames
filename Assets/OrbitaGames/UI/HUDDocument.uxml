@@ -1,7 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="VisualElement" style="-unity-text-align: upper-center; transform-origin: 209% 482%; -unity-background-image-tint-color: rgb(233, 29, 29); align-items: stretch; justify-content: space-around; flex-direction: column; width: 30%; height: 25%; padding-left: 0; margin-left: 70%;">
-        <ui:ProgressBar title="my-progress" />
-        <ui:ProgressBar title="my-progress" />
-        <ui:ProgressBar title="my-progress" />
+    <ui:VisualElement name="HUDContainer" style="height: 25%; width: 100%;">
+        <ui:VisualElement name="VisualElement" style="height: 100%; width: 25%; left: 0; align-items: flex-end; flex-direction: column; justify-content: space-around; transform-origin: center;">
+            <ui:ProgressBar title="Ice" name="ProgressBar" style="width: 45%; -unity-text-align: upper-left; -unity-font-style: bold; white-space: normal;" />
+            <ui:ProgressBar title="Water" name="ProgressBar" style="width: 45%;" />
+            <ui:ProgressBar title="Air" name="ProgressBar" style="width: 45%;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
