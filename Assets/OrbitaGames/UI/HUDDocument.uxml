@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="HUDContainer" style="height: 25%; width: 100%;">
-        <ui:VisualElement name="VisualElement" style="height: 100%; width: 25%; left: 0; align-items: flex-end; flex-direction: column; justify-content: space-around; transform-origin: center;">
-            <ui:ProgressBar title="Ice" name="ProgressBar" style="width: 45%; -unity-text-align: upper-left; -unity-font-style: bold; white-space: normal;" />
-            <ui:ProgressBar title="Water" name="ProgressBar" style="width: 45%;" />
-            <ui:ProgressBar title="Air" name="ProgressBar" style="width: 45%;" />
+    <ui:VisualElement name="HUDContainer" focusable="true" style="height: 40%; width: 25%; align-items: stretch; justify-content: space-around; padding-left: 2%;">
+        <ui:VisualElement name="VisualElement" style="width: 25%; height: 25%; -unity-background-image-tint-color: rgb(164, 98, 98); background-color: rgba(76, 177, 178, 0.75); align-items: flex-end; justify-content: flex-start;" />
+        <ui:VisualElement name="VisualElement" style="width: 25%; height: 25%; -unity-background-image-tint-color: rgb(164, 98, 98); background-color: rgba(16, 39, 197, 0.75);" />
+        <ui:VisualElement name="VisualElement" style="width: 25%; height: 25%; -unity-background-image-tint-color: rgb(164, 98, 98); background-color: rgba(254, 255, 255, 0.75);">
+            <ui:ProgressBar title="my-progress" name="ProgressBar" style="width: 100px; height: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-direction: row; align-items: stretch; justify-content: flex-start; transform-origin: bottom; translate: 0 100%; padding-left: 0; padding-right: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
