@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 /// </summary>
 public class PlayerSensor : MonoBehaviour
 {
-    public Transform Target;
+    private Transform Target;
     public Transform Camera;
     private Vector3 _targetPoz;
     private RotateDirection rotator;
@@ -35,7 +35,6 @@ public class PlayerSensor : MonoBehaviour
                     break;
             }
         }
-
     }
         
         
@@ -68,6 +67,7 @@ public class PlayerSensor : MonoBehaviour
     {
         CanJump = true;
         playerController = GetComponent<PlayerController>();
+        Target = playerController.targetB;
     }
 
     void FixedUpdate()
