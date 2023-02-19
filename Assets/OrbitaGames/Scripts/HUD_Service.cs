@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using Zenject;
 
-public class UIEventBus : MonoBehaviour
+public class HUD_Service : MonoBehaviour
 {
     private PlayerInstanse player;
     private PlayerController playerController;
