@@ -28,7 +28,7 @@ public class HUD_Service : MonoBehaviour
         this.player = player;
     }
 
-    private void Start()
+    private void Awake()
     {
         playerController = player.GetComponentInChildren<PlayerController>();
         _uiDocument = GetComponentInChildren<UIDocument>();

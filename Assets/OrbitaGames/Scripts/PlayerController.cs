@@ -1,5 +1,6 @@
 using System;
 using Obi;
+using Unity.VisualScripting;
 using UnityEngine;
 using Task = System.Threading.Tasks.Task;
 
@@ -106,7 +107,7 @@ public class PlayerController : MonoBehaviour
         Direction.AirControll = 1;
         //Cursor.lockState = CursorLockMode.Locked;
         inputSystem = new InputSystem();
-        InitializePlayerState();
+
 
         iceRigidbody = ice.GetComponent<Rigidbody>();
         waterActor = water.GetComponent<ObiActor>();
@@ -118,6 +119,12 @@ public class PlayerController : MonoBehaviour
         inputSystem.Control.DoubleShift.performed += context => DoubleClickCheck(IceDoubleShiftDelay);
         inputSystem.Control.ShiftButton.performed += context => WaterShift();
     }
+
+    private void Start()
+    {
+        InitializePlayerState();
+    }
+
 
     private void Update()
     {
