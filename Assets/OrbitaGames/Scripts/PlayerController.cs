@@ -6,6 +6,10 @@ using Task = System.Threading.Tasks.Task;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action ToWater;
+    public event Action ToIce;
+    public event Action ToAir;
+
     public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
 
@@ -49,12 +53,15 @@ public class PlayerController : MonoBehaviour
             {
                 case PlayerState.Water:
                     currentGameobjectState = water;
+                    ToWater?.Invoke();
                     break;
                 case PlayerState.Ice:
                     currentGameobjectState = ice;
+                    ToIce?.Invoke();
                     break;
                 case PlayerState.Air:
                     currentGameobjectState = air;
+                    ToAir?.Invoke();
                     break;
             }
         }
