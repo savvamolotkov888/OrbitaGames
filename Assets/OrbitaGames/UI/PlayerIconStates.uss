@@ -1,0 +1,22 @@
+.Icon {
+    width: 25%;
+    height: 25%;
+    -unity-background-image-tint-color: rgb(164, 98, 98);
+    background-color: rgba(16, 39, 197, 0.75);
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-color: rgb(75, 66, 66);
+    border-right-color: rgb(75, 66, 66);
+    border-top-color: rgb(75, 66, 66);
+    border-bottom-color: rgb(75, 66, 66);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
