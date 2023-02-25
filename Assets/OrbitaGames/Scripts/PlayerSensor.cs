@@ -24,20 +24,20 @@ public class PlayerSensor : MonoBehaviour
             rotator = value;
             switch (rotator)
             {
-                case RotateDirection.Left :
-                    playerController.Direction.Rotation = RotateDirection.Left ;
+                case RotateDirection.Left:
+                    playerController.Direction.Rotation = RotateDirection.Left;
                     break;
-                case RotateDirection.Right :
-                    playerController.Direction.Rotation = RotateDirection.Right ;
+                case RotateDirection.Right:
+                    playerController.Direction.Rotation = RotateDirection.Right;
                     break;
-                case RotateDirection.DontRotate :
-                    playerController.Direction.Rotation = RotateDirection.DontRotate ;
+                case RotateDirection.DontRotate:
+                    playerController.Direction.Rotation = RotateDirection.DontRotate;
                     break;
             }
         }
     }
-        
-        
+
+
     private float angle;
     public float rayDist;
     public Ice Ice;
@@ -97,7 +97,7 @@ public class PlayerSensor : MonoBehaviour
     private async Task JumpPressedDelay()
     {
         rayCheck = false;
-        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime * Time.deltaTime));
+        await Task.Delay(TimeSpan.FromSeconds(jumpPressedDellayTime));
         rayCheck = true;
     }
 

@@ -21,6 +21,16 @@ public class HUD_Service : MonoBehaviour
     private VisualElement AirIcon;
 
     #endregion
+    
+    #region BoostHP
+
+    private ProgressBar IceBoostHP;
+    private VisualElement WaterBoostHP;
+    private VisualElement AirBoostHP;
+
+    #endregion
+    
+    
 
     [Inject]
     private void Construct(PlayerInstanse player)
@@ -39,14 +49,14 @@ public class HUD_Service : MonoBehaviour
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
         
 
-        playerController.ToWater += Water;
-        playerController.ToIce += Ice;
-        playerController.ToAir += Air;
+        playerController.ToIce += IceSelect;
+        playerController.ToWater += WaterSelect;
+        playerController.ToAir += AirSelect;
     }
 
-    void Water() => SelectingIcon(WaterIcon);
-    void Ice() => SelectingIcon(IceIcon);
-    void Air() => SelectingIcon(AirIcon);
+    void WaterSelect() => SelectingIcon(WaterIcon);
+    void IceSelect() => SelectingIcon(IceIcon);
+    void AirSelect() => SelectingIcon(AirIcon);
 
     private void SelectingIcon(VisualElement icon)
     {
