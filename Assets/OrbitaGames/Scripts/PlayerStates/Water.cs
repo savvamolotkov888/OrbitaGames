@@ -64,4 +64,28 @@ public class Water : Player, IMove, IJump, IShift
         Debug.LogError("WaterJump");
         obi.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
+    public override void TakeDamage(float waterDamageValue)
+    {
+        Debug.LogError("W" + waterDamageValue);
+    }
+    
+    void Solver_OnCollision (object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+    {
+        var world = ObiColliderWorld.GetInstance();
+        // just iterate over all contacts in the current frame:
+        foreach (Oni.Contact contact in e.contacts)
+        {
+            // if this one is an actual collision:
+            if (contact.distance < 0.01)
+            {
+                ObiColliderBase col = world.colliderHandles[contact.bodyB].owner;
+                if (col != null)
+                {
+                    if (col.gameObject.TryGetComponent(out Enemy enemy))
+                        TakeDamage(enemy.iceDamage);
+                    // do something with the collider.
+                }
+            }
+        }
+    }
 }

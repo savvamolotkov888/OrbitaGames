@@ -7,6 +7,9 @@ using Task = System.Threading.Tasks.Task;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float IceHealthHP;
+    [SerializeField] private float WaterHealthHP;
+    [SerializeField] private float AirHealthHP;
     public event Action ToWater;
     public event Action ToIce;
     public event Action ToAir;
@@ -32,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private ObiSolver WaterSolwer;
     [SerializeField] private ObiActor waterActor;
-
+    
     private Player currentGameobjectState;
 
     private float moveAcceleration;
@@ -109,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        WaterSolwer.OnCollision += Solver_OnCollision;
         Direction = new PlayerDirection();
         Direction.AirControll = 1;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -318,6 +322,27 @@ public class PlayerController : MonoBehaviour
         air.transform.position = transform.position;
         air.gameObject.SetActive(true);
     }
+    
+    void Solver_OnCollision (object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+    {
+        
+        var world = ObiColliderWorld.GetInstance();
+
+        // just iterate over all contacts in the current frame:
+        foreach (Oni.Contact contact in e.contacts)
+        {
+            // if this one is an actual collision:
+            if (contact.distance < 0.01)
+            {
+                ObiColliderBase col = world.colliderHandles[contact.bodyB].owner;
+                if (col != null)
+                {
+                    Debug.LogError("sss");
+                    // do something with the collider.
+                }
+            }
+        }
+    }
 
 
     private void DoubleClickCheck(float time)
@@ -333,8 +358,7 @@ public class PlayerController : MonoBehaviour
             clickCount = 0;
         }
     }
-
-
+    
     private void OnEnable()
     {
         inputSystem.Enable();

@@ -62,4 +62,14 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
         }
     }
+    public override void TakeDamage(float iceDamageValue)
+    {
+        Debug.LogError("I");
+    }
+
+    private void OnCollisionEnter(Collision player)
+    {
+        if (player.gameObject.TryGetComponent(out Enemy enemy))
+            TakeDamage(enemy.iceDamage);
+    }
 }

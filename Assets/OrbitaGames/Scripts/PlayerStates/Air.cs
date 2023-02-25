@@ -32,4 +32,15 @@ public class Air : Player, IMove, IJump
         else
             airRigidbody.AddForce(0, FlyAccelerationWhenMoove, 0, ForceMode.Force);
     }
+
+    public override void TakeDamage(float airDamageValue)
+    {
+        Debug.LogError("A");
+    }
+
+    private void OnCollisionEnter(Collision player)
+    {
+      //  if (player.gameObject.TryGetComponent(out Enemy enemy))
+            TakeDamage(100);
+    }
 }
