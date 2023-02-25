@@ -54,11 +54,10 @@ public class HUD_Service : MonoBehaviour
     private void Awake()
     {
         InitializationUIElements();
-      
+
         playerController.ToIce += IceSelect;
         playerController.ToWater += WaterSelect;
         playerController.ToAir += AirSelect;
-       
     }
 
     private void Start()
@@ -68,12 +67,9 @@ public class HUD_Service : MonoBehaviour
         air = playerController.air;
 
 
-
-
         water.TakeDamageEvent += WaterTakeDamage;
         ice.TakeDamageEvent += IceTakeDamage;
         air.TakeDamageEvent += AirTakeDamage;
-        
     }
 
     private void InitializationUIElements()
@@ -104,25 +100,35 @@ public class HUD_Service : MonoBehaviour
 
     void WaterTakeDamage(float damage)
     {
-        Debug.LogError(damage);
-        WaterHealthHP.value -= damage;
-        if (WaterHealthHP.value <=0)
-        Debug.LogError("FWater");
+        if (WaterHealthHP.value > 0)
+        {
+            Debug.LogError(damage);
+            WaterHealthHP.value -= damage;
+        }
+        else
+            Debug.LogError("FWater");
     }
 
     void IceTakeDamage(float damage)
     {
-        Debug.LogError(damage);
-        IceHealthHP.value -= damage;
-        if (IceHealthHP.value <=0)
+        if (IceHealthHP.value > 0)
+        {
+            Debug.LogError(damage);
+            IceHealthHP.value -= damage;
+        }
+        else
+
             Debug.LogError("FIce");
     }
 
     void AirTakeDamage(float damage)
     {
-        Debug.LogError(damage);
-        AirHealthHP.value -= damage;
-        if (IceHealthHP.value <=0)
+        if (AirHealthHP.value > 0)
+        {
+            Debug.LogError(damage);
+            AirHealthHP.value -= damage;
+        }
+        else
             Debug.LogError("FAir");
     }
 
