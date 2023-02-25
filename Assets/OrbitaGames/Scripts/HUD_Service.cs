@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using Zenject;
@@ -23,11 +24,15 @@ public class HUD_Service : MonoBehaviour
     #endregion
     
     #region BoostHP
-
     private ProgressBar IceBoostHP;
-    private VisualElement WaterBoostHP;
-    private VisualElement AirBoostHP;
-
+    private ProgressBar WaterBoostHP;
+    private ProgressBar AirBoostHP;
+    #endregion
+    
+    #region HealthHP
+    private ProgressBar IceHealthHP;
+    private ProgressBar WaterHealthHP;
+    private ProgressBar AirHealthHP;
     #endregion
     
     
@@ -40,18 +45,29 @@ public class HUD_Service : MonoBehaviour
 
     private void Awake()
     {
-        playerController = player.GetComponentInChildren<PlayerController>();
-        _uiDocument = GetComponentInChildren<UIDocument>();
-
-
-        IceIcon = _uiDocument.rootVisualElement.Q("IceIcon");
-        WaterIcon = _uiDocument.rootVisualElement.Q("WaterIcon");
-        AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
-        
+        InitializationUIElements();
 
         playerController.ToIce += IceSelect;
         playerController.ToWater += WaterSelect;
         playerController.ToAir += AirSelect;
+    }
+
+    private void InitializationUIElements()
+    {
+        playerController = player.GetComponentInChildren<PlayerController>();
+        _uiDocument = GetComponentInChildren<UIDocument>();
+
+        IceIcon = _uiDocument.rootVisualElement.Q("IceIcon");
+        WaterIcon = _uiDocument.rootVisualElement.Q("WaterIcon");
+        AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
+
+        WaterHealthHP = (ProgressBar) _uiDocument.rootVisualElement.Q("WaterHealthHP");
+        IceHealthHP = (ProgressBar) _uiDocument.rootVisualElement.Q("IceHealthHP");
+        AirHealthHP = (ProgressBar) _uiDocument.rootVisualElement.Q("AirHealthHP");
+        
+        WaterBoostHP = (ProgressBar) _uiDocument.rootVisualElement.Q("WaterBoostHP");
+        IceBoostHP= (ProgressBar) _uiDocument.rootVisualElement.Q("IceBoostHP");
+        AirBoostHP= (ProgressBar) _uiDocument.rootVisualElement.Q("AirBoostHP");
     }
 
     void WaterSelect() => SelectingIcon(WaterIcon);

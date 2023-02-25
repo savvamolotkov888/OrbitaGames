@@ -84,6 +84,12 @@ public class PlayerController : MonoBehaviour
 
     # endregion
 
+    #region BooostHP
+
+    [SerializeField] private float IceBoostHP ; 
+
+    #endregion
+
     private Vector3 LookAtpoz;
 
     #region Interfaces
