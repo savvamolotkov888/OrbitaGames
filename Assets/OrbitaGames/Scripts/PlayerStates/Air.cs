@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Air : Player, IMove, IJump
 {
+    public override event Action<float> TakeDamageEvent;
+    
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float FlyAcceleration;
     [SerializeField] private float FlyAccelerationWhenMoove;
@@ -41,6 +43,9 @@ public class Air : Player, IMove, IJump
     private void OnCollisionEnter(Collision player)
     {
       //  if (player.gameObject.TryGetComponent(out Enemy enemy))
-            TakeDamage(100);
+      {
+          TakeDamage(100);
+          TakeDamageEvent?.Invoke(100);
+      }
     }
 }

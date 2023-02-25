@@ -74,9 +74,9 @@ public class PlayerController : MonoBehaviour
 
     #region PlayerTypes
 
-    [SerializeField] private Water water;
-    [SerializeField] private Ice ice;
-    [SerializeField] private Air air;
+    public Water water;
+    public Ice ice;
+    public Air air;
 
     # endregion
 
@@ -337,7 +337,6 @@ public class PlayerController : MonoBehaviour
                 ObiColliderBase col = world.colliderHandles[contact.bodyB].owner;
                 if (col != null)
                 {
-                    Debug.LogError("sss");
                     // do something with the collider.
                 }
             }

@@ -13,6 +13,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     [SerializeField] private float ShiftImpulseAcceleration;
     private float shiftAcceleration = 1f;
 
+    public override event Action<float> TakeDamageEvent;
+
     private Rigidbody iceRigidbody;
 
     private void Awake()
@@ -70,6 +72,9 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     private void OnCollisionEnter(Collision player)
     {
         if (player.gameObject.TryGetComponent(out Enemy enemy))
+        {
             TakeDamage(enemy.iceDamage);
+            TakeDamageEvent?.Invoke(enemy.iceDamage);
+        }
     }
 }

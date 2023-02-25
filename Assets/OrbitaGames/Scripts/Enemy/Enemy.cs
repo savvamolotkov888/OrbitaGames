@@ -10,9 +10,9 @@ public class Enemy : MonoBehaviour
     private const string waterTag = "Water";
     private const string iceTag = "Ice";
 
-    public float airDamage;
     public float iceDamage;
     public float waterDamage;
+    
     [Header("Для всех состояний одинаковый урон")] [SerializeField]
     private bool universalDamage;
 

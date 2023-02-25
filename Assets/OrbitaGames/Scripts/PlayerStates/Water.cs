@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 
 public class Water : Player, IMove, IJump, IShift
 {
+    public override event Action<float> TakeDamageEvent;
+
     [SerializeField] private float moveAcceleration;
     [SerializeField] private float jumpAcceleration;
     [SerializeField] private ObiCollisionMaterial stickinessMaterial;
@@ -18,12 +20,15 @@ public class Water : Player, IMove, IJump, IShift
     private bool isStickiness;
 
 
-    private ObiSoftbody obi;
+    private ObiSoftbody water;
+    private ObiSolver waterSolver;
 
     private void Start()
     {
         defaultMaterial = GetComponent<ObiSoftbody>().collisionMaterial;
-        obi = GetComponent<ObiSoftbody>();
+        water = GetComponent<ObiSoftbody>();
+        waterSolver = GetComponentInParent<ObiSolver>();
+        waterSolver.OnCollision += WaterSolver_OnCollision;
     }
 
 
@@ -34,13 +39,17 @@ public class Water : Player, IMove, IJump, IShift
         if (direction.Forward != 0)
         {
             forceDirection += referenceFrame.forward * moveAcceleration;
-            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Forward * direction.AirControll, ForceMode.Acceleration);
+            this.water.AddForce(
+                forceDirection.normalized * moveAcceleration * direction.Forward * direction.AirControll,
+                ForceMode.Acceleration);
         }
 
         if (direction.Lateral != 0)
         {
             forceDirection += referenceFrame.right * moveAcceleration;
-            obi.AddForce(forceDirection.normalized * moveAcceleration * direction.Lateral * direction.AirControll, ForceMode.Acceleration);
+            this.water.AddForce(
+                forceDirection.normalized * moveAcceleration * direction.Lateral * direction.AirControll,
+                ForceMode.Acceleration);
         }
     }
 
@@ -48,12 +57,12 @@ public class Water : Player, IMove, IJump, IShift
     {
         if (!isStickiness)
         {
-            obi.collisionMaterial = stickinessMaterial;
+            this.water.collisionMaterial = stickinessMaterial;
             isStickiness = true;
         }
         else
         {
-            obi.collisionMaterial = defaultMaterial;
+            this.water.collisionMaterial = defaultMaterial;
             isStickiness = false;
         }
     }
@@ -62,14 +71,15 @@ public class Water : Player, IMove, IJump, IShift
     public void Jump(PlayerDirection direction, Player water)
     {
         Debug.LogError("WaterJump");
-        obi.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
+        this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
+
     public override void TakeDamage(float waterDamageValue)
     {
         Debug.LogError("W" + waterDamageValue);
     }
-    
-    void Solver_OnCollision (object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+
+    void WaterSolver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
         var world = ObiColliderWorld.GetInstance();
         // just iterate over all contacts in the current frame:
@@ -82,8 +92,10 @@ public class Water : Player, IMove, IJump, IShift
                 if (col != null)
                 {
                     if (col.gameObject.TryGetComponent(out Enemy enemy))
-                        TakeDamage(enemy.iceDamage);
-                    // do something with the collider.
+                    {
+                        TakeDamage(enemy.waterDamage);
+                        TakeDamageEvent?.Invoke(enemy.waterDamage);
+                    }
                 }
             }
         }
