@@ -12,10 +12,14 @@ public class Enemy : MonoBehaviour
 
     public float iceDamage;
     public float waterDamage;
-    
-    [Header("Для всех состояний одинаковый урон")] [SerializeField]
-    private bool universalDamage;
 
-    [SerializeField] private bool universalDamageValue;
-    
+    [Header("Для всех состояний одинаковый урон")] [SerializeField]
+    private float universalDamageValue;
+
+    private void Awake()
+    {
+        if (universalDamageValue != 0)
+            iceDamage = waterDamage = universalDamageValue;
+        
+    }
 }

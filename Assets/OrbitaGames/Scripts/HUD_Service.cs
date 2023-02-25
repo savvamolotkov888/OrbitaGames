@@ -66,13 +66,14 @@ public class HUD_Service : MonoBehaviour
         water = playerController.water;
         ice = playerController.ice;
         air = playerController.air;
-        
-  
+
+
 
 
         water.TakeDamageEvent += WaterTakeDamage;
         ice.TakeDamageEvent += IceTakeDamage;
         air.TakeDamageEvent += AirTakeDamage;
+        
     }
 
     private void InitializationUIElements()
@@ -85,8 +86,11 @@ public class HUD_Service : MonoBehaviour
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
 
         WaterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
+        WaterHealthHP.value = 100;
         IceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
+        IceHealthHP.value = 100;
         AirHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
+        AirHealthHP.value = 1;
 
         WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
         IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
@@ -101,16 +105,25 @@ public class HUD_Service : MonoBehaviour
     void WaterTakeDamage(float damage)
     {
         Debug.LogError(damage);
+        WaterHealthHP.value -= damage;
+        if (WaterHealthHP.value <=0)
+        Debug.LogError("FWater");
     }
 
     void IceTakeDamage(float damage)
     {
         Debug.LogError(damage);
+        IceHealthHP.value -= damage;
+        if (IceHealthHP.value <=0)
+            Debug.LogError("FIce");
     }
 
     void AirTakeDamage(float damage)
     {
         Debug.LogError(damage);
+        AirHealthHP.value -= damage;
+        if (IceHealthHP.value <=0)
+            Debug.LogError("FAir");
     }
 
     private void SelectingIcon(VisualElement icon)
