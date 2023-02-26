@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Air : Player, IMove, IJump
+public class Air : Player, IMove, IJump , IDied
 {
     public override event Action<float> TakeDamageEvent;
     
@@ -47,5 +47,9 @@ public class Air : Player, IMove, IJump
           TakeDamage(100);
           TakeDamageEvent?.Invoke(100);
       }
+    }
+    public void Died()
+    {
+        Debug.LogError("AirDied");
     }
 }

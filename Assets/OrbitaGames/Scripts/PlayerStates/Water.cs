@@ -6,7 +6,7 @@ using Obi;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Water : Player, IMove, IJump, IShift
+public class Water : Player, IMove, IJump, IShift , IDied
 {
     public override event Action<float> TakeDamageEvent;
 
@@ -99,5 +99,10 @@ public class Water : Player, IMove, IJump, IShift
                 }
             }
         }
+    }
+
+    public void Died()
+    {
+        Debug.LogError("WaterDied");
     }
 }

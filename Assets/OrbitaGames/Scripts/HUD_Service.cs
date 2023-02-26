@@ -14,6 +14,8 @@ public class HUD_Service : MonoBehaviour
     [SerializeField] private Color SelectedIconBorderColor;
     [SerializeField] private Color DefaultIconBorderColor;
 
+    private IDied died;
+
 
     #region Icons
 
@@ -106,7 +108,8 @@ public class HUD_Service : MonoBehaviour
             WaterHealthHP.value -= damage;
         }
         else
-            Debug.LogError("FWater");
+            Died(water);
+            
     }
 
     void IceTakeDamage(float damage)
@@ -118,7 +121,7 @@ public class HUD_Service : MonoBehaviour
         }
         else
 
-            Debug.LogError("FIce");
+            Died(ice);
     }
 
     void AirTakeDamage(float damage)
@@ -129,7 +132,7 @@ public class HUD_Service : MonoBehaviour
             AirHealthHP.value -= damage;
         }
         else
-            Debug.LogError("FAir");
+            Died(air);
     }
 
     private void SelectingIcon(VisualElement icon)
@@ -151,4 +154,6 @@ public class HUD_Service : MonoBehaviour
         icon.style.borderRightColor = DefaultIconBorderColor;
         icon.style.borderTopColor = DefaultIconBorderColor;
     }
+
+    private void Died(IDied player) => player.Died();
 }

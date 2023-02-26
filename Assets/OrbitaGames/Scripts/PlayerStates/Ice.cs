@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Ice : Player, IMove, IJump, IShift, IDoubleShift
+public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
@@ -76,5 +76,9 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
             TakeDamage(enemy.iceDamage);
             TakeDamageEvent?.Invoke(enemy.iceDamage);
         }
+    }
+    public void Died()
+    {
+        Debug.LogError("IceDied");
     }
 }
