@@ -4,14 +4,14 @@
         <ui:VisualElement name="IceIcon" class="Icon" style="width: 25%; height: 25%; -unity-background-image-tint-color: rgb(164, 98, 98); background-color: rgba(76, 177, 178, 0.75); align-items: flex-end; justify-content: flex-start;">
             <ui:ProgressBar title="my-progress" name="IceBoostHP" style="width: 100%; left: 70%; align-items: auto; height: 30%; rotate: 90deg; top: 50%; right: 0; bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
         </ui:VisualElement>
-        <ui:ProgressBar title="d" name="IceHealthHP" focusable="true" style="width: 25%; left: 0; align-items: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto; -unity-background-image-tint-color: rgb(255, 0, 0); background-color: rgb(255, 0, 0); border-left-color: rgba(255, 0, 0, 0); border-right-color: rgba(255, 0, 0, 0); border-top-color: rgba(255, 0, 0, 0); border-bottom-color: rgba(255, 0, 0, 0);" />
+        <ui:ProgressBar title="my-progress" name="IceHealthHP" class="progressBarHP" />
         <ui:VisualElement name="WaterIcon" class="Icon">
             <ui:ProgressBar title="my-progress" name="WaterBoostHP" style="width: 100%; left: 70%; align-items: auto; height: 30%; rotate: 90deg; top: 50%; right: 0; bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
         </ui:VisualElement>
-        <ui:ProgressBar title="my-progress" name="WaterHealthHP" style="width: 25%; left: 0; align-items: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto;" />
+        <ui:ProgressBar title="my-progress" name="WaterHealthHP" class="progressBarHP" />
         <ui:VisualElement name="AirIcon" class="Icon" style="width: 25%; height: 25%; -unity-background-image-tint-color: rgb(164, 98, 98); background-color: rgba(254, 255, 255, 0.75);">
             <ui:ProgressBar title="my-progress" name="AirBoostHP" style="width: 100%; left: 70%; align-items: auto; height: 30%; rotate: 90deg; top: 50%; right: 0; bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
         </ui:VisualElement>
-        <ui:ProgressBar title="my-progress" name="AirHealthHP" high-value="1" style="width: 25%; left: 0; align-items: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto;" />
+        <ui:ProgressBar title="my-progress" name="AirHealthHP" high-value="1" class="progressBarHP" style="width: 25%; left: 0; align-items: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; height: auto;" />
     </ui:VisualElement>
 </ui:UXML>

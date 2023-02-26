@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Air : Player, IMove, IJump , IDied
 {
+    public override float CurrentHP { get; set; } = 1;
+    public override float MaxHP { get; set; } = 1;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
     

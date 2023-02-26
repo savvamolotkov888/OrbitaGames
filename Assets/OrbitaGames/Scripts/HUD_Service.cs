@@ -35,9 +35,43 @@ public class HUD_Service : MonoBehaviour
 
     #region HealthHP
 
-    private ProgressBar IceHealthHP;
+    private ProgressBar iceHealthHP;
+    private float IceHealthHP
+    {
+        get => iceHealthHP.value;
+        set
+        {
+            if (value < 0)
+            {
+                iceHealthHP.value = 0;
+                ice.CurrentHP = 0;
+                Died(ice);
+            }
+            else if (value > 100)
+            {
+                iceHealthHP.value = ice.MaxHP;
+                ice.CurrentHP = ice.MaxHP;
+                Debug.Log("FULL HEALTH");
+            }
+            else
+            {
+                iceHealthHP.value = value;
+                ice.CurrentHP = value;
+            }
+        }
+    }
+
     private ProgressBar WaterHealthHP;
+  
+
+    private ProgressBar airHealthHP;
     private ProgressBar AirHealthHP;
+    
+    private void ValueCheck(ProgressBar progressBar, int maxValue)
+    {
+        if (progressBar.value > maxValue)
+            progressBar.value = maxValue;
+    }
 
     #endregion
 
@@ -70,8 +104,13 @@ public class HUD_Service : MonoBehaviour
 
 
         water.TakeDamageEvent += WaterTakeDamage;
+        water.TakeHealthEvent += WaterAddHealth;
+
         ice.TakeDamageEvent += IceTakeDamage;
+        ice.TakeHealthEvent += IceAddDamage;
+
         air.TakeDamageEvent += AirTakeDamage;
+        air.TakeHealthEvent += AirAddDamage;
     }
 
     private void InitializationUIElements()
@@ -84,11 +123,11 @@ public class HUD_Service : MonoBehaviour
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
 
         WaterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
-        WaterHealthHP.value = 100;
-        IceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
-        IceHealthHP.value = 100;
-        AirHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
-        AirHealthHP.value = 1;
+//        WaterHealthHP.value = water.MaxHP;
+        iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
+        iceHealthHP.value = 100;
+        airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
+//        airHealthHP.value = air.MaxHP;
 
         WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
         IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
@@ -109,19 +148,36 @@ public class HUD_Service : MonoBehaviour
         }
         else
             Died(water);
-            
+    }
+
+    void WaterAddHealth(float damage)
+    {
+        if (WaterHealthHP.value < 100)
+        {
+            Debug.LogError(damage);
+            WaterHealthHP.value += damage;
+        }
+    }
+
+    void IceAddDamage(float damage)
+    {
+        
+            Debug.LogError(damage);
+            IceHealthHP += damage;
+    }
+
+    void AirAddDamage(float damage)
+    {
+        if (AirHealthHP.value < 100)
+        {
+            Debug.LogError(damage);
+            AirHealthHP.value += damage;
+        }
     }
 
     void IceTakeDamage(float damage)
     {
-        if (IceHealthHP.value > 0)
-        {
-            Debug.LogError(damage);
-            IceHealthHP.value -= damage;
-        }
-        else
-
-            Died(ice);
+            IceHealthHP -= damage;
     }
 
     void AirTakeDamage(float damage)

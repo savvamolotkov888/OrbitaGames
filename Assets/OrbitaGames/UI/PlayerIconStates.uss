@@ -20,3 +20,27 @@
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.progressBarHP {
+    width: 25%;
+    left: 0;
+    align-items: auto;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: auto;
+    opacity: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: auto;
+    min-width: 25%;
+    max-width: 23px;
+    color: rgba(255, 255, 255, 0);
+    font-size: 14px;
+    -unity-text-outline-width: 50px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}

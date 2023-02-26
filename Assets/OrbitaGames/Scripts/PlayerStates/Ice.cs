@@ -13,8 +13,11 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     [SerializeField] private float ShiftImpulseAcceleration;
     private float shiftAcceleration = 1f;
 
+    public override float CurrentHP { get; set; } = 100;
+    public override float MaxHP { get; set; } = 100;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
+
 
     private Rigidbody iceRigidbody;
 
@@ -65,10 +68,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
         }
     }
+
     public override void TakeDamage(float iceDamageValue)
     {
         Debug.LogError("I");
     }
+
     public override void TakeHealth(float iceHealthValue)
     {
         Debug.LogError("I");
@@ -81,13 +86,14 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
             TakeDamage(enemy.iceDamage);
             TakeDamageEvent?.Invoke(enemy.iceDamage);
         }
-        
+
         else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
         {
             TakeHealth(healthPlatform.waterHealth);
             TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
         }
     }
+
     public void Died()
     {
         Debug.LogError("IceDied");
