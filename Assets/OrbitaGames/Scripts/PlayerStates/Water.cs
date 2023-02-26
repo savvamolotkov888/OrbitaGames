@@ -6,9 +6,10 @@ using Obi;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Water : Player, IMove, IJump, IShift , IDied
+public class Water : Player, IMove, IJump, IShift, IDied
 {
     public override event Action<float> TakeDamageEvent;
+    public override event Action<float> TakeHealthEvent;
 
     [SerializeField] private float moveAcceleration;
     [SerializeField] private float jumpAcceleration;
@@ -79,6 +80,11 @@ public class Water : Player, IMove, IJump, IShift , IDied
         Debug.LogError("W" + waterDamageValue);
     }
 
+    public override void TakeHealth(float waterDamageValue)
+    {
+        Debug.LogError("W" + waterDamageValue);
+    }
+
     void WaterSolver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
         var world = ObiColliderWorld.GetInstance();
@@ -91,10 +97,16 @@ public class Water : Player, IMove, IJump, IShift , IDied
                 ObiColliderBase col = world.colliderHandles[contact.bodyB].owner;
                 if (col != null)
                 {
-                    if (col.gameObject.TryGetComponent(out Enemy enemy))
+                    if (col.gameObject.TryGetComponent(out DamagePlatfom damagePlatfom))
                     {
-                        TakeDamage(enemy.waterDamage);
-                        TakeDamageEvent?.Invoke(enemy.waterDamage);
+                        TakeDamage(damagePlatfom.waterDamage);
+                        TakeDamageEvent?.Invoke(damagePlatfom.waterDamage);
+                    }
+
+                    else if (col.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
+                    {
+                        TakeHealth(healthPlatform.waterHealth);
+                        TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
                     }
                 }
             }

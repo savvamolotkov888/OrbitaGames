@@ -14,6 +14,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     private float shiftAcceleration = 1f;
 
     public override event Action<float> TakeDamageEvent;
+    public override event Action<float> TakeHealthEvent;
 
     private Rigidbody iceRigidbody;
 
@@ -68,13 +69,23 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     {
         Debug.LogError("I");
     }
+    public override void TakeHealth(float iceHealthValue)
+    {
+        Debug.LogError("I");
+    }
 
     private void OnCollisionEnter(Collision player)
     {
-        if (player.gameObject.TryGetComponent(out Enemy enemy))
+        if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
             TakeDamage(enemy.iceDamage);
             TakeDamageEvent?.Invoke(enemy.iceDamage);
+        }
+        
+        else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
+        {
+            TakeHealth(healthPlatform.waterHealth);
+            TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
         }
     }
     public void Died()

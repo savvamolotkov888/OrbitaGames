@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class DamagePlatfom : MonoBehaviour
 {
     private const string airTag = "Air";
     private const string waterTag = "Water";
@@ -20,6 +20,5 @@ public class Enemy : MonoBehaviour
     {
         if (universalDamageValue != 0)
             iceDamage = waterDamage = universalDamageValue;
-        
     }
 }

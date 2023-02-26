@@ -6,6 +6,7 @@ using UnityEngine;
 public class Air : Player, IMove, IJump , IDied
 {
     public override event Action<float> TakeDamageEvent;
+    public override event Action<float> TakeHealthEvent;
     
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float FlyAcceleration;
@@ -38,6 +39,11 @@ public class Air : Player, IMove, IJump , IDied
     public override void TakeDamage(float airDamageValue)
     {
         Debug.LogError("A");
+    }
+
+    public override void TakeHealth(float damageValue)
+    {
+        
     }
 
     private void OnCollisionEnter(Collision player)
