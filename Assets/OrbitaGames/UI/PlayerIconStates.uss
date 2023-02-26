@@ -44,3 +44,20 @@
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
 }
+
+.progressBarBoost {
+    width: 100%;
+    left: 70%;
+    align-items: auto;
+    height: 30%;
+    rotate: 90deg;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgba(27, 27, 27, 0);
+    -unity-background-image-tint-color: rgb(248, 50, 50);
+}

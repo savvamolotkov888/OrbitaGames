@@ -8,8 +8,10 @@ using UnityEngine.Serialization;
 
 public class Water : Player, IMove, IJump, IShift, IDied
 {
-    public override float CurrentHP { get; set; } = 100;
-    public override float MaxHP => 100;
+    public override float CurrentHealthHP { get; set; } = 100;
+    public override float MaxHealthHP => 100;
+    public override float CurrentBoostHP { get; set; } = 10;
+    public override float MaxBoostHP  => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
 

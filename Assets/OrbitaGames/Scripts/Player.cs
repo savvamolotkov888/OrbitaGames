@@ -5,8 +5,11 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-    public abstract float CurrentHP { get; set;}
-    public abstract  float MaxHP { get;}
+    public abstract float CurrentHealthHP { get; set;}
+    public abstract  float MaxHealthHP { get;}
+    
+    public abstract float CurrentBoostHP { get; set;}
+    public abstract  float MaxBoostHP { get;}
     public abstract void TakeDamage(float damageValue);
     public abstract void TakeHealth(float damageValue);
 

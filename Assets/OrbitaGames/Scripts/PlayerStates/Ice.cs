@@ -13,8 +13,10 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     [SerializeField] private float ShiftImpulseAcceleration;
     private float shiftAcceleration = 1f;
 
-    public override float CurrentHP { get; set; } = 100;
-    public override float MaxHP => 100;
+    public override float CurrentHealthHP { get; set; } = 100;
+    public override float MaxHealthHP => 100;
+    public override float CurrentBoostHP { get; set; } = 10;
+    public override float MaxBoostHP  => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
 

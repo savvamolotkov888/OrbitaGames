@@ -44,17 +44,17 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                iceHealthHP.value = ice.CurrentHP = 0;
+                iceHealthHP.value = ice.CurrentHealthHP = 0;
                 Died(ice);
             }
-            else if (value > ice.MaxHP)
+            else if (value > ice.MaxHealthHP)
             {
-                iceHealthHP.value = ice.CurrentHP = ice.MaxHP;
+                iceHealthHP.value = ice.CurrentHealthHP = ice.MaxHealthHP;
                 Debug.Log("FULL HEALTH");
             }
             else
             {
-                iceHealthHP.value = ice.CurrentHP = value;
+                iceHealthHP.value = ice.CurrentHealthHP = value;
             }
         }
     }
@@ -69,17 +69,17 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                waterHealthHP.value = water.CurrentHP = 0;
+                waterHealthHP.value = water.CurrentHealthHP = 0;
                 Died(water);
             }
-            else if (value > water.MaxHP)
+            else if (value > water.MaxHealthHP)
             {
-                waterHealthHP.value = water.CurrentHP = water.MaxHP;
+                waterHealthHP.value = water.CurrentHealthHP = water.MaxHealthHP;
                 Debug.Log("FULL HEALTH");
             }
             else
             {
-                waterHealthHP.value = water.CurrentHP = value;
+                waterHealthHP.value = water.CurrentHealthHP = value;
             }
         }
     }
@@ -94,7 +94,7 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                airHealthHP.value = air.CurrentHP = 0;
+                airHealthHP.value = air.CurrentHealthHP = 0;
                 Died(air);
             }
         }
@@ -138,11 +138,11 @@ public class HUD_Service : MonoBehaviour
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
 
         waterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
-        waterHealthHP.value = waterHealthHP.highValue = water.MaxHP;
+        waterHealthHP.value = waterHealthHP.highValue = water.MaxHealthHP;
         iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
-        iceHealthHP.value = iceHealthHP.highValue = ice.MaxHP;
+        iceHealthHP.value = iceHealthHP.highValue = ice.MaxHealthHP;
         airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
-        airHealthHP.value = airHealthHP.highValue = air.MaxHP;
+        airHealthHP.value = airHealthHP.highValue = air.MaxHealthHP;
 
         WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
         IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
