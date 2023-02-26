@@ -14,7 +14,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     private float shiftAcceleration = 1f;
 
     public override float CurrentHP { get; set; } = 100;
-    public override float MaxHP { get; set; } = 100;
+    public override float MaxHP => 100;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
 

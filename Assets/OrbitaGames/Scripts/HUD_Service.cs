@@ -36,6 +36,7 @@ public class HUD_Service : MonoBehaviour
     #region HealthHP
 
     private ProgressBar iceHealthHP;
+
     private float IceHealthHP
     {
         get => iceHealthHP.value;
@@ -47,7 +48,7 @@ public class HUD_Service : MonoBehaviour
                 ice.CurrentHP = 0;
                 Died(ice);
             }
-            else if (value > 100)
+            else if (value > ice.MaxHP)
             {
                 iceHealthHP.value = ice.MaxHP;
                 ice.CurrentHP = ice.MaxHP;
@@ -61,17 +62,37 @@ public class HUD_Service : MonoBehaviour
         }
     }
 
-    private ProgressBar WaterHealthHP;
-  
+
+    private ProgressBar waterHealthHP;
+
+    private float WaterHealthHP
+    {
+        get => waterHealthHP.value;
+        set
+        {
+            if (value < 0)
+            {
+                waterHealthHP.value = 0;
+                water.CurrentHP = 0;
+                Died(water);
+            }
+            else if (value > water.MaxHP)
+            {
+                waterHealthHP.value = water.MaxHP;
+                water.CurrentHP = water.MaxHP;
+                Debug.Log("FULL HEALTH");
+            }
+            else
+            {
+                waterHealthHP.value = value;
+                water.CurrentHP = value;
+            }
+        }
+    }
+
 
     private ProgressBar airHealthHP;
     private ProgressBar AirHealthHP;
-    
-    private void ValueCheck(ProgressBar progressBar, int maxValue)
-    {
-        if (progressBar.value > maxValue)
-            progressBar.value = maxValue;
-    }
 
     #endregion
 
@@ -89,19 +110,44 @@ public class HUD_Service : MonoBehaviour
 
     private void Awake()
     {
-        InitializationUIElements();
-
-        playerController.ToIce += IceSelect;
-        playerController.ToWater += WaterSelect;
-        playerController.ToAir += AirSelect;
+        Initialization();
+        Subscribe();
     }
 
-    private void Start()
+    private void Initialization()
     {
+        playerController = player.GetComponentInChildren<PlayerController>();
+        _uiDocument = GetComponentInChildren<UIDocument>();
+
         water = playerController.water;
         ice = playerController.ice;
         air = playerController.air;
+        InitializationUIElements();
+    }
 
+    private void InitializationUIElements()
+    {
+        IceIcon = _uiDocument.rootVisualElement.Q("IceIcon");
+        WaterIcon = _uiDocument.rootVisualElement.Q("WaterIcon");
+        AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
+
+        waterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
+        waterHealthHP.value = water.MaxHP;
+        iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
+        iceHealthHP.value = ice.MaxHP;
+        airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
+        airHealthHP.value = air.MaxHP;
+
+        WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
+        IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
+        AirBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
+    }
+
+    private void Subscribe()
+    {
+        playerController.ToIce += IceSelect;
+        playerController.ToWater += WaterSelect;
+        playerController.ToAir += AirSelect;
 
         water.TakeDamageEvent += WaterTakeDamage;
         water.TakeHealthEvent += WaterAddHealth;
@@ -113,26 +159,6 @@ public class HUD_Service : MonoBehaviour
         air.TakeHealthEvent += AirAddDamage;
     }
 
-    private void InitializationUIElements()
-    {
-        playerController = player.GetComponentInChildren<PlayerController>();
-        _uiDocument = GetComponentInChildren<UIDocument>();
-
-        IceIcon = _uiDocument.rootVisualElement.Q("IceIcon");
-        WaterIcon = _uiDocument.rootVisualElement.Q("WaterIcon");
-        AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
-
-        WaterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
-//        WaterHealthHP.value = water.MaxHP;
-        iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
-        iceHealthHP.value = 100;
-        airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
-//        airHealthHP.value = air.MaxHP;
-
-        WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
-        IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
-        AirBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
-    }
 
     void WaterSelect() => SelectingIcon(WaterIcon);
     void IceSelect() => SelectingIcon(IceIcon);
@@ -141,29 +167,17 @@ public class HUD_Service : MonoBehaviour
 
     void WaterTakeDamage(float damage)
     {
-        if (WaterHealthHP.value > 0)
-        {
-            Debug.LogError(damage);
-            WaterHealthHP.value -= damage;
-        }
-        else
-            Died(water);
+        WaterHealthHP -= damage;
     }
 
     void WaterAddHealth(float damage)
     {
-        if (WaterHealthHP.value < 100)
-        {
-            Debug.LogError(damage);
-            WaterHealthHP.value += damage;
-        }
+        WaterHealthHP += damage;
     }
 
     void IceAddDamage(float damage)
     {
-        
-            Debug.LogError(damage);
-            IceHealthHP += damage;
+        IceHealthHP += damage;
     }
 
     void AirAddDamage(float damage)
@@ -177,7 +191,7 @@ public class HUD_Service : MonoBehaviour
 
     void IceTakeDamage(float damage)
     {
-            IceHealthHP -= damage;
+        IceHealthHP -= damage;
     }
 
     void AirTakeDamage(float damage)
@@ -197,19 +211,14 @@ public class HUD_Service : MonoBehaviour
         UnSelectingIcon(IceIcon);
         UnSelectingIcon(AirIcon);
 
-        icon.style.borderBottomColor = SelectedIconBorderColor;
-        icon.style.borderLeftColor = SelectedIconBorderColor;
-        icon.style.borderRightColor = SelectedIconBorderColor;
-        icon.style.borderTopColor = SelectedIconBorderColor;
+        icon.style.borderBottomColor = icon.style.borderLeftColor =
+            icon.style.borderRightColor = icon.style.borderTopColor = SelectedIconBorderColor;
     }
 
-    private void UnSelectingIcon(VisualElement icon)
-    {
-        icon.style.borderBottomColor = DefaultIconBorderColor;
-        icon.style.borderLeftColor = DefaultIconBorderColor;
-        icon.style.borderRightColor = DefaultIconBorderColor;
-        icon.style.borderTopColor = DefaultIconBorderColor;
-    }
+    private void UnSelectingIcon(VisualElement icon) =>
+        icon.style.borderBottomColor = icon.style.borderLeftColor =
+            icon.style.borderRightColor = icon.style.borderTopColor = DefaultIconBorderColor;
+
 
     private void Died(IDied player) => player.Died();
 }
