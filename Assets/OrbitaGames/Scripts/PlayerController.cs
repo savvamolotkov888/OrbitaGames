@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private ObiSolver WaterSolwer;
     [SerializeField] private ObiActor waterActor;
-    
+
     private Player currentGameobjectState;
 
     private float moveAcceleration;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     #region BooostHP
 
-    [SerializeField] private float IceBoostHP ; 
+    [SerializeField] private float IceBoostHP;
 
     #endregion
 
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
     void IceShift()
     {
-        if (CurrentState == PlayerState.Ice)
+        if (CurrentState == PlayerState.Ice && ice.CurrentBoostHP > 0)
         {
             if (clickCount >= 2)
             {
@@ -227,6 +227,7 @@ public class PlayerController : MonoBehaviour
             {
                 Shift(ice);
             }
+            ice.CurrentBoostHP--;
         }
     }
 
@@ -322,10 +323,9 @@ public class PlayerController : MonoBehaviour
         air.transform.position = transform.position;
         air.gameObject.SetActive(true);
     }
-    
-    void Solver_OnCollision (object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+
+    void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
     {
-        
         var world = ObiColliderWorld.GetInstance();
 
         // just iterate over all contacts in the current frame:
@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
             clickCount = 0;
         }
     }
-    
+
     private void OnEnable()
     {
         inputSystem.Enable();
