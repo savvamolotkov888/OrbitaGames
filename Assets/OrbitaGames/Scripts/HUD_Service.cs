@@ -97,13 +97,6 @@ public class HUD_Service : MonoBehaviour
                 airHealthHP.value = air.CurrentHP = 0;
                 Died(air);
             }
-            else if (value > air.MaxHP)
-            {
-                airHealthHP.value = air.CurrentHP = air.MaxHP;
-                Debug.Log("FULL HEALTH");
-            }
-            else
-                airHealthHP.value = air.CurrentHP = value;
         }
     }
 
@@ -145,11 +138,11 @@ public class HUD_Service : MonoBehaviour
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
 
         waterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
-        waterHealthHP.value = water.MaxHP;
+        waterHealthHP.value = waterHealthHP.highValue = water.MaxHP;
         iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
-        iceHealthHP.value = ice.MaxHP;
+        iceHealthHP.value = iceHealthHP.highValue = ice.MaxHP;
         airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
-        airHealthHP.value = air.MaxHP;
+        airHealthHP.value = airHealthHP.highValue = air.MaxHP;
 
         WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
         IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
@@ -169,7 +162,7 @@ public class HUD_Service : MonoBehaviour
         ice.TakeHealthEvent += IceAddDamage;
 
         air.TakeDamageEvent += AirTakeDamage;
-        air.TakeHealthEvent += AirAddDamage;
+        //air.TakeHealthEvent 
     }
 
 
@@ -192,11 +185,7 @@ public class HUD_Service : MonoBehaviour
     {
         IceHealthHP += damage;
     }
-
-    void AirAddDamage(float damage)
-    {
-        AirHealthHP += damage;
-    }
+    
 
     void IceTakeDamage(float damage)
     {
