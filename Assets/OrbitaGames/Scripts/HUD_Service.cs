@@ -44,20 +44,17 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                iceHealthHP.value = 0;
-                ice.CurrentHP = 0;
+                iceHealthHP.value = ice.CurrentHP = 0;
                 Died(ice);
             }
             else if (value > ice.MaxHP)
             {
-                iceHealthHP.value = ice.MaxHP;
-                ice.CurrentHP = ice.MaxHP;
+                iceHealthHP.value = ice.CurrentHP = ice.MaxHP;
                 Debug.Log("FULL HEALTH");
             }
             else
             {
-                iceHealthHP.value = value;
-                ice.CurrentHP = value;
+                iceHealthHP.value = ice.CurrentHP = value;
             }
         }
     }
@@ -72,27 +69,43 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                waterHealthHP.value = 0;
-                water.CurrentHP = 0;
+                waterHealthHP.value = water.CurrentHP = 0;
                 Died(water);
             }
             else if (value > water.MaxHP)
             {
-                waterHealthHP.value = water.MaxHP;
-                water.CurrentHP = water.MaxHP;
+                waterHealthHP.value = water.CurrentHP = water.MaxHP;
                 Debug.Log("FULL HEALTH");
             }
             else
             {
-                waterHealthHP.value = value;
-                water.CurrentHP = value;
+                waterHealthHP.value = water.CurrentHP = value;
             }
         }
     }
 
 
     private ProgressBar airHealthHP;
-    private ProgressBar AirHealthHP;
+
+    private float AirHealthHP
+    {
+        get => airHealthHP.value;
+        set
+        {
+            if (value < 0)
+            {
+                airHealthHP.value = air.CurrentHP = 0;
+                Died(air);
+            }
+            else if (value > air.MaxHP)
+            {
+                airHealthHP.value = air.CurrentHP = air.MaxHP;
+                Debug.Log("FULL HEALTH");
+            }
+            else
+                airHealthHP.value = air.CurrentHP = value;
+        }
+    }
 
     #endregion
 
@@ -182,11 +195,7 @@ public class HUD_Service : MonoBehaviour
 
     void AirAddDamage(float damage)
     {
-        if (AirHealthHP.value < 100)
-        {
-            Debug.LogError(damage);
-            AirHealthHP.value += damage;
-        }
+        AirHealthHP += damage;
     }
 
     void IceTakeDamage(float damage)
@@ -196,13 +205,7 @@ public class HUD_Service : MonoBehaviour
 
     void AirTakeDamage(float damage)
     {
-        if (AirHealthHP.value > 0)
-        {
-            Debug.LogError(damage);
-            AirHealthHP.value -= damage;
-        }
-        else
-            Died(air);
+        AirHealthHP -= damage;
     }
 
     private void SelectingIcon(VisualElement icon)
