@@ -55,8 +55,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
 
     public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
     {
-        if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0)
+        if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0 && CurrentBoostHP > 0)
+        {
             shiftAcceleration = ShiftAcceleration;
+            CurrentBoostHP--;
+            Debug.LogError(CurrentBoostHP);
+        }
 
         else if (direction.Shift <= 0)
             shiftAcceleration = 1;

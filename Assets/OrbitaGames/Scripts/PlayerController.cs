@@ -7,17 +7,12 @@ using Task = System.Threading.Tasks.Task;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float IceHealthHP;
-    [SerializeField] private float WaterHealthHP;
-    [SerializeField] private float AirHealthHP;
     public event Action ToWater;
     public event Action ToIce;
     public event Action ToAir;
 
     public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
-
-
     [SerializeField] private ActorCOMTransform softbodyCOM;
     [SerializeField] private PlayerState PlayerStateAtStart;
 
@@ -216,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
     void IceShift()
     {
-        if (CurrentState == PlayerState.Ice && ice.CurrentBoostHP > 0)
+        if (CurrentState == PlayerState.Ice)
         {
             if (clickCount >= 2)
             {
@@ -227,7 +222,6 @@ public class PlayerController : MonoBehaviour
             {
                 Shift(ice);
             }
-            ice.CurrentBoostHP--;
         }
     }
 
