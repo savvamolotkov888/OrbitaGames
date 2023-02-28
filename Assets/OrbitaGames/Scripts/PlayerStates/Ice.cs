@@ -88,7 +88,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         Debug.LogError("Ice TakeHealth");
     }
 
-    private void OnCollisionEnter(Collision player)
+    private void OnCollisionStay(Collision player)
     {
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
