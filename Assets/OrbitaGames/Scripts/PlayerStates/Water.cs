@@ -8,24 +8,21 @@ using UnityEngine.Serialization;
 
 public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 {
-
     private float currentHealthHP = 100;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
     public override event Action<float> LoseBoostEvent;
+
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set
-        {
-            currentHealthHP = value;
-        }
-    } 
+        set { currentHealthHP = value; }
+    }
+
     public override float MaxHealthHP => 100;
-    
+
     public override float CurrentBoostHP { get; set; } = 10;
-    public override float MaxBoostHP  => 10;
-    
+    public override float MaxBoostHP => 10;
 
 
     [SerializeField] private float moveAcceleration;
@@ -77,6 +74,7 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
         {
             this.water.collisionMaterial = stickinessMaterial;
             isStickiness = true;
+            Debug.LogError("isStickiness");
         }
         else
         {
@@ -91,9 +89,9 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
         Debug.LogError("WaterJump");
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
+
     public void Regeniration()
     {
-        
     }
 
     public override void TakeDamage(float waterDamageValue)
