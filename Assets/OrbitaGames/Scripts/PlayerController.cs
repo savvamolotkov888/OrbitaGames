@@ -283,7 +283,15 @@ public class PlayerController : MonoBehaviour
         CurrentState = PlayerState.Water;
 
         WaterSolwer.gameObject.SetActive(true);
-        waterActor.Teleport(transform.position, transform.rotation);
+        try
+        {
+            waterActor.Teleport(transform.position, transform.rotation);
+        }
+        catch 
+        {
+            Debug.LogError("TO DO");
+        }
+ 
         softbodyCOM.Update();
         gameObject.transform.position = water.transform.position;
     }
