@@ -18,4 +18,6 @@ public abstract class Player : MonoBehaviour
 
     public abstract event Action<float> TakeDamageEvent;
     public abstract event Action<float> TakeHealthEvent;
+    public abstract event Action<float> LoseBoostEvent;
+  //  public abstract event Action<float> TakeHealthEvent;
 }

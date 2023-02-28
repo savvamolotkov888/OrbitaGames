@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState currentState;
 
+
     private PlayerState CurrentState
     {
         get => currentState;
@@ -107,7 +108,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        WaterSolwer.OnCollision += Solver_OnCollision;
         Direction = new PlayerDirection();
         Direction.AirControll = 1;
         //Cursor.lockState = CursorLockMode.Locked;
@@ -138,14 +138,12 @@ public class PlayerController : MonoBehaviour
         Direction.Up = inputSystem.Control.Jump.ReadValue<float>();
         Direction.Shift = inputSystem.Control.ShiftValue.ReadValue<float>();
 
-
         if (inputSystem.Transformation.ToWater.ReadValue<float>() > 0)
             TransformaitionToWater();
         if (inputSystem.Transformation.ToIce.ReadValue<float>() > 0)
             TransformaitionToIce();
         if (inputSystem.Transformation.ToAir.ReadValue<float>() > 0)
             TransformaitionToAir();
-
 
         LookAtpoz = Vector3.Lerp(targetB.position,
             new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z), smoothFacor);
@@ -318,22 +316,25 @@ public class PlayerController : MonoBehaviour
         air.gameObject.SetActive(true);
     }
 
-    void Solver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
+    public void TransformaitionToPreviousState()
     {
-        var world = ObiColliderWorld.GetInstance();
-
-        // just iterate over all contacts in the current frame:
-        foreach (Oni.Contact contact in e.contacts)
+        Debug.LogError(previousState);
+        switch (previousState)
         {
-            // if this one is an actual collision:
-            if (contact.distance < 0.01)
-            {
-                ObiColliderBase col = world.colliderHandles[contact.bodyB].owner;
-                if (col != null)
-                {
-                    // do something with the collider.
-                }
-            }
+            case PlayerState.Water:
+                CurrentState = PlayerState.Water;
+                TransformaitionToIce();
+                break;
+            case PlayerState.Ice:
+                CurrentState = PlayerState.Ice;
+                ice.gameObject.SetActive(true);
+                TransformaitionToIce();
+                break;
+
+            case PlayerState.Air:
+                CurrentState = PlayerState.Air;
+                air.gameObject.SetActive(true);
+                break;
         }
     }
 

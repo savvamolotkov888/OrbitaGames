@@ -10,6 +10,9 @@ public class Water : Player, IMove, IJump, IShift, IDied
 {
 
     private float currentHealthHP = 100;
+    public override event Action<float> TakeDamageEvent;
+    public override event Action<float> TakeHealthEvent;
+    public override event Action<float> LoseBoostEvent;
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
@@ -23,8 +26,7 @@ public class Water : Player, IMove, IJump, IShift, IDied
     public override float CurrentBoostHP { get; set; } = 10;
     public override float MaxBoostHP  => 10;
     
-    public override event Action<float> TakeDamageEvent;
-    public override event Action<float> TakeHealthEvent;
+
 
     [SerializeField] private float moveAcceleration;
     [SerializeField] private float jumpAcceleration;

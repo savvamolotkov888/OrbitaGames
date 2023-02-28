@@ -29,7 +29,7 @@ public class HUD_Service : MonoBehaviour
 
     private ProgressBar IceBoostHP;
     private ProgressBar WaterBoostHP;
-    private ProgressBar AirBoostHP;
+    private ProgressBar airBoostHP;
 
     #endregion
 
@@ -100,6 +100,28 @@ public class HUD_Service : MonoBehaviour
         }
     }
 
+    private float AirBoostHP
+    {
+        get => airBoostHP.value;
+        set
+        {
+            if (value < 0)
+            {
+                airHealthHP.value = air.CurrentBoostHP = 0;
+                playerController.TransformaitionToPreviousState();
+            }
+            else if (value > air.MaxBoostHP)
+            {
+                airBoostHP.value = air.CurrentBoostHP = air.MaxBoostHP;
+                Debug.Log("FULL Boost");
+            }
+            else
+            {
+                airBoostHP.value = ice.CurrentBoostHP = value;
+            }
+        }
+    }
+
     #endregion
 
 
@@ -139,17 +161,21 @@ public class HUD_Service : MonoBehaviour
 
         waterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
         waterHealthHP.value = waterHealthHP.highValue = water.MaxHealthHP;
+
         iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
         iceHealthHP.value = iceHealthHP.highValue = ice.MaxHealthHP;
+
         airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
         airHealthHP.value = airHealthHP.highValue = air.MaxHealthHP;
 
         WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
         WaterBoostHP.value = WaterBoostHP.highValue = water.MaxBoostHP;
+
         IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
-        IceBoostHP.value = iceHealthHP.highValue = ice.MaxHealthHP;
-        AirBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
-        airHealthHP.value = airHealthHP.highValue = air.MaxHealthHP;
+        IceBoostHP.value = IceBoostHP.highValue = ice.MaxBoostHP;
+
+        airBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
+        airBoostHP.value = airBoostHP.highValue = air.MaxBoostHP;
     }
 
     private void Subscribe()
@@ -163,8 +189,10 @@ public class HUD_Service : MonoBehaviour
 
         ice.TakeDamageEvent += IceTakeDamage;
         ice.TakeHealthEvent += IceAddDamage;
+        ice.LoseBoostEvent += IceLooseBoost;
 
         air.TakeDamageEvent += AirTakeDamage;
+        air.LoseBoostEvent += AirLooseBoost;
         //air.TakeHealthEvent 
     }
 
@@ -193,6 +221,19 @@ public class HUD_Service : MonoBehaviour
     void IceTakeDamage(float damage)
     {
         IceHealthHP -= damage;
+    }
+
+    void IceLooseBoost(float damage)
+    {
+        IceBoostHP.value -= damage;
+        Debug.LogError(IceBoostHP.value);
+    }
+
+    void AirLooseBoost(float boostLose)
+    {
+        AirBoostHP -= boostLose;
+
+        Debug.LogError(airBoostHP.value);
     }
 
     void AirTakeDamage(float damage)

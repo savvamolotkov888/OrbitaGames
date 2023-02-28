@@ -16,9 +16,10 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     public override float CurrentHealthHP { get; set; } = 100;
     public override float MaxHealthHP => 100;
     public override float CurrentBoostHP { get; set; } = 10;
-    public override float MaxBoostHP  => 10;
+    public override float MaxBoostHP => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
+    public override event Action<float> LoseBoostEvent;
 
 
     private Rigidbody iceRigidbody;
@@ -60,6 +61,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
             shiftAcceleration = ShiftAcceleration;
             CurrentBoostHP--;
             Debug.LogError(CurrentBoostHP);
+            LoseBoostEvent?.Invoke(5);
         }
 
         else if (direction.Shift <= 0)
@@ -72,6 +74,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         {
             iceRigidbody.AddRelativeForce(0, 0,
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
+            LoseBoostEvent?.Invoke(5);
         }
     }
 

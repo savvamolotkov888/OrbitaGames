@@ -12,6 +12,7 @@ public class Air : Player, IMove, IJump , IDied
     public override float MaxBoostHP  => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
+    public override event Action<float> LoseBoostEvent;
     
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float FlyAcceleration;
@@ -39,6 +40,7 @@ public class Air : Player, IMove, IJump , IDied
 
         else
             airRigidbody.AddForce(0, FlyAccelerationWhenMoove, 0, ForceMode.Force);
+        LoseBoostEvent?.Invoke(0.1f);
     }
 
     public override void TakeDamage(float airDamageValue)
