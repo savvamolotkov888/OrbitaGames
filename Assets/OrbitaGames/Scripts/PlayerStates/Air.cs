@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public class Air : Player, IMove, IJump, IDied
+public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
 {
     private HUD_Service _HUDService;
 
@@ -14,6 +14,7 @@ public class Air : Player, IMove, IJump, IDied
     [SerializeField] private PlayerController playerController;
 
     private float currentHealthHP = 1;
+
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
@@ -21,13 +22,15 @@ public class Air : Player, IMove, IJump, IDied
     }
 
     public override float MaxHealthHP => 1;
-    
+
     private float currentBoostHP = 10;
-    public override float CurrentBoostHP 
+
+    public override float CurrentBoostHP
     {
         get => currentBoostHP;
         set => currentBoostHP = _HUDService.AirBoostHP = value;
     }
+
     public override float MaxBoostHP => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
@@ -50,6 +53,8 @@ public class Air : Player, IMove, IJump, IDied
     private void Awake()
     {
         airRigidbody = GetComponent<Rigidbody>();
+        PlayerController.ToIce += Regeniration;
+        PlayerController.ToWater += Regeniration;
     }
 
 
@@ -68,6 +73,12 @@ public class Air : Player, IMove, IJump, IDied
         else
             airRigidbody.AddForce(0, FlyAccelerationWhenMoove, 0, ForceMode.Force);
         LoseBoostEvent?.Invoke(0.1f);
+    }
+
+    public void Regeniration()
+    {
+        CurrentBoostHP = 10;
+        Debug.LogError("Regeniration");
     }
 
     public override void TakeDamage(float airDamageValue)
@@ -105,7 +116,4 @@ public class Air : Player, IMove, IJump, IDied
     {
         CanTakeDamage = false;
     }
-
-    public void AddBoostHp()
-        => CurrentBoostHP = 10;
 }

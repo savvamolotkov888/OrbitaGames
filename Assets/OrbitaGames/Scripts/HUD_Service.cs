@@ -107,10 +107,9 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                 air.CurrentBoostHP = 0;
+                air.CurrentBoostHP = 0;
                 playerController.TransformaitionToPreviousState();
-                air.AddBoostHp();
-                airBoostHP.value = air.CurrentBoostHP = 10;
+                Regeniration(air);
             }
             else if (value > air.MaxBoostHP)
             {
@@ -182,9 +181,9 @@ public class HUD_Service : MonoBehaviour
 
     private void Subscribe()
     {
-        playerController.ToIce += IceSelect;
-        playerController.ToWater += WaterSelect;
-        playerController.ToAir += AirSelect;
+        PlayerController.ToIce += IceSelect;
+        PlayerController.ToWater += WaterSelect;
+        PlayerController.ToAir += AirSelect;
 
         water.TakeDamageEvent += WaterTakeDamage;
         water.TakeHealthEvent += WaterAddHealth;
@@ -257,4 +256,5 @@ public class HUD_Service : MonoBehaviour
 
 
     private void Died(IDied player) => player.Died();
+    private void Regeniration(IHealthRegeneration player) => player.Regeniration();
 }

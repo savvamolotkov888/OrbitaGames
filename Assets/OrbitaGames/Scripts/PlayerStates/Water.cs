@@ -6,7 +6,7 @@ using Obi;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Water : Player, IMove, IJump, IShift, IDied
+public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 {
 
     private float currentHealthHP = 100;
@@ -90,6 +90,10 @@ public class Water : Player, IMove, IJump, IShift, IDied
     {
         Debug.LogError("WaterJump");
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
+    }
+    public void Regeniration()
+    {
+        
     }
 
     public override void TakeDamage(float waterDamageValue)

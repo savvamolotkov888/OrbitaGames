@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
+public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegeneration, IDied
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
@@ -106,5 +106,9 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     public void Died()
     {
         Debug.LogError("IceDied");
+    }
+
+    public void Regeniration()
+    {
     }
 }
