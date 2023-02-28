@@ -10,9 +10,11 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
 {
     private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
-    public bool CanTakeDamage ;
-    [SerializeField] private float boostLoseSpeed;//с какой скоростью теряет буст
+    public bool CanTakeDamage;
+    [SerializeField] private float boostLoseSpeed; //с какой скоростью теряет буст
     [SerializeField] private float boostGettingSpeed;
+
+    [SerializeField] private PlayerController playerController;
 
     private float currentHealthHP; // кол во здоровья
 
@@ -88,7 +90,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
             CurrentBoostHP += boostGettingSpeed;
             Debug.LogError(CurrentBoostHP);
 
-            if (CurrentBoostHP > MaxBoostHP)
+            if (CurrentBoostHP > MaxBoostHP || playerController.currentState == PlayerState.Air)
             {
                 Debug.LogError("Regeniration Ended");
                 compositeDisposable.Clear();

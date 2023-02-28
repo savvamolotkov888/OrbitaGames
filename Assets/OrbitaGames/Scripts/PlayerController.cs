@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private InputSystem inputSystem;
 
-    private PlayerState currentState;
+    public PlayerState currentState { get; private set; }
     private PlayerState previousState;
 
     private PlayerState CurrentState
