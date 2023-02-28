@@ -7,21 +7,27 @@ using Zenject;
 
 public class Air : Player, IMove, IJump, IDied
 {
-    public float currentHealthHP = 1;
+    private HUD_Service _HUDService;
 
     public bool CanTakeDamage = false;
 
+    [SerializeField] private PlayerController playerController;
+
+    private float currentHealthHP = 1;
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set
-        {
-            currentHealthHP = value;
-        }
+        set => currentHealthHP = _HUDService.AirHealthHP = value;
     }
 
     public override float MaxHealthHP => 1;
-    public override float CurrentBoostHP { get; set; } = 10;
+    
+    private float currentBoostHP = 10;
+    public override float CurrentBoostHP 
+    {
+        get => currentBoostHP;
+        set => currentBoostHP = _HUDService.AirBoostHP = value;
+    }
     public override float MaxBoostHP => 10;
     public override event Action<float> TakeDamageEvent;
     public override event Action<float> TakeHealthEvent;
@@ -33,6 +39,13 @@ public class Air : Player, IMove, IJump, IDied
     [SerializeField] private float ImortalityTime;
     [Range(0, 1)] public float airControl = 0.3f;
     private Rigidbody airRigidbody;
+
+
+    [Inject]
+    private void Construct(HUD_Service _HUD_Service)
+    {
+        _HUDService = _HUD_Service;
+    }
 
     private void Awake()
     {

@@ -87,7 +87,7 @@ public class HUD_Service : MonoBehaviour
 
     private ProgressBar airHealthHP;
 
-    private float AirHealthHP
+    public float AirHealthHP
     {
         get => airHealthHP.value;
         set
@@ -100,21 +100,21 @@ public class HUD_Service : MonoBehaviour
         }
     }
 
-    private float AirBoostHP
+    public float AirBoostHP
     {
         get => airBoostHP.value;
         set
         {
             if (value < 0)
             {
-                airBoostHP.value = air.CurrentBoostHP = 0;
+                 air.CurrentBoostHP = 0;
                 playerController.TransformaitionToPreviousState();
                 air.AddBoostHp();
                 airBoostHP.value = air.CurrentBoostHP = 10;
             }
             else if (value > air.MaxBoostHP)
             {
-                airBoostHP.value = air.CurrentBoostHP = air.MaxBoostHP;
+                air.CurrentBoostHP = air.MaxBoostHP;
                 Debug.Log("FULL Boost");
             }
             else
