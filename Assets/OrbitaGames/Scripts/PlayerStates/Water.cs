@@ -94,12 +94,12 @@ public class Water : Player, IMove, IJump, IShift, IDied
 
     public override void TakeDamage(float waterDamageValue)
     {
-        Debug.LogError("W" + waterDamageValue);
+        Debug.LogError("Water TakeDamage" + waterDamageValue);
     }
 
     public override void TakeHealth(float waterDamageValue)
     {
-        Debug.LogError("W" + waterDamageValue);
+        Debug.LogError("Water TakeHealth" + waterDamageValue);
     }
 
     void WaterSolver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)

@@ -5,7 +5,18 @@ using UnityEngine;
 
 public class Air : Player, IMove, IJump , IDied
 {
-    public override float CurrentHealthHP { get; set; } = 1;
+    public float currentHealthHP = 1;
+
+    public override float CurrentHealthHP
+    {
+        get =>currentHealthHP;
+        set
+        {
+            currentHealthHP = value;
+            if (currentHealthHP == 0)
+                currentHealthHP = 10;
+        }
+    } 
     public override float MaxHealthHP  => 1;
     
     public override float CurrentBoostHP { get; set; } = 10;
@@ -45,12 +56,12 @@ public class Air : Player, IMove, IJump , IDied
 
     public override void TakeDamage(float airDamageValue)
     {
-        Debug.LogError("A");
+        Debug.LogError("Air TakeDamage");
     }
 
     public override void TakeHealth(float damageValue)
     {
-        
+        Debug.LogError("Air TakeHealth");
     }
 
     private void OnCollisionEnter(Collision player)
@@ -65,4 +76,7 @@ public class Air : Player, IMove, IJump , IDied
     {
         Debug.LogError("AirDied");
     }
+
+    public void AddBoostHp()
+        => CurrentBoostHP = 10;
 }

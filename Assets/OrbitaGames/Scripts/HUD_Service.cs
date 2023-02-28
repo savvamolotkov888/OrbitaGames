@@ -109,7 +109,8 @@ public class HUD_Service : MonoBehaviour
             {
                 airBoostHP.value = air.CurrentBoostHP = 0;
                 playerController.TransformaitionToPreviousState();
-                
+                air.AddBoostHp();
+                airBoostHP.value = air.CurrentBoostHP = 10;
             }
             else if (value > air.MaxBoostHP)
             {

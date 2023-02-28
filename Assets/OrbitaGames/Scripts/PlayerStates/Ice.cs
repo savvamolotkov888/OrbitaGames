@@ -80,12 +80,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
 
     public override void TakeDamage(float iceDamageValue)
     {
-        Debug.LogError("I");
+        Debug.LogError("Ice TakeDamage");
     }
 
     public override void TakeHealth(float iceHealthValue)
     {
-        Debug.LogError("I");
+        Debug.LogError("Ice TakeHealth");
     }
 
     private void OnCollisionEnter(Collision player)
