@@ -332,7 +332,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139563484}
-  m_LocalRotation: {x: 0.20930679, y: 0.000000008254428, z: -0.0000000017668433, w: 0.97785}
+  m_LocalRotation: {x: 0.20930678, y: 0.000000014571103, z: -0.0000000031189145, w: 0.9778501}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -576,8 +576,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437076710}
-  m_LocalRotation: {x: 0.28978413, y: 0.000000012243939, z: -0.0000000037071664, w: 0.95709205}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.2829163, y: 0.00000003028302, z: -0.000000008932502, w: 0.9591446}
+  m_LocalPosition: {x: 0, y: -0.79999924, z: 0.9999981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1015,7 +1015,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570007308}
-  m_LocalRotation: {x: 0.28978416, y: 0.000000016608785, z: -0.0000000050287357, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978416, y: 0.000000040338413, z: -0.000000012213489, w: 0.95709205}
   m_LocalPosition: {x: -13.782266, y: 1.4183807, z: -2.8666394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1253,7 +1253,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787912198}
-  m_LocalRotation: {x: 0.28978413, y: 0.000000016608782, z: -0.0000000050287348, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.000000040338413, z: -0.000000012213488, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3731,12 +3731,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 570007311}
     - target: {fileID: 8883401773315863720, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
+      propertyPath: maxBoostHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883401773315863720, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: maxHealthHP
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8883401773315863720, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: ImortalityTime
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8883401773315863720, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: boostLoseSpeed

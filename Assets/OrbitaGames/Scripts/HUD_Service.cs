@@ -94,7 +94,7 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                airHealthHP.value = air.CurrentHealthHP = 0;
+                airHealthHP.value = 0;
                 Died(air);
             }
         }
@@ -103,23 +103,7 @@ public class HUD_Service : MonoBehaviour
     public float AirBoostHP
     {
         get => airBoostHP.value;
-        set
-        {
-            if (value < 0)
-            {
-                air.CurrentBoostHP = 0;
-                playerController.TransformaitionToPreviousState();
-            }
-            else if (value > air.MaxBoostHP)
-            {
-                air.CurrentBoostHP = air.MaxBoostHP;
-                Debug.Log("FULL Boost");
-            }
-            else
-            {
-                airBoostHP.value = ice.CurrentBoostHP = value;
-            }
-        }
+        set => airBoostHP.value = value;
     }
 
     #endregion

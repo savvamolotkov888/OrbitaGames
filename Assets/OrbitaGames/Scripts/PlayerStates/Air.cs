@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -26,10 +27,18 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set => currentHealthHP = _HUDService.AirHealthHP = value;
+        set
+        {
+            currentHealthHP = _HUDService.AirHealthHP = value;
+            if (value < 0)
+            {
+                currentHealthHP = _HUDService.AirHealthHP = 0;
+                Died();
+            }
+        }
     }
 
-    
+
     public override float MaxHealthHP => maxHealthHP;
 
     private float currentBoostHP = 10;
@@ -37,11 +46,24 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
-        set => currentBoostHP = _HUDService.AirBoostHP = value;
+        set
+        {
+            currentBoostHP = _HUDService.AirBoostHP = value; 
+            if (value < 0)
+            {
+                playerController.TransformaitionToPreviousState();
+                Debug.LogError("NO Boost");
+            }
+            if (value > MaxBoostHP)
+            {
+                CurrentBoostHP = MaxBoostHP;
+                Debug.LogError("FULL Boost");
+            }
+        }
     }
 
     public override float MaxBoostHP => 10;
-    public override event Action<float> TakeDamageEvent;
+    public override event Action<float> TakeDamageEvent;// не надо
     public override event Action<float> LoseBoostEvent; // не надо
     public override event Action<float> TakeHealthEvent; // не надо для айр
 
@@ -114,8 +136,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         if (CanTakeDamage)
         {
             Debug.LogError(player.gameObject.name + "!!");
-            TakeDamage(100);
-            TakeDamageEvent?.Invoke(100);
+            CurrentHealthHP -= 100;
         }
     }
 
