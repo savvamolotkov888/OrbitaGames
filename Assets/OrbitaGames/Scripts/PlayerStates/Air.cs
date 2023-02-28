@@ -11,20 +11,25 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
     public bool CanTakeDamage;
+    
     [SerializeField] private float boostLoseSpeed; //с какой скоростью теряет буст
     [SerializeField] private float boostGettingSpeed;
-
     [SerializeField] private PlayerController playerController;
-
+    [SerializeField] private float maxHealthHP;
+    [SerializeField] private float MoveAcceleration;
+    [SerializeField] private float FlyAcceleration;
+    [SerializeField] private float FlyAccelerationWhenMoove;
+    [SerializeField] private float ImortalityTime;
+    [Range(0, 1)] public float airControl = 0.3f;
+    
     private float currentHealthHP; // кол во здоровья
-
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
         set => currentHealthHP = _HUDService.AirHealthHP = value;
     }
 
-    [SerializeField] private float maxHealthHP;
+    
     public override float MaxHealthHP => maxHealthHP;
 
     private float currentBoostHP = 10;
@@ -37,14 +42,10 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
 
     public override float MaxBoostHP => 10;
     public override event Action<float> TakeDamageEvent;
-    public override event Action<float> TakeHealthEvent;
-    public override event Action<float> LoseBoostEvent;
+    public override event Action<float> LoseBoostEvent; // не надо
+    public override event Action<float> TakeHealthEvent; // не надо для айр
 
-    [SerializeField] private float MoveAcceleration;
-    [SerializeField] private float FlyAcceleration;
-    [SerializeField] private float FlyAccelerationWhenMoove;
-    [SerializeField] private float ImortalityTime;
-    [Range(0, 1)] public float airControl = 0.3f;
+   
     private Rigidbody airRigidbody;
 
 
@@ -78,7 +79,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         else
             airRigidbody.AddForce(0, FlyAccelerationWhenMoove, 0, ForceMode.Force);
 
-        //   LoseBoostEvent?.Invoke(0.1f);
+
         CurrentBoostHP -= boostLoseSpeed;
     }
 
@@ -113,8 +114,8 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         if (CanTakeDamage)
         {
             Debug.LogError(player.gameObject.name + "!!");
-            TakeDamage(1);
-            TakeDamageEvent?.Invoke(1);
+            TakeDamage(100);
+            TakeDamageEvent?.Invoke(100);
         }
     }
 
