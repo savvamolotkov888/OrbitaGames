@@ -2,18 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
 {
+    private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
+    public bool CanTakeDamage ;
+    [SerializeField] private float boostLoseSpeed;//с какой скоростью теряет буст
+    [SerializeField] private float boostGettingSpeed;
 
-    public bool CanTakeDamage = false;
-
-    [SerializeField] private PlayerController playerController;
-
-    private float currentHealthHP = 1;
+    private float currentHealthHP; // кол во здоровья
 
     public override float CurrentHealthHP
     {
@@ -21,7 +22,8 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         set => currentHealthHP = _HUDService.AirHealthHP = value;
     }
 
-    public override float MaxHealthHP => 1;
+    [SerializeField] private float maxHealthHP;
+    public override float MaxHealthHP => maxHealthHP;
 
     private float currentBoostHP = 10;
 
@@ -55,6 +57,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         airRigidbody = GetComponent<Rigidbody>();
         PlayerController.ToIce += Regeniration;
         PlayerController.ToWater += Regeniration;
+        currentHealthHP = maxHealthHP;
     }
 
 
@@ -72,13 +75,25 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
 
         else
             airRigidbody.AddForce(0, FlyAccelerationWhenMoove, 0, ForceMode.Force);
-        LoseBoostEvent?.Invoke(0.1f);
+
+        //   LoseBoostEvent?.Invoke(0.1f);
+        CurrentBoostHP -= boostLoseSpeed;
     }
 
     public void Regeniration()
     {
-        CurrentBoostHP = 10;
         Debug.LogError("Regeniration");
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            CurrentBoostHP += boostGettingSpeed;
+            Debug.LogError(CurrentBoostHP);
+
+            if (CurrentBoostHP > MaxBoostHP)
+            {
+                Debug.LogError("Regeniration Ended");
+                compositeDisposable.Clear();
+            }
+        }).AddTo(compositeDisposable);
     }
 
     public override void TakeDamage(float airDamageValue)
@@ -96,8 +111,8 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         if (CanTakeDamage)
         {
             Debug.LogError(player.gameObject.name + "!!");
-            TakeDamage(100);
-            TakeDamageEvent?.Invoke(100);
+            TakeDamage(1);
+            TakeDamageEvent?.Invoke(1);
         }
     }
 

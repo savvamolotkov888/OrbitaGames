@@ -109,7 +109,6 @@ public class HUD_Service : MonoBehaviour
             {
                 air.CurrentBoostHP = 0;
                 playerController.TransformaitionToPreviousState();
-                Regeniration(air);
             }
             else if (value > air.MaxBoostHP)
             {
@@ -193,7 +192,6 @@ public class HUD_Service : MonoBehaviour
         ice.LoseBoostEvent += IceLooseBoost;
 
         air.TakeDamageEvent += AirTakeDamage;
-        air.LoseBoostEvent += AirLooseBoost;
         //air.TakeHealthEvent 
     }
 
@@ -229,11 +227,7 @@ public class HUD_Service : MonoBehaviour
         IceBoostHP.value -= damage;
         Debug.LogError(IceBoostHP.value);
     }
-
-    void AirLooseBoost(float boostLose)
-    {
-        AirBoostHP -= boostLose;
-    }
+    
 
     void AirTakeDamage(float damage)
     {
