@@ -2,11 +2,13 @@ using System;
 using Obi;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 using Task = System.Threading.Tasks.Task;
 
 
 public class PlayerController : MonoBehaviour
 {
+    public HUD_Service _HUDService { get; private set; }
     public event Action ToWater;
     public event Action ToIce;
     public event Action ToAir;
@@ -43,6 +45,11 @@ public class PlayerController : MonoBehaviour
     private PlayerState currentState;
     private PlayerState previousState;
 
+    [Inject]
+    private void Construct(HUD_Service _HUD_Service)
+    {
+        _HUDService = _HUD_Service;
+    }
 
     private PlayerState CurrentState
     {
@@ -287,11 +294,11 @@ public class PlayerController : MonoBehaviour
         {
             waterActor.Teleport(transform.position, transform.rotation);
         }
-        catch 
+        catch
         {
             Debug.LogError("TO DO");
         }
- 
+
         softbodyCOM.Update();
         gameObject.transform.position = water.transform.position;
     }

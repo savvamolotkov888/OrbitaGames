@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class Air : Player, IMove, IJump, IDied
 {
@@ -16,13 +17,10 @@ public class Air : Player, IMove, IJump, IDied
         set
         {
             currentHealthHP = value;
-            if (currentHealthHP == 0)
-                currentHealthHP = 10;
         }
     }
 
     public override float MaxHealthHP => 1;
-
     public override float CurrentBoostHP { get; set; } = 10;
     public override float MaxBoostHP => 10;
     public override event Action<float> TakeDamageEvent;
