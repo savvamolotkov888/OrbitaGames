@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem inputSystem;
 
     private PlayerState currentState;
+    private PlayerState previousState;
 
 
     private PlayerState CurrentState
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         get => currentState;
         set
         {
+            previousState = currentState;
             currentState = value;
             switch (currentState)
             {
@@ -322,18 +324,14 @@ public class PlayerController : MonoBehaviour
         switch (previousState)
         {
             case PlayerState.Water:
-                CurrentState = PlayerState.Water;
-                TransformaitionToIce();
+                TransformaitionToWater();
                 break;
             case PlayerState.Ice:
-                CurrentState = PlayerState.Ice;
-                ice.gameObject.SetActive(true);
                 TransformaitionToIce();
                 break;
 
             case PlayerState.Air:
-                CurrentState = PlayerState.Air;
-                air.gameObject.SetActive(true);
+                TransformaitionToAir();
                 break;
         }
     }

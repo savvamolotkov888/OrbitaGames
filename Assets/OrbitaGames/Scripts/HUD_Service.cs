@@ -107,8 +107,9 @@ public class HUD_Service : MonoBehaviour
         {
             if (value < 0)
             {
-                airHealthHP.value = air.CurrentBoostHP = 0;
+                airBoostHP.value = air.CurrentBoostHP = 0;
                 playerController.TransformaitionToPreviousState();
+                
             }
             else if (value > air.MaxBoostHP)
             {
@@ -232,8 +233,6 @@ public class HUD_Service : MonoBehaviour
     void AirLooseBoost(float boostLose)
     {
         AirBoostHP -= boostLose;
-
-        Debug.LogError(airBoostHP.value);
     }
 
     void AirTakeDamage(float damage)
