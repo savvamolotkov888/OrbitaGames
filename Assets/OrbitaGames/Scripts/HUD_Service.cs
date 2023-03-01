@@ -27,51 +27,56 @@ public class HUD_Service : MonoBehaviour
 
     #region BoostHP
 
-    private ProgressBar IceBoostHP;
-    private ProgressBar WaterBoostHP;
-    private ProgressBar airBoostHP;
+    private ProgressBar iceBoostHPBar;
+    private ProgressBar waterBoostHPBar;
+    private ProgressBar airBoostHPBar;
 
     #endregion
 
     #region HealthHP
 
-    private ProgressBar iceHealthHP;
+    private ProgressBar iceHealthHPBar;
 
     public float IceHealthHP
     {
-        get => iceHealthHP.value;
+        get => iceHealthHPBar.value;
         set
         {
-            iceHealthHP.value  = value;
+            iceHealthHPBar.value  = value;
         }
     }
 
 
-    private ProgressBar waterHealthHP;
+    private ProgressBar waterHealthHPBar;
 
     public float WaterHealthHP
     {
-        get => waterHealthHP.value;
-        set { waterHealthHP.value = value; }
+        get => waterHealthHPBar.value;
+        set { waterHealthHPBar.value = value; }
+    }
+    
+    public float WaterBoostHP
+    {
+        set => waterBoostHPBar.value = value; 
     }
 
 
-    private ProgressBar airHealthHP;
+    private ProgressBar airHealthHPBar;
 
     public float AirHealthHP
     {
-        get => airHealthHP.value;
+        get => airHealthHPBar.value;
         set
         {
             //dosnt work
-            airHealthHP.value = value;
+            airHealthHPBar.value = value;
         }
     }
 
     public float AirBoostHP
     {
-        get => airBoostHP.value;
-        set => airBoostHP.value = value;
+        get => airBoostHPBar.value;
+        set => airBoostHPBar.value = value;
     }
 
     #endregion
@@ -111,23 +116,23 @@ public class HUD_Service : MonoBehaviour
         WaterIcon = _uiDocument.rootVisualElement.Q("WaterIcon");
         AirIcon = _uiDocument.rootVisualElement.Q("AirIcon");
 
-        waterHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
-        waterHealthHP.value = waterHealthHP.highValue = water.MaxHealthHP;
+        waterHealthHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterHealthHP");
+        waterHealthHPBar.value = waterHealthHPBar.highValue = water.MaxHealthHP;
 
-        iceHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
-        iceHealthHP.value = iceHealthHP.highValue = ice.MaxHealthHP;
+        iceHealthHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("IceHealthHP");
+        iceHealthHPBar.value = iceHealthHPBar.highValue = ice.MaxHealthHP;
 
-        airHealthHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
-        airHealthHP.value = airHealthHP.highValue = air.MaxHealthHP;
+        airHealthHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("AirHealthHP");
+        airHealthHPBar.value = airHealthHPBar.highValue = air.MaxHealthHP;
 
-        WaterBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
-        WaterBoostHP.value = WaterBoostHP.highValue = water.MaxBoostHP;
+        waterBoostHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("WaterBoostHP");
+        waterBoostHPBar.value = waterBoostHPBar.highValue = water.MaxBoostHP;
 
-        IceBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
-        IceBoostHP.value = IceBoostHP.highValue = ice.MaxBoostHP;
+        iceBoostHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("IceBoostHP");
+        iceBoostHPBar.value = iceBoostHPBar.highValue = ice.MaxBoostHP;
 
-        airBoostHP = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
-        airBoostHP.value = airBoostHP.highValue = air.MaxBoostHP;
+        airBoostHPBar = (ProgressBar)_uiDocument.rootVisualElement.Q("AirBoostHP");
+        airBoostHPBar.value = airBoostHPBar.highValue = air.MaxBoostHP;
     }
 
     private void Subscribe()
@@ -160,8 +165,8 @@ public class HUD_Service : MonoBehaviour
 
     void IceLooseBoost(float damage)
     {
-        IceBoostHP.value -= damage;
-        Debug.LogError(IceBoostHP.value);
+        iceBoostHPBar.value -= damage;
+        Debug.LogError(iceBoostHPBar.value);
     }
 
 

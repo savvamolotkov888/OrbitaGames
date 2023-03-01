@@ -9,14 +9,15 @@ using Zenject;
 
 public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 {
- 
     private HUD_Service _HUDService;
+    [SerializeField] private PlayerController playerController;
 
     [Inject]
     private void Construct(HUD_Service _HUD_Service)
     {
         _HUDService = _HUD_Service;
     }
+
     private float currentHealthHP = 100;
     public override float CurrentHealthHP
     {
@@ -44,7 +45,34 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 
     public override float MaxHealthHP => 100;
 
-    public override float CurrentBoostHP { get; set; } = 10;
+    private float currentBoostHP = 100;
+
+    public override float CurrentBoostHP
+    {
+        get => currentBoostHP;
+        set
+        {
+          
+            if (value < 0)
+            {
+                UnSticking();
+                currentBoostHP = _HUDService.WaterBoostHP = 0;
+                Debug.LogError("Water NO Boost");
+            }
+
+            if (value > MaxBoostHP)
+            {
+                currentBoostHP = _HUDService.WaterBoostHP = MaxBoostHP;
+                Debug.LogError("FULL Boost");
+            }
+            else
+            {
+                currentBoostHP = _HUDService.WaterBoostHP = value;
+            }
+            Debug.LogError(currentBoostHP);
+        }
+    }
+
     public override float MaxBoostHP => 10;
 
 
@@ -95,15 +123,27 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
     {
         if (!isStickiness)
         {
-            this.water.collisionMaterial = stickinessMaterial;
-            isStickiness = true;
-            Debug.LogError("isStickiness");
+            Sticking();
         }
         else
         {
-            this.water.collisionMaterial = defaultMaterial;
-            isStickiness = false;
+            UnSticking();
         }
+    }
+
+    private void UnSticking()
+    {
+        this.water.collisionMaterial = defaultMaterial;
+        isStickiness = false;
+        BoostRegeniration();
+    }
+
+    private void Sticking()
+    {
+        this.water.collisionMaterial = stickinessMaterial;
+        isStickiness = true;
+        Debug.LogError("isStickiness");
+        CurrentBoostHP -= 1;
     }
 
 
@@ -115,6 +155,7 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 
     public void BoostRegeniration()
     {
+        Debug.LogError("BoostRegeniration");
     }
 
     public void TakeDamage(float waterDamageValue)

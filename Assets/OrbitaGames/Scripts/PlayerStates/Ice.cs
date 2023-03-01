@@ -62,7 +62,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         RotateDirection rotationDirection)
     {
         iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
-
         if (direction.Forward != 1 && direction.Forward != -1)
             return;
 
