@@ -122,7 +122,7 @@ public class Air : Player, IMove, IJump
         }
     }
 
-    public override void Died()
+    protected override void Died()
     {
         Debug.LogError("AirDied");
     }

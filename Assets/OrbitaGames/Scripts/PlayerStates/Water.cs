@@ -250,7 +250,7 @@ public class Water : Player, IMove, IJump, IShift
         }
     }
 
-    public override void Died()
+    protected override void Died()
     {
         Debug.LogError("WaterDied");
     }
