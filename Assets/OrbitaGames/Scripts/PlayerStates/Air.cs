@@ -22,8 +22,7 @@ public class Air : Player, IMove, IJump
     [SerializeField] private float FlyAccelerationWhenMoove;
     [SerializeField] private float ImortalityTime;
     [Range(0, 1)] public float airControl = 0.3f;
-
-    private float currentHealthHP; // кол во здоровья
+    
 
     public override float CurrentHealthHP
     {
@@ -47,7 +46,7 @@ public class Air : Player, IMove, IJump
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
-        set
+        protected set
         {
             currentBoostHP = _HUDService.AirBoostHP = value;
             if (value < 0)

@@ -24,8 +24,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         _HUDService = _HUD_Service;
     }
 
-    private float currentHealthHP = 100;
-
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
@@ -51,10 +49,11 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     [SerializeField] private float currentBoostHP;
 
     private bool additingBoostHP = true;
+
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
-        set
+        protected set
         {
             if (value < 0)
             {
@@ -72,8 +71,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
                 Observable.EveryUpdate().Subscribe(_ =>
                 {
                     additingBoostHP = false;
-                
-                   
+
+
                     if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
                     {
                         CurrentBoostHP += boostSpeed;

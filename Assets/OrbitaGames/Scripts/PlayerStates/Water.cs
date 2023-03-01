@@ -18,8 +18,7 @@ public class Water : Player, IMove, IJump, IShift
     {
         _HUDService = _HUD_Service;
     }
-
-    private float currentHealthHP = 100;
+    
 
     public override float CurrentHealthHP
     {
@@ -52,7 +51,7 @@ public class Water : Player, IMove, IJump, IShift
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
-        set
+        protected set
         {
             if (value < 0)
             {
