@@ -11,7 +11,6 @@ using Zenject;
 public class Water : Player, IMove, IJump, IShift
 {
     private HUD_Service _HUDService;
-    [SerializeField] private PlayerController playerController;
 
     [Inject]
     private void Construct(HUD_Service _HUD_Service)
@@ -90,7 +89,7 @@ public class Water : Player, IMove, IJump, IShift
             }
             else
             {
-                BoostHPAdd();
+                BoostRegeneration();
             }
         }
     }
@@ -111,6 +110,7 @@ public class Water : Player, IMove, IJump, IShift
         water = GetComponent<ObiSoftbody>();
         waterSolver = GetComponentInParent<ObiSolver>();
         waterSolver.OnCollision += WaterSolver_OnCollision;
+
         Initialize();
     }
 
@@ -168,7 +168,7 @@ public class Water : Player, IMove, IJump, IShift
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
 
-    public void BoostHPAdd()
+    protected override void BoostRegeneration()
     {
         if (CurrentBoostHP >= MaxBoostHP)
             return;
@@ -243,7 +243,6 @@ public class Water : Player, IMove, IJump, IShift
                     {
                         TakeHealth(healthPlatform.waterHealth);
                         CurrentHealthHP += healthPlatform.waterHealth;
-                        // TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
                     }
                 }
             }

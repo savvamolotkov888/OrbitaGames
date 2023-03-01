@@ -10,6 +10,9 @@ public abstract class Player : MonoBehaviour
     protected float currentHealthHP;
     public abstract float CurrentHealthHP { get; protected set; }
 
+   // protected abstract void HealthRegeneration();
+    
+
 
     //---------------------------------------------------------
 
@@ -18,6 +21,8 @@ public abstract class Player : MonoBehaviour
 
     protected float currentBoostHP;
     public abstract float CurrentBoostHP { get; protected set; }
+
+    protected abstract void BoostRegeneration();
 
 
     //---------------------------------------------------------

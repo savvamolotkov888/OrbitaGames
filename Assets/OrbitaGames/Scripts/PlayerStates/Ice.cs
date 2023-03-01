@@ -9,8 +9,10 @@ using Zenject;
 public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
+
     [SerializeField] private float RotationAcceleration;
-   // [SerializeField] private float JumpAcceleration;
+
+    // [SerializeField] private float JumpAcceleration;
     [SerializeField] private float ShiftAcceleration;
     [SerializeField] private float ShiftImpulseAcceleration;
     [SerializeField] private PlayerController playerController;
@@ -63,22 +65,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
             }
             else if (value < MaxHealthHP && additingBoostHP)
             {
-                Debug.LogError(000);
-                Observable.EveryUpdate().Subscribe(_ =>
-                {
-                    additingBoostHP = false;
-
-
-                    if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
-                    {
-                        CurrentBoostHP += boostSpeed;
-                        if (CurrentBoostHP >= MaxBoostHP)
-                        {
-                            additingBoostHP = true;
-                            compositeDisposable.Clear();
-                        }
-                    }
-                }).AddTo(compositeDisposable);
+                BoostRegeneration();
             }
             else
             {
@@ -97,7 +84,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     private void Awake()
     {
         iceRigidbody = GetComponent<Rigidbody>();
-        
     }
 
     private void Start()
@@ -185,7 +171,22 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         Debug.LogError("IceDied");
     }
 
-    public void BoostHealthRegeniration()
+    protected override void BoostRegeneration()
     {
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            additingBoostHP = false;
+
+
+            if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
+            {
+                CurrentBoostHP += boostSpeed;
+                if (CurrentBoostHP >= MaxBoostHP)
+                {
+                    additingBoostHP = true;
+                    compositeDisposable.Clear();
+                }
+            }
+        }).AddTo(compositeDisposable);
     }
 }

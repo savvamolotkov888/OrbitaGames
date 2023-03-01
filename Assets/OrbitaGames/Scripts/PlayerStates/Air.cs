@@ -72,9 +72,10 @@ public class Air : Player, IMove, IJump
     private void Awake()
     {
         airRigidbody = GetComponent<Rigidbody>();
-        PlayerController.ToIce += BoostHealthRegeniration;
-        PlayerController.ToWater += BoostHealthRegeniration;
-        Initialize();
+        PlayerController.ToIce += BoostRegeneration;
+        PlayerController.ToWater += BoostRegeneration;
+        currentHealthHP = maxHealthHP;
+        currentBoostHP = MaxBoostHP;
     }
 
 
@@ -97,7 +98,7 @@ public class Air : Player, IMove, IJump
         CurrentBoostHP -= boostLoseSpeed;
     }
 
-    public void BoostHealthRegeniration()
+    protected override void BoostRegeneration()
     {
         Debug.LogError("Regeniration");
         Observable.EveryUpdate().Subscribe(_ =>
