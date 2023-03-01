@@ -41,27 +41,23 @@ public class Air : Player, IMove, IJump, IDied
 
     public override float MaxHealthHP => maxHealthHP;
 
-    private float currentBoostHP = 100;
+    private float currentBoostHP = 10;
 
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
         set
         {
+            currentBoostHP = _HUDService.AirBoostHP = value; 
             if (value < 0)
             {
-                currentBoostHP = _HUDService.IceHealthHP = 0;
-                Debug.LogError("Water NO Boost");
+                playerController.TransformaitionToPreviousState();
+                Debug.LogError("NO Boost");
             }
-
             if (value > MaxBoostHP)
             {
-                currentBoostHP = _HUDService.WaterBoostHP = MaxBoostHP;
+                CurrentBoostHP = MaxBoostHP;
                 Debug.LogError("FULL Boost");
-            }
-            else
-            {
-                currentBoostHP = _HUDService.WaterBoostHP = value;
             }
         }
     }

@@ -347,7 +347,6 @@ public class PlayerController : MonoBehaviour
 
     private void DoubleClickCheck(float time)
     {
-        Debug.LogError("4444");
         ResetClickCount(time);
         clickCount++;
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +13,9 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     [SerializeField] private float JumpAcceleration;
     [SerializeField] private float ShiftAcceleration;
     [SerializeField] private float ShiftImpulseAcceleration;
+    [SerializeField] private float BoostGettingSpeed;
+    [SerializeField] private PlayerController playerController;
+
     private float shiftAcceleration = 1f;
     private HUD_Service _HUDService;
 
@@ -67,17 +71,27 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         }
     }
 
-    public override float MaxBoostHP => 10;
-    public event Action<float> TakeDamageEvent;
-    public event Action<float> TakeHealthEvent;
-    public event Action<float> LoseBoostEvent;
+    public override float MaxBoostHP => 100;
 
 
     private Rigidbody iceRigidbody;
+    [SerializeField] private float DoubleShiftPower;
+    [SerializeField] private float ShiftPower;
+    [SerializeField] private float boostSpeed;
+    private CompositeDisposable compositeDisposable;
 
     private void Awake()
     {
         iceRigidbody = GetComponent<Rigidbody>();
+
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
+            {
+                CurrentBoostHP += boostSpeed;
+                Debug.LogError("CurrentBoostHP");
+            }
+        }).AddTo(compositeDisposable);
     }
 
     public void Move(PlayerDirection direction, Player ice,
@@ -109,7 +123,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0 && CurrentBoostHP > 0)
         {
             shiftAcceleration = ShiftAcceleration;
-            CurrentBoostHP= 50;
+
+            CurrentBoostHP -= ShiftPower;
             Debug.LogError(CurrentBoostHP);
         }
 
@@ -123,8 +138,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         {
             iceRigidbody.AddRelativeForce(0, 0,
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
-            
-            CurrentBoostHP=0;
+
+            CurrentBoostHP -= DoubleShiftPower;
         }
     }
 
@@ -153,6 +168,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
             CurrentHealthHP += healthPlatform.iceHealth;
         }
     }
+
 
     public void Died()
     {
