@@ -5,8 +5,9 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-    public abstract float CurrentHealthHP { get; set;}
+    public abstract float CurrentHealthHP { get; protected set; }
     public abstract float CurrentBoostHP { get; set;}
+    protected abstract void Died();
     // public abstract float BoostHPTakenValue { get; set;}
     // public abstract float BoostHPAddValue { get; set;}
     public abstract  float MaxBoostHP { get;} 

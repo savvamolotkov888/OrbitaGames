@@ -14,9 +14,6 @@ public class HUD_Service : MonoBehaviour
     [SerializeField] private Color SelectedIconBorderColor;
     [SerializeField] private Color DefaultIconBorderColor;
 
-    private IDied died;
-
-
     #region Icons
 
     private VisualElement IceIcon;

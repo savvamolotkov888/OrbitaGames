@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Zenject;
 
-public class Water : Player, IMove, IJump, IShift, IDied
+public class Water : Player, IMove, IJump, IShift
 {
     private HUD_Service _HUDService;
     [SerializeField] private PlayerController playerController;
@@ -24,7 +24,7 @@ public class Water : Player, IMove, IJump, IShift, IDied
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set
+        protected set
         {
             if (value < 0)
             {
@@ -256,7 +256,7 @@ public class Water : Player, IMove, IJump, IShift, IDied
         }
     }
 
-    public void Died()
+    protected override void Died()
     {
         Debug.LogError("WaterDied");
     }

@@ -7,12 +7,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
-public class Air : Player, IMove, IJump, IDied
+public class Air : Player, IMove, IJump
 {
     private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
     public bool CanTakeDamage;
-    
+
     [SerializeField] private float boostLoseSpeed; //с какой скоростью теряет буст
     [SerializeField] private float boostGettingSpeed;
     [SerializeField] private PlayerController playerController;
@@ -22,12 +22,13 @@ public class Air : Player, IMove, IJump, IDied
     [SerializeField] private float FlyAccelerationWhenMoove;
     [SerializeField] private float ImortalityTime;
     [Range(0, 1)] public float airControl = 0.3f;
-    
+
     private float currentHealthHP; // кол во здоровья
+
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set
+        protected set
         {
             currentHealthHP = _HUDService.AirHealthHP = value;
             if (value < 0)
@@ -48,12 +49,13 @@ public class Air : Player, IMove, IJump, IDied
         get => currentBoostHP;
         set
         {
-            currentBoostHP = _HUDService.AirBoostHP = value; 
+            currentBoostHP = _HUDService.AirBoostHP = value;
             if (value < 0)
             {
                 playerController.TransformaitionToPreviousState();
                 Debug.LogError("NO Boost");
             }
+
             if (value > MaxBoostHP)
             {
                 CurrentBoostHP = MaxBoostHP;
@@ -124,10 +126,9 @@ public class Air : Player, IMove, IJump, IDied
             Debug.LogError(player.gameObject.name + "!!");
             CurrentHealthHP -= 100;
         }
-       
     }
 
-    public void Died()
+    protected override void Died()
     {
         Debug.LogError("AirDied");
     }

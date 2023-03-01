@@ -6,7 +6,7 @@ using UnityEngine;
 using Zenject;
 
 
-public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
+public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
@@ -29,7 +29,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set
+        protected set
         {
             if (value < 0)
             {
@@ -50,6 +50,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
 
     [SerializeField] private float currentBoostHP;
 
+    private bool additingBoostHP = true;
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
@@ -65,22 +66,28 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
                 currentBoostHP = _HUDService.IceBoostHP = MaxHealthHP;
                 Debug.LogError("Ice FULL Boost");
             }
-            else
+            else if (value < MaxHealthHP && additingBoostHP)
             {
-                currentBoostHP = _HUDService.IceBoostHP = value;
-
-
+                Debug.LogError(000);
                 Observable.EveryUpdate().Subscribe(_ =>
                 {
+                    additingBoostHP = false;
+                
+                   
                     if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
                     {
                         CurrentBoostHP += boostSpeed;
                         if (CurrentBoostHP >= MaxBoostHP)
                         {
+                            additingBoostHP = true;
                             compositeDisposable.Clear();
                         }
                     }
                 }).AddTo(compositeDisposable);
+            }
+            else
+            {
+                currentBoostHP = _HUDService.IceBoostHP = value;
             }
         }
     }
@@ -92,7 +99,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     [SerializeField] private float DoubleShiftPower;
     [SerializeField] private float ShiftPower;
     [SerializeField] private float boostSpeed;
-    private CompositeDisposable compositeDisposable;
+    private CompositeDisposable compositeDisposable = new();
 
     private void Awake()
     {
@@ -175,7 +182,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     }
 
 
-    public void Died()
+    protected override void Died()
     {
         Debug.LogError("IceDied");
     }

@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
                 DoubleShift(ice);
                 clickCount = 0;
             }
-            else if (Direction.Shift>0)
+            else if (Direction.Shift > 0)
             {
                 Shift(ice);
             }
