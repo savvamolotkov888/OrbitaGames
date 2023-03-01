@@ -51,7 +51,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
     public void Jump(PlayerDirection direction, Player ice)
     {
         Debug.Log("IceJump");
-        iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
+      //  iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
