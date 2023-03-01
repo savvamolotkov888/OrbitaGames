@@ -38,11 +38,6 @@ public class Air : Player, IMove, IJump
         }
     }
 
-
-    public override float MaxHealthHP => maxHealthHP;
-
-    private float currentBoostHP = 10;
-
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
@@ -62,8 +57,6 @@ public class Air : Player, IMove, IJump
             }
         }
     }
-
-    public override float MaxBoostHP => 10;
 
     private Rigidbody airRigidbody;
 

@@ -5,17 +5,29 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
+    public float MaxHealthHP;
+
     protected float currentHealthHP;
     public abstract float CurrentHealthHP { get; protected set; }
-    
-    
-    public abstract float CurrentBoostHP { get; protected set;}
-    protected abstract void Died();
-    // public abstract float BoostHPTakenValue { get; set;}
-    // public abstract float BoostHPAddValue { get; set;}
-    public abstract  float MaxBoostHP { get;} 
-    public abstract  float MaxHealthHP { get;}
-    
-  
 
+
+    //---------------------------------------------------------
+
+
+    public float MaxBoostHP;
+
+    protected float currentBoostHP;
+    public abstract float CurrentBoostHP { get; protected set; }
+
+
+    //---------------------------------------------------------
+
+    protected abstract void Died();
+
+
+    private void Awake()
+    {
+        currentHealthHP = MaxHealthHP;
+        currentBoostHP = MaxBoostHP;
+    }
 }

@@ -44,10 +44,6 @@ public class Water : Player, IMove, IJump, IShift
         }
     }
 
-    public override float MaxHealthHP => 100;
-
-    private float currentBoostHP = 100;
-
     public override float CurrentBoostHP
     {
         get => currentBoostHP;
@@ -71,8 +67,6 @@ public class Water : Player, IMove, IJump, IShift
             }
         }
     }
-
-    public override float MaxBoostHP => 10;
 
 
     [SerializeField] private float moveAcceleration;

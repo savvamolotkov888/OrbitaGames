@@ -44,10 +44,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         }
     }
 
-    public override float MaxHealthHP => 100;
-
-    [SerializeField] private float currentBoostHP;
-
     private bool additingBoostHP = true;
 
     public override float CurrentBoostHP
@@ -90,8 +86,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
             }
         }
     }
-
-    public override float MaxBoostHP => 100;
 
 
     private Rigidbody iceRigidbody;
