@@ -160,7 +160,6 @@ public class Water : Player, IMove, IJump, IShift, IDied
     private void Sticking()
     {
         IsStickiness = true;
-        CurrentBoostHP -= 1;
     }
 
 
@@ -177,10 +176,11 @@ public class Water : Player, IMove, IJump, IShift, IDied
             CurrentBoostHP += boostGettingSpeed;
             Debug.LogError(CurrentBoostHP);
 
-            if (CurrentBoostHP > MaxBoostHP)
+            if (CurrentBoostHP >= MaxBoostHP)
             {
-                Debug.LogError("Regeniration Ended");
+                Debug.LogError("Regeniration Ended!!!");
                 compositeDisposable.Clear();
+               // IsStickiness = false;
             }
         }).AddTo(compositeDisposable);
     }
