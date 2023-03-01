@@ -24,10 +24,9 @@ public abstract class Player : MonoBehaviour
 
     protected abstract void Died();
 
-
-    private void Awake()
+    protected void Awake()
     {
-        currentHealthHP = MaxHealthHP;
-        currentBoostHP = MaxBoostHP;
+        currentHealthHP = CurrentHealthHP = MaxHealthHP;
+        currentBoostHP = CurrentBoostHP = MaxBoostHP;
     }
 }

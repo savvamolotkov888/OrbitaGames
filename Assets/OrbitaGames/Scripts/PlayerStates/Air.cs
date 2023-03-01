@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class Air : Player, IMove, IJump
 {
     private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
-    public bool CanTakeDamage;
+
+    [SerializeField] private bool canTakeDamage;
 
     [SerializeField] private float boostLoseSpeed; //с какой скоростью теряет буст
     [SerializeField] private float boostGettingSpeed;
@@ -22,7 +24,7 @@ public class Air : Player, IMove, IJump
     [SerializeField] private float FlyAccelerationWhenMoove;
     [SerializeField] private float ImortalityTime;
     [Range(0, 1)] public float airControl = 0.3f;
-    
+
 
     public override float CurrentHealthHP
     {
@@ -113,10 +115,10 @@ public class Air : Player, IMove, IJump
 
     private void OnCollisionEnter(Collision player)
     {
-        if (CanTakeDamage)
+        if (canTakeDamage)
         {
             Debug.LogError(player.gameObject.name + "!!");
-            CurrentHealthHP -= 100;
+            CurrentHealthHP -= 1;
         }
     }
 
@@ -127,12 +129,14 @@ public class Air : Player, IMove, IJump
 
     private async void OnEnable()
     {
+        canTakeDamage = false;
         await Task.Delay(TimeSpan.FromSeconds(ImortalityTime));
-        CanTakeDamage = true;
+        canTakeDamage = true;
+        Debug.LogError(canTakeDamage);
     }
 
     private void OnDisable()
     {
-        CanTakeDamage = false;
+        canTakeDamage = false;
     }
 }

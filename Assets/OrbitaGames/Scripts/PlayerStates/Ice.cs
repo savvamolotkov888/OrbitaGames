@@ -10,7 +10,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
-    [SerializeField] private float JumpAcceleration;
+   // [SerializeField] private float JumpAcceleration;
     [SerializeField] private float ShiftAcceleration;
     [SerializeField] private float ShiftImpulseAcceleration;
     [SerializeField] private PlayerController playerController;
@@ -169,7 +169,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
         {
             TakeHealth(healthPlatform.waterHealth);
-            //  TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
             CurrentHealthHP += healthPlatform.iceHealth;
         }
     }
