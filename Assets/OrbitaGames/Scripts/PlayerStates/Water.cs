@@ -93,13 +93,11 @@ public class Water : Player, IMove, IJump, IShift, IDied
             isStickiness = value;
             if (IsStickiness)
             {
-                this.water.collisionMaterial = stickinessMaterial;
-                BoostHPTake();
+                BoostHPMinus();
             }
             else
             {
                 BoostHPAdd();
-                this.water.collisionMaterial = defaultMaterial;
             }
         }
     }
@@ -107,8 +105,12 @@ public class Water : Player, IMove, IJump, IShift, IDied
 
     private ObiSoftbody water;
     private ObiSolver waterSolver;
-    [SerializeField] private float boostGettingSpeed;
-    private CompositeDisposable compositeDisposable = new();
+
+    [FormerlySerializedAs("boostGettingSpeed")] [SerializeField]
+    private float boostSpeed;
+
+    private CompositeDisposable compositeDisposable1 = new();
+    private CompositeDisposable compositeDisposable2 = new();
 
     private void Start()
     {
@@ -154,11 +156,14 @@ public class Water : Player, IMove, IJump, IShift, IDied
 
     private void UnSticking()
     {
+        Debug.LogError("UnSticking");
+        this.water.collisionMaterial = defaultMaterial;
         IsStickiness = false;
     }
 
     private void Sticking()
     {
+        this.water.collisionMaterial = stickinessMaterial;
         IsStickiness = true;
     }
 
@@ -171,37 +176,43 @@ public class Water : Player, IMove, IJump, IShift, IDied
 
     public void BoostHPAdd()
     {
+        if (CurrentBoostHP >= MaxBoostHP)
+            return;
+        Debug.LogError("BoostHPAdd");
+
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            CurrentBoostHP += boostGettingSpeed;
+            Debug.LogError("1");
+            CurrentBoostHP += boostSpeed;
             Debug.LogError(CurrentBoostHP);
 
             if (CurrentBoostHP >= MaxBoostHP)
             {
                 Debug.LogError("Regeniration Ended!!!");
-                compositeDisposable.Clear();
-               // IsStickiness = false;
+                compositeDisposable2.Clear();
             }
-        }).AddTo(compositeDisposable);
+        }).AddTo(compositeDisposable2);
     }
 
-    private void BoostHPTake()
+    private void BoostHPMinus()
     {
+        compositeDisposable1.Clear();
         if (CurrentBoostHP <= 0)
             return;
-        
+        compositeDisposable1 = new CompositeDisposable();
         Observable.EveryUpdate().Subscribe(_ =>
         {
-            CurrentBoostHP -= boostGettingSpeed;
+            CurrentBoostHP -= boostSpeed;
 
             Debug.LogError(CurrentBoostHP);
 
-            if (CurrentBoostHP <= 0)
+            if (CurrentBoostHP <= 0 || IsStickiness == false)
             {
                 Debug.LogError("Regeniration Ended");
-                compositeDisposable.Clear();
+                UnSticking();
+                compositeDisposable1.Clear();
             }
-        }).AddTo(compositeDisposable);
+        }).AddTo(compositeDisposable1);
     }
 
 
