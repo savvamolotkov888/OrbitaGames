@@ -94,15 +94,14 @@ public class Water : Player, IMove, IJump, IShift, IDied
             if (IsStickiness)
             {
                 this.water.collisionMaterial = stickinessMaterial;
-                
+                BoostHPTake();
             }
             else
             {
-                BoostHealthRegeniration();
+                BoostHPAdd();
                 this.water.collisionMaterial = defaultMaterial;
             }
         }
-
     }
 
 
@@ -155,13 +154,11 @@ public class Water : Player, IMove, IJump, IShift, IDied
 
     private void UnSticking()
     {
-        
         IsStickiness = false;
     }
 
     private void Sticking()
     {
-    
         IsStickiness = true;
         CurrentBoostHP -= 1;
     }
@@ -173,7 +170,7 @@ public class Water : Player, IMove, IJump, IShift, IDied
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
 
-    public void BoostHealthRegeniration()
+    public void BoostHPAdd()
     {
         Observable.EveryUpdate().Subscribe(_ =>
         {
@@ -187,6 +184,26 @@ public class Water : Player, IMove, IJump, IShift, IDied
             }
         }).AddTo(compositeDisposable);
     }
+
+    private void BoostHPTake()
+    {
+        if (CurrentBoostHP <= 0)
+            return;
+        
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            CurrentBoostHP -= boostGettingSpeed;
+
+            Debug.LogError(CurrentBoostHP);
+
+            if (CurrentBoostHP <= 0)
+            {
+                Debug.LogError("Regeniration Ended");
+                compositeDisposable.Clear();
+            }
+        }).AddTo(compositeDisposable);
+    }
+
 
     public void TakeDamage(float waterDamageValue)
     {
