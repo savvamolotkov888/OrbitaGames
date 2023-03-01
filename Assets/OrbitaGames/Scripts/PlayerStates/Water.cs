@@ -18,7 +18,7 @@ public class Water : Player, IMove, IJump, IShift
     {
         _HUDService = _HUD_Service;
     }
-    
+
 
     public override float CurrentHealthHP
     {
@@ -249,7 +249,7 @@ public class Water : Player, IMove, IJump, IShift
         }
     }
 
-    protected override void Died()
+    public override void Died()
     {
         Debug.LogError("WaterDied");
     }

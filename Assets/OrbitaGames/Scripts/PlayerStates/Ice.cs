@@ -174,7 +174,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     }
 
 
-    protected override void Died()
+    public override void Died()
     {
         Debug.LogError("IceDied");
     }

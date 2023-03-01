@@ -75,6 +75,7 @@ public class Air : Player, IMove, IJump
         PlayerController.ToIce += BoostHealthRegeniration;
         PlayerController.ToWater += BoostHealthRegeniration;
         currentHealthHP = maxHealthHP;
+        currentBoostHP = MaxBoostHP;
     }
 
 
@@ -122,7 +123,7 @@ public class Air : Player, IMove, IJump
         }
     }
 
-    protected override void Died()
+    public override void Died()
     {
         Debug.LogError("AirDied");
     }
@@ -135,7 +136,7 @@ public class Air : Player, IMove, IJump
         Debug.LogError(canTakeDamage);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         canTakeDamage = false;
     }

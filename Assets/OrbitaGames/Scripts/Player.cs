@@ -7,7 +7,7 @@ public abstract class Player : MonoBehaviour
 {
     public float MaxHealthHP;
 
-    protected float currentHealthHP;
+    public float currentHealthHP;
     public abstract float CurrentHealthHP { get; protected set; }
 
 
@@ -16,15 +16,15 @@ public abstract class Player : MonoBehaviour
 
     public float MaxBoostHP;
 
-    protected float currentBoostHP;
+    public float currentBoostHP;
     public abstract float CurrentBoostHP { get; protected set; }
 
 
     //---------------------------------------------------------
 
-    protected abstract void Died();
+    public abstract void Died();
 
-    protected void Awake()
+    public void Awake()
     {
         currentHealthHP = CurrentHealthHP = MaxHealthHP;
         currentBoostHP = CurrentBoostHP = MaxBoostHP;
