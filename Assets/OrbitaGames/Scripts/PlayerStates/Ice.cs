@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 
 
-public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegeneration, IDied
+public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
 {
     [SerializeField] private float MoveAcceleration;
     [SerializeField] private float RotationAcceleration;
@@ -137,7 +137,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         Debug.LogError("IceDied");
     }
 
-    public void BoostRegeniration()
+    public void BoostHealthRegeniration()
     {
     }
 }

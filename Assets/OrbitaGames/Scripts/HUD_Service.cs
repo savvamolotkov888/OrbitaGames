@@ -188,8 +188,4 @@ public class HUD_Service : MonoBehaviour
     private void UnSelectingIcon(VisualElement icon) =>
         icon.style.borderBottomColor = icon.style.borderLeftColor =
             icon.style.borderRightColor = icon.style.borderTopColor = DefaultIconBorderColor;
-
-
-    private void Died(IDied player) => player.Died();
-    private void Regeniration(IHealthRegeneration player) => player.BoostRegeniration();
 }

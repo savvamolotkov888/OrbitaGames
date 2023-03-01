@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
-public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
+public class Air : Player, IMove, IJump, IDied
 {
     private CompositeDisposable compositeDisposable = new();
     private HUD_Service _HUDService;
@@ -76,8 +76,8 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     private void Awake()
     {
         airRigidbody = GetComponent<Rigidbody>();
-        PlayerController.ToIce += BoostRegeniration;
-        PlayerController.ToWater += BoostRegeniration;
+        PlayerController.ToIce += BoostHealthRegeniration;
+        PlayerController.ToWater += BoostHealthRegeniration;
         currentHealthHP = maxHealthHP;
     }
 
@@ -101,7 +101,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         CurrentBoostHP -= boostLoseSpeed;
     }
 
-    public void BoostRegeniration()
+    public void BoostHealthRegeniration()
     {
         Debug.LogError("Regeniration");
         Observable.EveryUpdate().Subscribe(_ =>

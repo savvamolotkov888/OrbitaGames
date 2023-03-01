@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Obi;
+using UniRx;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Zenject;
 
-public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
+public class Water : Player, IMove, IJump, IShift, IDied
 {
     private HUD_Service _HUDService;
     [SerializeField] private PlayerController playerController;
@@ -19,6 +20,7 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
     }
 
     private float currentHealthHP = 100;
+
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
@@ -52,7 +54,6 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
         get => currentBoostHP;
         set
         {
-          
             if (value < 0)
             {
                 UnSticking();
@@ -69,7 +70,6 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
             {
                 currentBoostHP = _HUDService.WaterBoostHP = value;
             }
-            Debug.LogError(currentBoostHP);
         }
     }
 
@@ -85,9 +85,31 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 
     private bool isStickiness;
 
+    private bool IsStickiness
+    {
+        get => isStickiness;
+        set
+        {
+            isStickiness = value;
+            if (IsStickiness)
+            {
+                this.water.collisionMaterial = stickinessMaterial;
+                
+            }
+            else
+            {
+                BoostHealthRegeniration();
+                this.water.collisionMaterial = defaultMaterial;
+            }
+        }
+
+    }
+
 
     private ObiSoftbody water;
     private ObiSolver waterSolver;
+    [SerializeField] private float boostGettingSpeed;
+    private CompositeDisposable compositeDisposable = new();
 
     private void Start()
     {
@@ -121,7 +143,7 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 
     public void Shift(PlayerDirection direction, Player water, float time)
     {
-        if (!isStickiness)
+        if (!IsStickiness)
         {
             Sticking();
         }
@@ -133,16 +155,14 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 
     private void UnSticking()
     {
-        this.water.collisionMaterial = defaultMaterial;
-        isStickiness = false;
-        BoostRegeniration();
+        
+        IsStickiness = false;
     }
 
     private void Sticking()
     {
-        this.water.collisionMaterial = stickinessMaterial;
-        isStickiness = true;
-        Debug.LogError("isStickiness");
+    
+        IsStickiness = true;
         CurrentBoostHP -= 1;
     }
 
@@ -153,9 +173,19 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
 
-    public void BoostRegeniration()
+    public void BoostHealthRegeniration()
     {
-        Debug.LogError("BoostRegeniration");
+        Observable.EveryUpdate().Subscribe(_ =>
+        {
+            CurrentBoostHP += boostGettingSpeed;
+            Debug.LogError(CurrentBoostHP);
+
+            if (CurrentBoostHP > MaxBoostHP)
+            {
+                Debug.LogError("Regeniration Ended");
+                compositeDisposable.Clear();
+            }
+        }).AddTo(compositeDisposable);
     }
 
     public void TakeDamage(float waterDamageValue)
