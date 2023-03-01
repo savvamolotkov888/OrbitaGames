@@ -9,17 +9,15 @@ using Zenject;
 
 public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 {
-    private float currentHealthHP = 100;
+ 
     private HUD_Service _HUDService;
-    public event Action<float> TakeDamageEvent;
-    public event Action<float> TakeHealthEvent;
 
     [Inject]
     private void Construct(HUD_Service _HUD_Service)
     {
         _HUDService = _HUD_Service;
     }
-
+    private float currentHealthHP = 100;
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
@@ -115,7 +113,7 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
         this.water.AddForce(new Vector3(0, jumpAcceleration, 0), ForceMode.Impulse);
     }
 
-    public void Regeniration()
+    public void BoostRegeniration()
     {
     }
 

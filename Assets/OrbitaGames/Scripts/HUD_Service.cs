@@ -37,25 +37,12 @@ public class HUD_Service : MonoBehaviour
 
     private ProgressBar iceHealthHP;
 
-    private float IceHealthHP
+    public float IceHealthHP
     {
         get => iceHealthHP.value;
         set
         {
-            if (value < 0)
-            {
-                iceHealthHP.value = ice.CurrentHealthHP = 0;
-                Died(ice);
-            }
-            else if (value > ice.MaxHealthHP)
-            {
-                iceHealthHP.value = ice.CurrentHealthHP = ice.MaxHealthHP;
-                Debug.Log("FULL HEALTH");
-            }
-            else
-            {
-                iceHealthHP.value = ice.CurrentHealthHP = value;
-            }
+            iceHealthHP.value  = value;
         }
     }
 
@@ -76,11 +63,8 @@ public class HUD_Service : MonoBehaviour
         get => airHealthHP.value;
         set
         {
-            if (value < 0)
-            {
-                airHealthHP.value = 0;
-                Died(air);
-            }
+            //dosnt work
+            airHealthHP.value = value;
         }
     }
 
@@ -152,9 +136,6 @@ public class HUD_Service : MonoBehaviour
         PlayerController.ToWater += WaterSelect;
         PlayerController.ToAir += AirSelect;
 
-        water.TakeDamageEvent += WaterTakeDamage;
-        water.TakeHealthEvent += WaterAddHealth;
-
         ice.TakeDamageEvent += IceTakeDamage;
         ice.TakeHealthEvent += IceAddDamage;
         ice.LoseBoostEvent += IceLooseBoost;
@@ -165,17 +146,7 @@ public class HUD_Service : MonoBehaviour
     void IceSelect() => SelectingIcon(IceIcon);
     void AirSelect() => SelectingIcon(AirIcon);
 
-
-    void WaterTakeDamage(float damage)
-    {
-        WaterHealthHP -= damage;
-    }
-
-    void WaterAddHealth(float damage)
-    {
-        WaterHealthHP += damage;
-    }
-
+    
     void IceAddDamage(float damage)
     {
         IceHealthHP += damage;
@@ -215,5 +186,5 @@ public class HUD_Service : MonoBehaviour
 
 
     private void Died(IDied player) => player.Died();
-    private void Regeniration(IHealthRegeneration player) => player.Regeniration();
+    private void Regeniration(IHealthRegeneration player) => player.BoostRegeniration();
 }

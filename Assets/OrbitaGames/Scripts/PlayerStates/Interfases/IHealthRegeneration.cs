@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHealthRegeneration
 {
-   public void Regeniration();
+   public void BoostRegeniration();
 }

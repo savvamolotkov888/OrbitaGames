@@ -76,8 +76,8 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     private void Awake()
     {
         airRigidbody = GetComponent<Rigidbody>();
-        PlayerController.ToIce += Regeniration;
-        PlayerController.ToWater += Regeniration;
+        PlayerController.ToIce += BoostRegeniration;
+        PlayerController.ToWater += BoostRegeniration;
         currentHealthHP = maxHealthHP;
     }
 
@@ -101,7 +101,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
         CurrentBoostHP -= boostLoseSpeed;
     }
 
-    public void Regeniration()
+    public void BoostRegeniration()
     {
         Debug.LogError("Regeniration");
         Observable.EveryUpdate().Subscribe(_ =>
@@ -124,6 +124,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
             Debug.LogError(player.gameObject.name + "!!");
             CurrentHealthHP -= 100;
         }
+       
     }
 
     public void Died()

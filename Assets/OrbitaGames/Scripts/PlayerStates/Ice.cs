@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 
 public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegeneration, IDied
@@ -12,8 +13,36 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
     [SerializeField] private float ShiftAcceleration;
     [SerializeField] private float ShiftImpulseAcceleration;
     private float shiftAcceleration = 1f;
+    private HUD_Service _HUDService;
 
-    public override float CurrentHealthHP { get; set; } = 100;
+    [Inject]
+    private void Construct(HUD_Service _HUD_Service)
+    {
+        _HUDService = _HUD_Service;
+    }
+
+    private float currentHealthHP = 100;
+
+    public override float CurrentHealthHP
+    {
+        get => currentHealthHP;
+        set
+        {
+            if (value < 0)
+            {
+                currentHealthHP = _HUDService.WaterHealthHP = 0;
+                Died();
+            }
+            else if (value > MaxHealthHP)
+            {
+                currentHealthHP = _HUDService.WaterHealthHP = MaxHealthHP;
+                Debug.LogError("Ice FULL HEALTH");
+            }
+            else
+                currentHealthHP = _HUDService.IceHealthHP = value;
+        }
+    }
+
     public override float MaxHealthHP => 100;
     public override float CurrentBoostHP { get; set; } = 10;
     public override float MaxBoostHP => 10;
@@ -51,7 +80,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
     public void Jump(PlayerDirection direction, Player ice)
     {
         Debug.Log("IceJump");
-      //  iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
+        //  iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
@@ -78,12 +107,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         }
     }
 
-    public  void TakeDamage(float iceDamageValue)
+    public void TakeDamage(float iceDamageValue)
     {
         Debug.LogError("Ice TakeDamage");
     }
 
-    public  void TakeHealth(float iceHealthValue)
+    public void TakeHealth(float iceHealthValue)
     {
         Debug.LogError("Ice TakeHealth");
     }
@@ -93,13 +122,14 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
             TakeDamage(enemy.iceDamage);
-            TakeDamageEvent?.Invoke(enemy.iceDamage);
+            CurrentHealthHP -= enemy.iceDamage;
         }
 
         else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
         {
             TakeHealth(healthPlatform.waterHealth);
-            TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
+            //  TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
+            CurrentHealthHP += healthPlatform.iceHealth;
         }
     }
 
@@ -108,7 +138,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         Debug.LogError("IceDied");
     }
 
-    public void Regeniration()
+    public void BoostRegeniration()
     {
     }
 }
