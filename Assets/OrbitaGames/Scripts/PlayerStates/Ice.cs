@@ -97,6 +97,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     private void Awake()
     {
         iceRigidbody = GetComponent<Rigidbody>();
+        
+    }
+
+    private void Start()
+    {
+        Initialize();
     }
 
     public void Move(PlayerDirection direction, Player ice,

@@ -74,8 +74,7 @@ public class Air : Player, IMove, IJump
         airRigidbody = GetComponent<Rigidbody>();
         PlayerController.ToIce += BoostHealthRegeniration;
         PlayerController.ToWater += BoostHealthRegeniration;
-        currentHealthHP = maxHealthHP;
-        currentBoostHP = MaxBoostHP;
+        Initialize();
     }
 
 

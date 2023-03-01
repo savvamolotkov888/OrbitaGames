@@ -111,6 +111,7 @@ public class Water : Player, IMove, IJump, IShift
         water = GetComponent<ObiSoftbody>();
         waterSolver = GetComponentInParent<ObiSolver>();
         waterSolver.OnCollision += WaterSolver_OnCollision;
+        Initialize();
     }
 
 

@@ -24,7 +24,7 @@ public abstract class Player : MonoBehaviour
 
     public abstract void Died();
 
-    public void Awake()
+    public void Initialize ()
     {
         currentHealthHP = CurrentHealthHP = MaxHealthHP;
         currentBoostHP = CurrentBoostHP = MaxBoostHP;
