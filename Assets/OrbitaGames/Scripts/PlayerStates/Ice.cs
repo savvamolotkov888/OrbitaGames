@@ -13,7 +13,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     [SerializeField] private float JumpAcceleration;
     [SerializeField] private float ShiftAcceleration;
     [SerializeField] private float ShiftImpulseAcceleration;
-    [SerializeField] private float BoostGettingSpeed;
     [SerializeField] private PlayerController playerController;
 
     private float shiftAcceleration = 1f;
@@ -67,7 +66,22 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
                 Debug.LogError("Ice FULL Boost");
             }
             else
+            {
                 currentBoostHP = _HUDService.IceBoostHP = value;
+
+
+                Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
+                    {
+                        CurrentBoostHP += boostSpeed;
+                        if (CurrentBoostHP >= MaxBoostHP)
+                        {
+                            compositeDisposable.Clear();
+                        }
+                    }
+                }).AddTo(compositeDisposable);
+            }
         }
     }
 
@@ -83,15 +97,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     private void Awake()
     {
         iceRigidbody = GetComponent<Rigidbody>();
-
-        Observable.EveryUpdate().Subscribe(_ =>
-        {
-            if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
-            {
-                CurrentBoostHP += boostSpeed;
-                Debug.LogError("CurrentBoostHP");
-            }
-        }).AddTo(compositeDisposable);
     }
 
     public void Move(PlayerDirection direction, Player ice,
@@ -125,7 +130,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
             shiftAcceleration = ShiftAcceleration;
 
             CurrentBoostHP -= ShiftPower;
-            Debug.LogError(CurrentBoostHP);
+            //   Debug.LogError(CurrentBoostHP);
         }
 
         else if (direction.Shift <= 0)
