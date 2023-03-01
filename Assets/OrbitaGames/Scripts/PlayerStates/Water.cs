@@ -5,18 +5,43 @@ using UnityEngine;
 using Obi;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using Zenject;
 
 public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
 {
     private float currentHealthHP = 100;
-    public override event Action<float> TakeDamageEvent;
-    public override event Action<float> TakeHealthEvent;
-    public override event Action<float> LoseBoostEvent;
+    private HUD_Service _HUDService;
+    public event Action<float> TakeDamageEvent;
+    public event Action<float> TakeHealthEvent;
+
+    [Inject]
+    private void Construct(HUD_Service _HUD_Service)
+    {
+        _HUDService = _HUD_Service;
+    }
 
     public override float CurrentHealthHP
     {
         get => currentHealthHP;
-        set { currentHealthHP = value; }
+        set
+        {
+            if (value < 0)
+            {
+                currentHealthHP = _HUDService.WaterHealthHP = 0;
+                Died();
+            }
+            else if (value > MaxHealthHP)
+            {
+                currentHealthHP = _HUDService.WaterHealthHP = MaxHealthHP;
+                Debug.Log("FULL HEALTH");
+            }
+            else
+            {
+                currentHealthHP = _HUDService.WaterHealthHP = value;
+            }
+
+            Debug.LogError(CurrentHealthHP);
+        }
     }
 
     public override float MaxHealthHP => 100;
@@ -94,12 +119,12 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
     {
     }
 
-    public override void TakeDamage(float waterDamageValue)
+    public void TakeDamage(float waterDamageValue)
     {
         Debug.LogError("Water TakeDamage" + waterDamageValue);
     }
 
-    public override void TakeHealth(float waterDamageValue)
+    public void TakeHealth(float waterDamageValue)
     {
         Debug.LogError("Water TakeHealth" + waterDamageValue);
     }
@@ -119,13 +144,15 @@ public class Water : Player, IMove, IJump, IShift, IHealthRegeneration, IDied
                     if (col.gameObject.TryGetComponent(out DamagePlatfom damagePlatfom))
                     {
                         TakeDamage(damagePlatfom.waterDamage);
-                        TakeDamageEvent?.Invoke(damagePlatfom.waterDamage);
+                        CurrentHealthHP -= damagePlatfom.waterDamage;
+                        //   TakeDamageEvent?.Invoke(damagePlatfom.waterDamage);
                     }
 
                     else if (col.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
                     {
                         TakeHealth(healthPlatform.waterHealth);
-                        TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
+                        CurrentHealthHP += healthPlatform.waterHealth;
+                        // TakeHealthEvent?.Invoke(healthPlatform.waterHealth);
                     }
                 }
             }

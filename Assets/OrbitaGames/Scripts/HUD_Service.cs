@@ -62,26 +62,10 @@ public class HUD_Service : MonoBehaviour
 
     private ProgressBar waterHealthHP;
 
-    private float WaterHealthHP
+    public float WaterHealthHP
     {
         get => waterHealthHP.value;
-        set
-        {
-            if (value < 0)
-            {
-                waterHealthHP.value = water.CurrentHealthHP = 0;
-                Died(water);
-            }
-            else if (value > water.MaxHealthHP)
-            {
-                waterHealthHP.value = water.CurrentHealthHP = water.MaxHealthHP;
-                Debug.Log("FULL HEALTH");
-            }
-            else
-            {
-                waterHealthHP.value = water.CurrentHealthHP = value;
-            }
-        }
+        set { waterHealthHP.value = value; }
     }
 
 
@@ -174,9 +158,6 @@ public class HUD_Service : MonoBehaviour
         ice.TakeDamageEvent += IceTakeDamage;
         ice.TakeHealthEvent += IceAddDamage;
         ice.LoseBoostEvent += IceLooseBoost;
-
-        air.TakeDamageEvent += AirTakeDamage;
-        //air.TakeHealthEvent 
     }
 
 
@@ -211,7 +192,7 @@ public class HUD_Service : MonoBehaviour
         IceBoostHP.value -= damage;
         Debug.LogError(IceBoostHP.value);
     }
-    
+
 
     void AirTakeDamage(float damage)
     {

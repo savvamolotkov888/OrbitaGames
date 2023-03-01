@@ -17,9 +17,9 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
     public override float MaxHealthHP => 100;
     public override float CurrentBoostHP { get; set; } = 10;
     public override float MaxBoostHP => 10;
-    public override event Action<float> TakeDamageEvent;
-    public override event Action<float> TakeHealthEvent;
-    public override event Action<float> LoseBoostEvent;
+    public event Action<float> TakeDamageEvent;
+    public event Action<float> TakeHealthEvent;
+    public event Action<float> LoseBoostEvent;
 
 
     private Rigidbody iceRigidbody;
@@ -78,12 +78,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IHealthRegenerati
         }
     }
 
-    public override void TakeDamage(float iceDamageValue)
+    public  void TakeDamage(float iceDamageValue)
     {
         Debug.LogError("Ice TakeDamage");
     }
 
-    public override void TakeHealth(float iceHealthValue)
+    public  void TakeHealth(float iceHealthValue)
     {
         Debug.LogError("Ice TakeHealth");
     }

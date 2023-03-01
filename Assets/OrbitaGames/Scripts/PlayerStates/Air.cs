@@ -63,11 +63,7 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
     }
 
     public override float MaxBoostHP => 10;
-    public override event Action<float> TakeDamageEvent;// не надо
-    public override event Action<float> LoseBoostEvent; // не надо
-    public override event Action<float> TakeHealthEvent; // не надо для айр
 
-   
     private Rigidbody airRigidbody;
 
 
@@ -119,16 +115,6 @@ public class Air : Player, IMove, IJump, IHealthRegeneration, IDied
                 compositeDisposable.Clear();
             }
         }).AddTo(compositeDisposable);
-    }
-
-    public override void TakeDamage(float airDamageValue)
-    {
-        Debug.LogError("Air TakeDamage");
-    }
-
-    public override void TakeHealth(float damageValue)
-    {
-        Debug.LogError("Air TakeHealth");
     }
 
     private void OnCollisionEnter(Collision player)
