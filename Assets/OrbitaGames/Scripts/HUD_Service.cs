@@ -40,10 +40,13 @@ public class HUD_Service : MonoBehaviour
     public float IceHealthHP
     {
         get => iceHealthHPBar.value;
-        set
-        {
-            iceHealthHPBar.value  = value;
-        }
+        set { iceHealthHPBar.value = value; }
+    }
+
+    public float IceBoostHP
+    {
+        get => iceBoostHPBar.value;
+        set { iceBoostHPBar.value = value; }
     }
 
 
@@ -54,10 +57,10 @@ public class HUD_Service : MonoBehaviour
         get => waterHealthHPBar.value;
         set { waterHealthHPBar.value = value; }
     }
-    
+
     public float WaterBoostHP
     {
-        set => waterBoostHPBar.value = value; 
+        set => waterBoostHPBar.value = value;
     }
 
 
@@ -140,10 +143,6 @@ public class HUD_Service : MonoBehaviour
         PlayerController.ToIce += IceSelect;
         PlayerController.ToWater += WaterSelect;
         PlayerController.ToAir += AirSelect;
-
-        ice.TakeDamageEvent += IceTakeDamage;
-        ice.TakeHealthEvent += IceAddDamage;
-        ice.LoseBoostEvent += IceLooseBoost;
     }
 
 
@@ -151,29 +150,6 @@ public class HUD_Service : MonoBehaviour
     void IceSelect() => SelectingIcon(IceIcon);
     void AirSelect() => SelectingIcon(AirIcon);
 
-    
-    void IceAddDamage(float damage)
-    {
-        IceHealthHP += damage;
-    }
-
-
-    void IceTakeDamage(float damage)
-    {
-        IceHealthHP -= damage;
-    }
-
-    void IceLooseBoost(float damage)
-    {
-        iceBoostHPBar.value -= damage;
-        Debug.LogError(iceBoostHPBar.value);
-    }
-
-
-    void AirTakeDamage(float damage)
-    {
-        AirHealthHP -= damage;
-    }
 
     private void SelectingIcon(VisualElement icon)
     {

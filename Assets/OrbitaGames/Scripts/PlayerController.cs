@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
                 DoubleShift(ice);
                 clickCount = 0;
             }
-            else
+            else if (clickCount == 1)
             {
                 Shift(ice);
             }
@@ -347,6 +347,7 @@ public class PlayerController : MonoBehaviour
 
     private void DoubleClickCheck(float time)
     {
+        Debug.LogError("4444");
         ResetClickCount(time);
         clickCount++;
     }

@@ -30,12 +30,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         {
             if (value < 0)
             {
-                currentHealthHP = _HUDService.WaterHealthHP = 0;
+                currentHealthHP = _HUDService.IceHealthHP = 0;
                 Died();
             }
             else if (value > MaxHealthHP)
             {
-                currentHealthHP = _HUDService.WaterHealthHP = MaxHealthHP;
+                currentHealthHP = _HUDService.IceHealthHP = MaxHealthHP;
                 Debug.LogError("Ice FULL HEALTH");
             }
             else
@@ -44,7 +44,29 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
     }
 
     public override float MaxHealthHP => 100;
-    public override float CurrentBoostHP { get; set; } = 10;
+
+    [SerializeField] private float currentBoostHP;
+
+    public override float CurrentBoostHP
+    {
+        get => currentBoostHP;
+        set
+        {
+            if (value < 0)
+            {
+                currentBoostHP = _HUDService.IceBoostHP = 0;
+                Died();
+            }
+            else if (value > MaxHealthHP)
+            {
+                currentBoostHP = _HUDService.IceBoostHP = MaxHealthHP;
+                Debug.LogError("Ice FULL Boost");
+            }
+            else
+                currentBoostHP = _HUDService.IceBoostHP = value;
+        }
+    }
+
     public override float MaxBoostHP => 10;
     public event Action<float> TakeDamageEvent;
     public event Action<float> TakeHealthEvent;
@@ -87,9 +109,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         if ((direction.Forward == 1 || direction.Lateral == 0) && direction.Shift > 0 && CurrentBoostHP > 0)
         {
             shiftAcceleration = ShiftAcceleration;
-            CurrentBoostHP--;
+            CurrentBoostHP= 50;
             Debug.LogError(CurrentBoostHP);
-            LoseBoostEvent?.Invoke(5);
         }
 
         else if (direction.Shift <= 0)
@@ -102,7 +123,8 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift, IDied
         {
             iceRigidbody.AddRelativeForce(0, 0,
                 direction.Forward * ShiftImpulseAcceleration, ForceMode.Impulse);
-            LoseBoostEvent?.Invoke(5);
+            
+            CurrentBoostHP=0;
         }
     }
 
