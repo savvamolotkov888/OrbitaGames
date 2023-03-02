@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Obi;
+/// <summary>
+/// За этим следить
+/// </summary>
 
 public class ActorCOMTransform : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class ActorCOMTransform : MonoBehaviour
         {
             Vector3 com;
             actor.GetMass(out com);
+            
             transform.position = actor.solver.transform.TransformPoint(com) + offset;
         }
     }
