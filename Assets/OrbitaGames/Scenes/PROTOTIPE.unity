@@ -2502,6 +2502,10 @@ PrefabInstance:
       propertyPath: m_FollowOffset.z
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456588465764655, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.18910751
