@@ -140,11 +140,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         }
     }
 
-    public void TakeDamage(float iceDamageValue)
-    {
-        Debug.LogError("Ice TakeDamage");
-    }
-
     public void TakeHealth(float iceHealthValue)
     {
         Debug.LogError("Ice TakeHealth");
@@ -154,8 +149,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     {
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
-            TakeDamage(enemy.iceDamage);
-            CurrentHealthHP -= enemy.iceDamage;
+            LosingHP(enemy.iceDamage);
         }
 
         else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
@@ -163,6 +157,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
             TakeHealth(healthPlatform.waterHealth);
             CurrentHealthHP += healthPlatform.iceHealth;
         }
+    }
+
+    protected override void LosingHP(float iceDamageValue)
+    {
+        CurrentHealthHP -= iceDamageValue;
+        Debug.LogError("Water TakeDamage" + iceDamageValue);
     }
 
 
@@ -176,7 +176,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         Observable.EveryUpdate().Subscribe(_ =>
         {
             additingBoostHP = false;
-
 
             if (CurrentBoostHP < MaxBoostHP && playerController.Direction.Shift == 0)
             {

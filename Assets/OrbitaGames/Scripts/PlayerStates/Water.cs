@@ -210,8 +210,9 @@ public class Water : Player, IMove, IJump, IShift
     }
 
 
-    public void TakeDamage(float waterDamageValue)
+    protected override void LosingHP(float waterDamageValue)
     {
+        CurrentHealthHP -= waterDamageValue;
         Debug.LogError("Water TakeDamage" + waterDamageValue);
     }
 
@@ -234,8 +235,7 @@ public class Water : Player, IMove, IJump, IShift
                 {
                     if (col.gameObject.TryGetComponent(out DamagePlatfom damagePlatfom))
                     {
-                        TakeDamage(damagePlatfom.waterDamage);
-                        CurrentHealthHP -= damagePlatfom.waterDamage;
+                        LosingHP(damagePlatfom.waterDamage);
                         //   TakeDamageEvent?.Invoke(damagePlatfom.waterDamage);
                     }
 

@@ -2477,23 +2477,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008520947
+      value: 0.000000008520948
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000011867423
+      value: -0.0000000011867425
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18910752
+      value: 0.18910754
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000032718795
+      value: -0.000000018890221
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000063010632
+      value: 0.0000000036379244
       objectReference: {fileID: 0}
     - target: {fileID: 2975608650009481805, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Follow
@@ -2521,11 +2521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3156774716942361995, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000018890205
+      value: 0.00000001853497
       objectReference: {fileID: 0}
     - target: {fileID: 3156774716942361995, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000036379209
+      value: -0.000000003569508
       objectReference: {fileID: 0}
     - target: {fileID: 3562506519802062281, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2629,15 +2629,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1891075
+      value: 0.18910751
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000003271879
+      value: -0.00000001889022
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000063010623
+      value: 0.0000000036379237
       objectReference: {fileID: 0}
     - target: {fileID: 7691322562535656190, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Name
