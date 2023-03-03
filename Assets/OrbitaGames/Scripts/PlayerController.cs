@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 
     public PlayerDirection Direction;
     [SerializeField] private PlayerSensor playerSensor;
-    [SerializeField] private ActorCOMTransform softbodyCOM;
     [SerializeField] private PlayerState PlayerStateAtStart;
 
     [SerializeField] private float IceAcelerationTime; // пока не используем
@@ -42,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem inputSystem;
 
     public PlayerState currentState { get; private set; }
+    private Vector3 com;
     private PlayerState previousState;
 
     private PlayerState CurrentState
@@ -240,7 +240,8 @@ public class PlayerController : MonoBehaviour
         switch (CurrentState)
         {
             case PlayerState.Water:
-                transform.position = water.transform.position;
+                waterActor.GetMass(out com);
+                transform.position = waterActor.solver.transform.TransformPoint(com);
                 break;
             case PlayerState.Ice:
                 transform.position = ice.transform.position;
@@ -295,8 +296,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("TO DO");
         }
 
-        softbodyCOM.Update();
-        gameObject.transform.position = water.transform.position;
+        transform.position = waterActor.solver.transform.TransformPoint(com);;
     }
 
     private void TransformaitionToIce()
