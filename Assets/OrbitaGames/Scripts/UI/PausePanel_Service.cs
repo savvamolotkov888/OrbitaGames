@@ -23,6 +23,7 @@ public class PausePanel_Service : MonoBehaviour
     void InitializationUI_Elements()
     {
         PausePanel = UI_Pause_Document.rootVisualElement.Q("PausePanel");
+        PausePanel.visible = false;
     }
 
     private void PanelVisibleChange()
@@ -30,10 +31,13 @@ public class PausePanel_Service : MonoBehaviour
         if (pausePanelIsVisible)
         {
             PausePanel.visible = true;
+            // TODO УЛУЧШИТЬ
+            Time.timeScale = 0;
         }
         else
         {
             PausePanel.visible = false;
+            Time.timeScale = 1;
         }
 
 
