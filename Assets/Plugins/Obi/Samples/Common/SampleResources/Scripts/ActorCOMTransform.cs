@@ -18,7 +18,6 @@ public class ActorCOMTransform : MonoBehaviour
         {
             Vector3 com;
             actor.GetMass(out com);
-            
             transform.position = actor.solver.transform.TransformPoint(com) + offset;
         }
     }

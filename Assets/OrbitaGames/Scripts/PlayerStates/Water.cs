@@ -210,15 +210,16 @@ public class Water : Player, IMove, IJump, IShift
     }
 
 
-    protected override void LosingHP(float waterDamageValue)
+    protected override void LosingHealthHP(float waterDamageValue)
     {
         CurrentHealthHP -= waterDamageValue;
         Debug.LogError("Water TakeDamage" + waterDamageValue);
     }
-
-    public void TakeHealth(float waterDamageValue)
+    
+    protected override void AddingHealthHP(float addedHealth)
     {
-        Debug.LogError("Water TakeHealth" + waterDamageValue);
+         CurrentHealthHP += addedHealth;
+         Debug.LogError("Water TakeHealth" + addedHealth);
     }
 
     void WaterSolver_OnCollision(object sender, Obi.ObiSolver.ObiCollisionEventArgs e)
@@ -235,13 +236,13 @@ public class Water : Player, IMove, IJump, IShift
                 {
                     if (col.gameObject.TryGetComponent(out DamagePlatfom damagePlatfom))
                     {
-                        LosingHP(damagePlatfom.waterDamage);
+                        LosingHealthHP(damagePlatfom.waterDamage);
                         //   TakeDamageEvent?.Invoke(damagePlatfom.waterDamage);
                     }
 
                     else if (col.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
                     {
-                        TakeHealth(healthPlatform.waterHealth);
+                        AddingHealthHP(healthPlatform.waterHealth);
                         CurrentHealthHP += healthPlatform.waterHealth;
                     }
                 }

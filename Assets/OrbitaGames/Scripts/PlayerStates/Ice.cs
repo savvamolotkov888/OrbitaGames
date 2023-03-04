@@ -149,20 +149,25 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     {
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
-            LosingHP(enemy.iceDamage);
+            LosingHealthHP(enemy.iceDamage);
         }
 
         else if (player.gameObject.TryGetComponent(out HealthPlatform healthPlatform))
         {
             TakeHealth(healthPlatform.waterHealth);
-            CurrentHealthHP += healthPlatform.iceHealth;
+            AddingHealthHP(healthPlatform.iceHealth);
         }
     }
 
-    protected override void LosingHP(float iceDamageValue)
+    protected override void LosingHealthHP(float iceDamageValue)
     {
         CurrentHealthHP -= iceDamageValue;
-        Debug.LogError("Water TakeDamage" + iceDamageValue);
+        Debug.LogError("Ice TakeDamage" + iceDamageValue);
+    }
+
+    protected override void AddingHealthHP(float addedHealth)
+    {
+        CurrentHealthHP += addedHealth;
     }
 
 

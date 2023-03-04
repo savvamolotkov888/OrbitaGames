@@ -119,13 +119,17 @@ public class Air : Player, IMove, IJump
         if (canTakeDamage)
         {
             Debug.LogError(player.gameObject.name + "!!");
-            LosingHP(1);
+            LosingHealthHP(1);
         }
     }
 
-    protected override void LosingHP(float iceDamage)
+    protected override void LosingHealthHP(float iceDamage)
     {
         CurrentHealthHP -= iceDamage;
+    }
+    protected override void AddingHealthHP(float iceDamage)
+    {
+        CurrentHealthHP += iceDamage;
     }
 
     protected override void Died()
