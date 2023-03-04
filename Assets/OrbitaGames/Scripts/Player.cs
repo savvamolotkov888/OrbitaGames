@@ -39,7 +39,7 @@ public abstract class Player : MonoBehaviour
         currentBoostHP = CurrentBoostHP = MaxBoostHP;
     }
 
-    protected bool canChangeHealthHP;
+    protected bool canChangeHealthHP = true;
     protected async void FixedChangeHealthHP()
     {
         canChangeHealthHP = false;

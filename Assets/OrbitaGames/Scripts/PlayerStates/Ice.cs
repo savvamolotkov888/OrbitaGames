@@ -161,8 +161,15 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
     protected override void LosingHealthHP(float iceDamageValue)
     {
-        CurrentHealthHP -= iceDamageValue;
-        Debug.LogError("Ice TakeDamage" + iceDamageValue);
+        if (canChangeHealthHP)
+        {
+            if (canChangeHealthHP)
+            {
+                CurrentHealthHP -= iceDamageValue;
+                Debug.LogError("Ice TakeDamage" + iceDamageValue);
+                FixedChangeHealthHP();
+            }
+        }
     }
 
     protected override void AddingHealthHP(float addedHealth)
