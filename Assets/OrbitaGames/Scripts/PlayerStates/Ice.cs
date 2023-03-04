@@ -145,7 +145,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         Debug.LogError("Ice TakeHealth");
     }
 
-    private void OnCollisionStay(Collision player)
+    private void OnCollisionEnter(Collision player)
     {
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
@@ -174,7 +174,12 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
     protected override void AddingHealthHP(float addedHealth)
     {
-        CurrentHealthHP += addedHealth;
+        if (canChangeHealthHP)
+        {
+            CurrentHealthHP += addedHealth;
+            Debug.LogError("Water TakeHealth" + addedHealth);
+            FixedChangeHealthHP();
+        }
     }
 
 

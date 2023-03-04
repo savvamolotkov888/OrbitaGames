@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13171718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: -0.53, z: 2.84}
+  m_LocalPosition: {x: 0.82, y: -2.29, z: 2.84}
   m_LocalScale: {x: 2, y: 0.3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iceHealth: 20
   waterHealth: 1
-  universalDamageValue: 0
+  universalDamageValue: 1
 --- !u!1001 &137359062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890382054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.03, y: -0.53, z: 1.65}
+  m_LocalPosition: {x: 4.03, y: -2.2, z: 1.65}
   m_LocalScale: {x: 2, y: 0.3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2457,11 +2457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 817997092255810270, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.13982
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 817997092255810270, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.164844
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2477,11 +2477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008520947
+      value: -0.000000008520947
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000011867423
+      value: 0.0000000011867423
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2601,19 +2601,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085961449061805030, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.13982
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5085961449061805030, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.164844
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5620477994659397367, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.13982
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5620477994659397367, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.164844
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5892456588465764655, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_IsActive
@@ -2689,7 +2689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8883401772662646316, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: boostSpeed
-      value: 0.02
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8883401772662646316, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: MaxHealthHP
@@ -2706,6 +2706,10 @@ PrefabInstance:
     - target: {fileID: 8883401772662646316, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: currentBoostHP
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883401772662646316, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
+      propertyPath: HealhChangeTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8883401772662646316, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: DoubleShiftPower
@@ -2731,6 +2735,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: c5cc023bc741e2c45a740c9580a9460d, type: 2}
+    - target: {fileID: 8883401772662646319, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8883401772941342754, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: m_RootOrder
       value: 1
