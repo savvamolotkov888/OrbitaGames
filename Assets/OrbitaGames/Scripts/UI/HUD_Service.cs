@@ -9,7 +9,7 @@ public class HUD_Service : MonoBehaviour
 {
     private PlayerInstanse player;
     private PlayerController playerController;
-    private UIDocument _uiDocument;
+    [SerializeField] private UIDocument _uiDocument;
 
     [SerializeField] private Color SelectedIconBorderColor;
     [SerializeField] private Color DefaultIconBorderColor;
@@ -102,7 +102,6 @@ public class HUD_Service : MonoBehaviour
     private void Initialization()
     {
         playerController = player.GetComponentInChildren<PlayerController>();
-        _uiDocument = GetComponentInChildren<UIDocument>();
 
         water = playerController.water;
         ice = playerController.ice;
