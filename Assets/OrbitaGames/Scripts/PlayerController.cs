@@ -110,9 +110,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-#if !UNITY_EDITOR
-        Cursor.lockState = CursorLockMode.Locked;
-#endif
         Direction = new PlayerDirection();
         Direction.AirControll = 1;
 
