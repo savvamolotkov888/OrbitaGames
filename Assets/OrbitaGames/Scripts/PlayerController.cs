@@ -172,8 +172,8 @@ public class PlayerController : MonoBehaviour
                 Move(water);
                 break;
             case PlayerState.Ice:
-                if (playerSensor.CanJump)
-                    Move(ice);
+                //  if (playerSensor.CanJump)
+                Move(ice);
                 break;
             case PlayerState.Air:
                 air.transform.LookAt(targetB);
@@ -296,7 +296,8 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("TO DO");
         }
 
-        transform.position = waterActor.solver.transform.TransformPoint(com);;
+        transform.position = waterActor.solver.transform.TransformPoint(com);
+        ;
     }
 
     private void TransformaitionToIce()

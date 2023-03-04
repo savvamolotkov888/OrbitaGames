@@ -80,6 +80,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     [SerializeField] private float ShiftPower;
     [SerializeField] private float boostSpeed;
     private CompositeDisposable compositeDisposable = new();
+    [SerializeField] private float JumpAcceleration;
 
     private void Awake()
     {
@@ -112,7 +113,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     public void Jump(PlayerDirection direction, Player ice)
     {
         Debug.Log("IceJump");
-        //  iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
+        iceRigidbody.AddForce(0, JumpAcceleration, 0, ForceMode.Impulse);
     }
 
     public void Shift(PlayerDirection direction, Player ice, float IceAcelerationTime)
@@ -145,8 +146,11 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         Debug.LogError("Ice TakeHealth");
     }
 
-    private void OnCollisionEnter(Collision player)
+    private void OnCollisionStay(Collision player)
     {
+        //TODO НУЖЕН ФИКС
+        iceRigidbody.WakeUp();
+        
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
             LosingHealthHP(enemy.iceDamage);
