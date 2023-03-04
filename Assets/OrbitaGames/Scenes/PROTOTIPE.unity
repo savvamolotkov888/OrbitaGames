@@ -1291,6 +1291,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7691322562535656190, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
   m_PrefabInstance: {fileID: 5549507794120064723}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1201697429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3583600249481543070, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
+  m_PrefabInstance: {fileID: 5549507794120064723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1201697430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,6 +1509,54 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 1477537252}
   m_DistanceField: {fileID: 0}
+--- !u!1 &1480214669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480214670}
+  - component: {fileID: 1480214671}
+  m_Layer: 5
+  m_Name: 'PausePanelDocument '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1480214670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480214669}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.756266, y: -5.25272, z: 3.5239604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1201697429}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1480214671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480214669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 9d5845b0abfa56c4c8fb15dc47bdae06, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 68f6a57b0ba83444dbbd3b9eb849c2ed, type: 3}
+  m_SortingOrder: -1.58
 --- !u!1 &1495905474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2525,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.9760396
       objectReference: {fileID: 0}
+    - target: {fileID: 670447218698255206, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
+      propertyPath: m_Name
+      value: HUDDocument
+      objectReference: {fileID: 0}
     - target: {fileID: 817997092255810270, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
       value: 3
@@ -2498,11 +2555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000007043292
+      value: 0.000000008701328
       objectReference: {fileID: 0}
     - target: {fileID: 2100378696835903798, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -9.809442e-10
+      value: -0.0000000012118644
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2510,11 +2567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019456479
+      value: -0.000000018534974
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000037469756
+      value: 0.00000000356951
       objectReference: {fileID: 0}
     - target: {fileID: 2975608650009481805, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Follow
@@ -2538,15 +2595,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3156774716942361995, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.18910754
+      value: 0.18910751
       objectReference: {fileID: 0}
     - target: {fileID: 3156774716942361995, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1.4626357e-28
+      value: 0.0000000327188
       objectReference: {fileID: 0}
     - target: {fileID: 3156774716942361995, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.080713e-29
+      value: -0.0000000063010637
       objectReference: {fileID: 0}
     - target: {fileID: 3562506519802062281, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2658,11 +2715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000019456477
+      value: -0.00000001853497
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000003746975
+      value: 0.000000003569508
       objectReference: {fileID: 0}
     - target: {fileID: 7691322562535656190, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Name
@@ -2670,7 +2727,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3583600249481543070, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1480214670}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7691322562535656190, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       insertIndex: -1
