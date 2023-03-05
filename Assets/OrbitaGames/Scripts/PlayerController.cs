@@ -2,6 +2,7 @@ using System;
 using Obi;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 using Task = System.Threading.Tasks.Task;
 
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float IceAcelerationTime; // пока не используем
     [SerializeField] private float IceDoubleShiftDelay;
     private short clickCount; //for double clicks
+
+    [FormerlySerializedAs("IceRotator")] [SerializeField] private Transform IceY_Rotator;
 
     #region CameraDebug
 
@@ -241,7 +244,11 @@ public class PlayerController : MonoBehaviour
                 transform.position = waterActor.solver.transform.TransformPoint(com);
                 break;
             case PlayerState.Ice:
-                transform.position = ice.transform.position;
+                transform.position = IceY_Rotator.transform.position = ice.transform.position;
+                IceY_Rotator.transform.rotation = Quaternion.Euler(0, ice.transform.rotation.eulerAngles.y, 0);
+
+                Debug.LogError(ice.transform.rotation.eulerAngles.y);
+
 
                 break;
             case PlayerState.Air:

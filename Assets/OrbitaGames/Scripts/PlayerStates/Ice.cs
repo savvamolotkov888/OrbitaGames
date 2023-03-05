@@ -9,6 +9,7 @@ using Zenject;
 public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
+  
 
     [SerializeField] private float RotationAcceleration;
 
@@ -119,7 +120,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
             return;
         }
 
-      //  Debug.LogError(rotationDirection);
+        //  Debug.LogError(rotationDirection);
 
         if (rotationDirection == RotateDirection.DontRotate)
         {
