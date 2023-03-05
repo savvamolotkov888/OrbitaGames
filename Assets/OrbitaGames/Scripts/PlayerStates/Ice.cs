@@ -81,6 +81,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     [SerializeField] private float boostSpeed;
     private CompositeDisposable compositeDisposable = new();
     [SerializeField] private float JumpAcceleration;
+    [SerializeField] private Transform referenceFrame;
 
     private void Awake()
     {
@@ -95,19 +96,43 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     public void Move(PlayerDirection direction, Player ice,
         RotateDirection rotationDirection)
     {
-        iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
-        if (direction.Forward != 1 && direction.Forward != -1)
-            return;
+        // iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0, 0);
+        // if (direction.Forward != 1 && direction.Forward != -1)
+        //     return;
+        //
+        //
+        // if (rotationDirection != RotateDirection.DontRotate)
+        //     iceRigidbody.AddTorque(0, RotationAcceleration * (float)rotationDirection * shiftAcceleration, 0);
+        //
+        // if (rotationDirection == RotateDirection.DontRotate)
+        // {
+        //     iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0,
+        //         direction.Forward * MoveAcceleration * shiftAcceleration);
+        // }
+        var forceDirection = Vector3.zero;
 
-
-        if (rotationDirection != RotateDirection.DontRotate)
-            iceRigidbody.AddTorque(0, RotationAcceleration * (float)rotationDirection * shiftAcceleration, 0);
-
-        if (rotationDirection == RotateDirection.DontRotate)
+        if (direction.Forward != 0)
         {
-            iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0,
-                direction.Forward * MoveAcceleration * shiftAcceleration);
+            forceDirection += referenceFrame.forward * MoveAcceleration;
+            forceDirection.y = transform.position.y;
+            
+            if (direction.Forward != 0)
+            iceRigidbody.AddForce(new Vector3(forceDirection.normalized.x, forceDirection.normalized.y,
+                                      forceDirection.normalized.z)
+                                  * MoveAcceleration * direction.Forward * direction.AirControll,
+                ForceMode.Force);
         }
+
+        if (direction.Lateral != 0)
+        {
+            forceDirection += referenceFrame.right * MoveAcceleration;
+            iceRigidbody.AddForce(
+                forceDirection.normalized * MoveAcceleration * direction.Lateral * direction.AirControll,
+                ForceMode.Force);
+        }
+
+        Debug.DrawRay(transform.position, forceDirection * 2, Color.black);
+        Debug.LogError(forceDirection);
     }
 
     public void Jump(PlayerDirection direction, Player ice)
@@ -150,7 +175,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
     {
         //TODO НУЖЕН ФИКС
         iceRigidbody.WakeUp();
-        
+
         if (player.gameObject.TryGetComponent(out DamagePlatfom enemy))
         {
             LosingHealthHP(enemy.iceDamage);
