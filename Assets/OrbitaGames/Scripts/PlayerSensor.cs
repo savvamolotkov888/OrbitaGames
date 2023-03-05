@@ -14,7 +14,7 @@ public class PlayerSensor : MonoBehaviour
     private Transform Target;
     public Transform Camera;
     private Vector3 _targetPoz;
-    private RotateDirection rotator;
+     [SerializeField] private RotateDirection rotator;
 
     public RotateDirection Rorator
     {
@@ -105,9 +105,10 @@ public class PlayerSensor : MonoBehaviour
     {
         angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, Ice.transform.forward, Vector3.up);
         _targetPoz = Ice.transform.position + Camera.position;
+        _targetPoz.y = 0;
+         Debug.DrawRay(transform.position, _targetPoz * 2, Color.black);
 
-
-        var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
+     //   var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
 
 //        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
 

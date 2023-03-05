@@ -109,30 +109,45 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
         //     iceRigidbody.AddRelativeForce(direction.Lateral * MoveAcceleration, 0,
         //         direction.Forward * MoveAcceleration * shiftAcceleration);
         // }
-        var forceDirection = Vector3.zero;
 
-        if (direction.Forward != 0)
+        if (direction.Forward == 0 && direction.Lateral == 0)
+            return;
+
+        if (rotationDirection != RotateDirection.DontRotate)
         {
-            forceDirection += referenceFrame.forward * MoveAcceleration;
-            forceDirection.y = transform.position.y;
-            
+            iceRigidbody.AddTorque(0, RotationAcceleration * (float)rotationDirection * shiftAcceleration, 0);
+            return;
+        }
+
+      //  Debug.LogError(rotationDirection);
+
+        if (rotationDirection == RotateDirection.DontRotate)
+        {
+            var forceDirection = Vector3.zero;
+
             if (direction.Forward != 0)
-            iceRigidbody.AddForce(new Vector3(forceDirection.normalized.x, forceDirection.normalized.y,
-                                      forceDirection.normalized.z)
-                                  * MoveAcceleration * direction.Forward * direction.AirControll,
-                ForceMode.Force);
-        }
+            {
+                forceDirection += referenceFrame.forward * MoveAcceleration;
+                forceDirection.y = transform.position.y;
 
-        if (direction.Lateral != 0)
-        {
-            forceDirection += referenceFrame.right * MoveAcceleration;
-            iceRigidbody.AddForce(
-                forceDirection.normalized * MoveAcceleration * direction.Lateral * direction.AirControll,
-                ForceMode.Force);
-        }
+                Debug.LogError(11);
+                iceRigidbody.AddForce(new Vector3(forceDirection.normalized.x, forceDirection.normalized.y,
+                                          forceDirection.normalized.z)
+                                      * MoveAcceleration * direction.Forward * direction.AirControll,
+                    ForceMode.Force);
+            }
 
-        Debug.DrawRay(transform.position, forceDirection * 2, Color.black);
-        Debug.LogError(forceDirection);
+            if (direction.Lateral != 0)
+            {
+                Debug.LogError(00);
+                forceDirection += referenceFrame.right * MoveAcceleration;
+                forceDirection.y = transform.position.y;
+                iceRigidbody.AddForce(
+                    forceDirection.normalized * MoveAcceleration * direction.Lateral * direction.AirControll,
+                    ForceMode.Force);
+            }
+            // Debug.DrawRay(transform.position, forceDirection * 2, Color.black);
+        }
     }
 
     public void Jump(PlayerDirection direction, Player ice)
