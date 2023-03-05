@@ -13,7 +13,7 @@ public class PlayerSensor : MonoBehaviour
 {
     private Transform Target;
     public Transform Camera;
-    private Vector3 _targetPoz;
+    public Transform _targetPoz;
     [SerializeField] private RotateDirection rotator;
     [SerializeField] private Transform IceY_Rotator;
 
@@ -90,7 +90,7 @@ public class PlayerSensor : MonoBehaviour
                     CanJump = true;
 
                 //else
-                    //CanJump = false;
+                //CanJump = false;
             }
         }
     }
@@ -104,14 +104,16 @@ public class PlayerSensor : MonoBehaviour
 
     private void IceRotationCheck()
     {
-        angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceY_Rotator.transform.forward, Vector3.up);
-        _targetPoz = IceY_Rotator.transform.position + Camera.position;
-        _targetPoz.y = 0;
-        Debug.DrawRay(transform.position, _targetPoz * 2, Color.black);
+        angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceY_Rotator.transform.forward,
+            Vector3.up);
+        _targetPoz.position = - new Vector3(IceY_Rotator.transform.position.x + Camera.position.x, 0,
+            IceY_Rotator.transform.position.z + Camera.position.z);
+
+        //Debug.DrawRay(transform.position, _targetPoz * 2, Color.black);
 
         //   var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
 
-//        Debug.LogError(Ice.transform.position+"  "+_targetPoz);
+       Debug.DrawRay(Ice.transform.position ,-_targetPoz.position ,Color.black);
 
         if (angle > 5 && angle < 180)
         {
