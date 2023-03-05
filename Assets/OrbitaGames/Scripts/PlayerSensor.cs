@@ -89,8 +89,8 @@ public class PlayerSensor : MonoBehaviour
                 if (hit.distance < 0.5)
                     CanJump = true;
 
-                else
-                    CanJump = false;
+                //else
+                    //CanJump = false;
             }
         }
     }
