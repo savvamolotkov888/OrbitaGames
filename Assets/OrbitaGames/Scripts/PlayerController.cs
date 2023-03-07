@@ -21,12 +21,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float IceDoubleShiftDelay;
     private short clickCount; //for double clicks
 
-    [FormerlySerializedAs("IceRotator")] [SerializeField] private Transform IceY_Rotator;
+    [FormerlySerializedAs("IceRotator")] [SerializeField]
+    private Transform IceY_Rotator;
 
     #region CameraDebug
 
-    [SerializeField] private Transform targetA;
-    public Transform targetB;
+    public Transform Target;
     public float smoothFacor;
 
     #endregion
@@ -150,9 +150,9 @@ public class PlayerController : MonoBehaviour
         if (inputSystem.Transformation.ToAir.ReadValue<float>() > 0)
             TransformaitionToAir();
 
-        LookAtpoz = Vector3.Lerp(targetB.position,
-            new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z), smoothFacor);
-        targetB.position = LookAtpoz;
+        // LookAtpoz = Vector3.Lerp(targetB.position,
+        //     new Vector3(targetA.position.x, ice.transform.position.y, targetA.position.z), smoothFacor);
+        // targetB.position = LookAtpoz;
         UpdatePosition();
     }
 
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                 Move(ice);
                 break;
             case PlayerState.Air:
-                air.transform.LookAt(targetB);
+                air.transform.LookAt(Target);
                 Move(air);
                 break;
         }

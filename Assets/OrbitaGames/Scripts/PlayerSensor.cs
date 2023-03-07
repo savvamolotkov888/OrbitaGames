@@ -68,7 +68,7 @@ public class PlayerSensor : MonoBehaviour
     {
         CanJump = true;
         playerController = GetComponent<PlayerController>();
-        Target = playerController.targetB;
+        Target = playerController.Target;
     }
 
     void FixedUpdate()
@@ -106,14 +106,10 @@ public class PlayerSensor : MonoBehaviour
     {
         angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceY_Rotator.transform.forward,
             Vector3.up);
-        _targetPoz.position = - new Vector3(IceY_Rotator.transform.position.x + Camera.position.x, 0,
-            IceY_Rotator.transform.position.z + Camera.position.z);
+        // _targetPoz.position = - new Vector3(IceY_Rotator.transform.position.x + Camera.position.x, 0,
+        //     IceY_Rotator.transform.position.z + Camera.position.z);
 
-        //Debug.DrawRay(transform.position, _targetPoz * 2, Color.black);
-
-        //   var angle2 = -Vector3.SignedAngle(_targetPoz - Ice.transform.position, Ice.transform.forward, Vector3.up);
-
-       Debug.DrawRay(Ice.transform.position ,-_targetPoz.position ,Color.black);
+//       Debug.DrawRay(Ice.transform.position ,-_targetPoz.position ,Color.black);
 
         if (angle > 5 && angle < 180)
         {
