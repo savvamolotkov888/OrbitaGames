@@ -12,8 +12,6 @@ using UnityEngine.Serialization;
 public class PlayerSensor : MonoBehaviour
 {
     private Transform Target;
-    public Transform Camera;
-    public Transform _targetPoz;
     [SerializeField] private RotateDirection rotator;
     [SerializeField] private Transform IceY_Rotator;
 
@@ -109,7 +107,7 @@ public class PlayerSensor : MonoBehaviour
         // _targetPoz.position = - new Vector3(IceY_Rotator.transform.position.x + Camera.position.x, 0,
         //     IceY_Rotator.transform.position.z + Camera.position.z);
 
-//       Debug.DrawRay(Ice.transform.position ,-_targetPoz.position ,Color.black);
+        Debug.DrawRay(Ice.transform.position, IceY_Rotator.transform.forward * 200, Color.black);
 
         if (angle > 5 && angle < 180)
         {
