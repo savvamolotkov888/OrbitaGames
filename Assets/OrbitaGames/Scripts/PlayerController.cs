@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     #region CameraDebug
 
-    public Transform Target;
+    public Transform TargetHorizontal;
     public float smoothFacor;
 
     #endregion
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                 Move(ice);
                 break;
             case PlayerState.Air:
-                air.transform.LookAt(Target);
+                air.transform.LookAt(TargetHorizontal);
                 Move(air);
                 break;
         }

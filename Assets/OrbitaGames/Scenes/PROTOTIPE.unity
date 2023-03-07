@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 205271832}
   - component: {fileID: 205271833}
   m_Layer: 0
-  m_Name: Target
+  m_Name: TargetHorizontal
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3241,11 +3241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 817997092255810270, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3
+      value: 1.000001
       objectReference: {fileID: 0}
     - target: {fileID: 817997092255810270, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.5
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 1333727297116499281, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_IsActive
@@ -3281,11 +3281,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -6.3005517e-15
+      value: 6.3005517e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2923600378682589375, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.2133754e-15
+      value: -1.2133754e-15
       objectReference: {fileID: 0}
     - target: {fileID: 2975608650009481805, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Follow
@@ -3393,19 +3393,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085961449061805030, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3
+      value: 1.000001
       objectReference: {fileID: 0}
     - target: {fileID: 5085961449061805030, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.5
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 5620477994659397367, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3
+      value: 1.000001
       objectReference: {fileID: 0}
     - target: {fileID: 5620477994659397367, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -7.5
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 5892456588465764655, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_IsActive
@@ -3429,11 +3429,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -6.3162773e-15
+      value: 6.3162773e-15
       objectReference: {fileID: 0}
     - target: {fileID: 7388112304660268224, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.2950366e-15
+      value: -1.2950366e-15
       objectReference: {fileID: 0}
     - target: {fileID: 7691322562535656190, guid: 44139b57a72f2054fa9c1413b627b699, type: 3}
       propertyPath: m_Name
@@ -3737,6 +3737,10 @@ PrefabInstance:
       propertyPath: IceY_Rotator
       value: 
       objectReference: {fileID: 209712579}
+    - target: {fileID: 8883401774361029268, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
+      propertyPath: TargetHorizontal
+      value: 
+      objectReference: {fileID: 205271832}
     - target: {fileID: 8883401774361029268, guid: dd4b226414ce3284fa12525a1a4f487d, type: 3}
       propertyPath: PlayerStateAtStart
       value: 1

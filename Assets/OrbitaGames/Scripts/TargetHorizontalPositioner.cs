@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class TargetPositioner : MonoBehaviour
+public class TargetHorizontalPositioner : MonoBehaviour
 {
     [SerializeField] private short ZDistance;
     [SerializeField] private Transform playerPosition;

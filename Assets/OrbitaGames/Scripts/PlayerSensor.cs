@@ -68,7 +68,7 @@ public class PlayerSensor : MonoBehaviour
     {
         CanJump = true;
         playerController = GetComponent<PlayerController>();
-        Target = playerController.Target;
+        Target = playerController.TargetHorizontal;
     }
 
     void FixedUpdate()
