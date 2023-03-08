@@ -9,7 +9,6 @@ using Zenject;
 public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 {
     [SerializeField] private float MoveAcceleration;
-    [SerializeField] private Transform IceY_Rotator;
 
     [SerializeField] private float RotationAcceleration;
 
@@ -96,7 +95,7 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
     private void Update()
     {
-        IceY_Rotator.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        
     }
 
     public void Move(PlayerDirection direction, Player ice,

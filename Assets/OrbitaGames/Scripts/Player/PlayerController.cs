@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private short clickCount; //for double clicks
 
     [FormerlySerializedAs("IceRotator")] [SerializeField]
-    private Transform IceY_Rotator;
 
     #region CameraDebug
 
@@ -244,8 +243,7 @@ public class PlayerController : MonoBehaviour
                 transform.position = waterActor.solver.transform.TransformPoint(com);
                 break;
             case PlayerState.Ice:
-                transform.position = IceY_Rotator.transform.position = ice.transform.position;
-                IceY_Rotator.transform.rotation = Quaternion.Euler(0, ice.transform.rotation.eulerAngles.y, 0);
+                transform.position = ice.transform.position;
 
                 Debug.LogError(ice.transform.rotation.eulerAngles.y);
 

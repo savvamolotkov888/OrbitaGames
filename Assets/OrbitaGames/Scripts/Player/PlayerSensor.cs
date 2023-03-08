@@ -13,7 +13,7 @@ public class PlayerSensor : MonoBehaviour
 {
     private Transform Target;
     [SerializeField] private RotateDirection rotator;
-    [SerializeField] private Transform IceY_Rotator;
+   [SerializeField] private Transform IceDirection;
 
     public RotateDirection Rorator
     {
@@ -102,12 +102,12 @@ public class PlayerSensor : MonoBehaviour
 
     private void IceRotationCheck()
     {
-        angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceY_Rotator.transform.forward,
+        angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceDirection.transform.forward,
             Vector3.up);
         // _targetPoz.position = - new Vector3(IceY_Rotator.transform.position.x + Camera.position.x, 0,
         //     IceY_Rotator.transform.position.z + Camera.position.z);
 
-        Debug.DrawRay(Ice.transform.position, IceY_Rotator.transform.forward * 200, Color.black);
+        Debug.DrawRay(Ice.transform.position, IceDirection.transform.forward * 200, Color.black);
 
         if (angle > 5 && angle < 180)
         {
