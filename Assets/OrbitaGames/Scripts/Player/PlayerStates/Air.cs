@@ -49,13 +49,13 @@ public class Air : Player, IMove, IJump
             if (value < 0)
             {
                 playerController.TransformaitionToPreviousState();
-                Debug.LogError("NO Boost");
+                Debug.Log("NO Boost");
             }
 
             if (value > MaxBoostHP)
             {
                 CurrentBoostHP = MaxBoostHP;
-                Debug.LogError("FULL Boost");
+                Debug.Log("FULL Boost");
             }
         }
     }

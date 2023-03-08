@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IceDirection : MonoBehaviour
 {
-    
     [SerializeField] private Transform ice;
 
     // Update is called once per frame
@@ -14,11 +13,17 @@ public class IceDirection : MonoBehaviour
         transform.rotation =
             Quaternion.Euler(0, ice.transform.rotation.eulerAngles.y, 0);
 
-        if (transform.rotation.eulerAngles.y < 180&&
-            transform.rotation.eulerAngles.y > 179||
-            transform.rotation.eulerAngles.y > -180&&
+        if (transform.rotation.eulerAngles.y < 180 &&
+            transform.rotation.eulerAngles.y > 179 ||
+            transform.rotation.eulerAngles.y > -180 &&
             transform.rotation.eulerAngles.y < -179
            )
-        Debug.LogError("BAG!");
+            Debug.LogError("BAG1!");
+
+        else if (transform.rotation.eulerAngles.y < 1 &&
+                 transform.rotation.eulerAngles.y > 0)
+            Debug.LogError("BAG2!");
+        
+        //Чекать 
     }
 }
