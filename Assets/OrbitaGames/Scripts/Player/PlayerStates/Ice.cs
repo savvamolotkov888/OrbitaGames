@@ -121,7 +121,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
                 forceDirection += referenceFrame.forward * MoveAcceleration;
                 forceDirection.y = transform.position.y;
 
-                Debug.LogError(11);
                 iceRigidbody.AddForce(new Vector3(forceDirection.normalized.x, forceDirection.normalized.y,
                                           forceDirection.normalized.z)
                                       * MoveAcceleration * direction.Forward * direction.AirControll,
@@ -130,7 +129,6 @@ public class Ice : Player, IMove, IJump, IShift, IDoubleShift
 
             if (direction.Lateral != 0)
             {
-                Debug.LogError(00);
                 forceDirection += referenceFrame.right * MoveAcceleration;
                 forceDirection.y = transform.position.y;
                 iceRigidbody.AddForce(

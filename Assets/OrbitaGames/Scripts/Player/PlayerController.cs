@@ -245,7 +245,6 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Ice:
                 transform.position = ice.transform.position;
 
-                Debug.LogError(ice.transform.rotation.eulerAngles.y);
 
 
                 break;
