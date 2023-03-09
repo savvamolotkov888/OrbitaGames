@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class IceDouble : MonoBehaviour
 {
-    [SerializeField] private PlayerSensor playerSensor;
+    [SerializeField] private Transform IceDoubleDirection;
     [SerializeField] private Transform player;
     [SerializeField] private Transform TargetVertical;
     [SerializeField] private float DebugLength;
@@ -47,31 +47,31 @@ public class IceDouble : MonoBehaviour
             _currentIceAxis = value;
             CurrentIceAxisText.text = value.ToString();
 
-            // if (_currentIceAxis == CurrentIceAxis.X)
-            // {
-            //     playerSensor.Target = Y;
-            // }
-            // else if (_currentIceAxis == CurrentIceAxis.Xm)
-            // {
-            //     playerSensor.Target = Ym;
-            // }
-            //
-            // else if (_currentIceAxis == CurrentIceAxis.Y)
-            // {
-            //     playerSensor.Target = Xm;
-            // }
-            // else if (_currentIceAxis == CurrentIceAxis.Ym)
-            // {
-            //     playerSensor.Target = X;
-            // }
-            // else if (_currentIceAxis == CurrentIceAxis.Z)
-            // {
-            //     playerSensor.Target = Y;
-            // }
-            // else if (_currentIceAxis == CurrentIceAxis.Zm)
-            // {
-            //     playerSensor.Target = Ym;
-            // }
+            if (_currentIceAxis == CurrentIceAxis.X)
+            {
+                IceDoubleDirection.position = Y.position;
+            }
+            else if (_currentIceAxis == CurrentIceAxis.Xm)
+            {
+                IceDoubleDirection.position = Ym.position;
+            }
+
+            else if (_currentIceAxis == CurrentIceAxis.Y)
+            {
+                IceDoubleDirection.position = Xm.position;
+            }
+            else if (_currentIceAxis == CurrentIceAxis.Ym)
+            {
+                IceDoubleDirection.position = Z.position;
+            }
+            else if (_currentIceAxis == CurrentIceAxis.Z)
+            {
+                IceDoubleDirection.position = Y.position;
+            }
+            else if (_currentIceAxis == CurrentIceAxis.Zm)
+            {
+                IceDoubleDirection.position = Ym.position;
+            }
         }
     }
 
