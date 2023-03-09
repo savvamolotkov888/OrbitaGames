@@ -13,16 +13,16 @@ public class IceDirection : MonoBehaviour
         transform.rotation =
             Quaternion.Euler(0, ice.transform.rotation.eulerAngles.y, 0);
 
-        if (transform.rotation.eulerAngles.y < 180 &&
-            transform.rotation.eulerAngles.y > 179 ||
-            transform.rotation.eulerAngles.y > -180 &&
-            transform.rotation.eulerAngles.y < -179
-           )
-            Debug.LogError("BAG1!");
-
-        else if (transform.rotation.eulerAngles.y < 1 &&
-                 transform.rotation.eulerAngles.y > 0)
-            Debug.LogError("BAG2!");
+        // if (transform.rotation.eulerAngles.y < 180 &&
+        //     transform.rotation.eulerAngles.y > 179 ||
+        //     transform.rotation.eulerAngles.y > -180 &&
+        //     transform.rotation.eulerAngles.y < -179
+        //    )
+        //     Debug.LogError("BAG1!");
+        //
+        // else if (transform.rotation.eulerAngles.y < 1 &&
+        //          transform.rotation.eulerAngles.y > 0)
+        //     Debug.LogError("BAG2!");
         
         //Чекать 
     }

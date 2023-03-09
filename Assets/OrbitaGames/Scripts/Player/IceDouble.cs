@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class IceDouble : MonoBehaviour
 {
+    [SerializeField] private PlayerSensor playerSensor;
     [SerializeField] private Transform player;
     [SerializeField] private Transform TargetVertical;
     [SerializeField] private float DebugLength;
@@ -16,10 +19,69 @@ public class IceDouble : MonoBehaviour
     [SerializeField] private Transform Z;
     [SerializeField] private Transform Zm;
 
-    // Update is called once per frame
-    void Update()
+
+    [SerializeField] private LayerMask DebugLayerMask;
+
+    private RaycastHit _X;
+    private RaycastHit _Xm;
+    private RaycastHit _Y;
+    private RaycastHit _Ym;
+    private RaycastHit _Z;
+    private RaycastHit _Zm;
+
+    private Ray __X;
+    private Ray __Xm;
+    private Ray __Y;
+    private Ray __Ym;
+    private Ray __Z;
+    private Ray __Zm;
+
+    [SerializeField] private TMP_Text CurrentIceAxisText;
+    private CurrentIceAxis _currentIceAxis;
+
+    private CurrentIceAxis _CurrentIceAxis
+    {
+        get => _currentIceAxis;
+        set
+        {
+            _currentIceAxis = value;
+            CurrentIceAxisText.text = value.ToString();
+
+            // if (_currentIceAxis == CurrentIceAxis.X)
+            // {
+            //     playerSensor.Target = Y;
+            // }
+            // else if (_currentIceAxis == CurrentIceAxis.Xm)
+            // {
+            //     playerSensor.Target = Ym;
+            // }
+            //
+            // else if (_currentIceAxis == CurrentIceAxis.Y)
+            // {
+            //     playerSensor.Target = Xm;
+            // }
+            // else if (_currentIceAxis == CurrentIceAxis.Ym)
+            // {
+            //     playerSensor.Target = X;
+            // }
+            // else if (_currentIceAxis == CurrentIceAxis.Z)
+            // {
+            //     playerSensor.Target = Y;
+            // }
+            // else if (_currentIceAxis == CurrentIceAxis.Zm)
+            // {
+            //     playerSensor.Target = Ym;
+            // }
+        }
+    }
+
+
+    void FixedUpdate()
     {
         transform.rotation = player.rotation;
+
+        RayUpdate();
+        RaycastHitCheck();
 
         Debug.DrawRay(transform.position, X.position - transform.position, Color.white);
         Debug.DrawRay(transform.position, Xm.position - transform.position, Color.red);
@@ -27,5 +89,41 @@ public class IceDouble : MonoBehaviour
         Debug.DrawRay(transform.position, Ym.position - transform.position, Color.green);
         Debug.DrawRay(transform.position, Z.position - transform.position, Color.blue);
         Debug.DrawRay(transform.position, Zm.position - transform.position, Color.blue);
+    }
+
+    private void RayUpdate()
+    {
+        __X = new Ray(transform.position, X.position - transform.position);
+        __Xm = new Ray(transform.position, Xm.position - transform.position);
+        __Y = new Ray(transform.position, Y.position - transform.position);
+        __Ym = new Ray(transform.position, Ym.position - transform.position);
+        __Z = new Ray(transform.position, Z.position - transform.position);
+        __Zm = new Ray(transform.position, Zm.position - transform.position);
+    }
+
+    private void RaycastHitCheck()
+    {
+        if (Physics.Raycast(__X, out RaycastHit XInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.X;
+        else if (Physics.Raycast(__Xm, out RaycastHit XmInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.Xm;
+        else if (Physics.Raycast(__Y, out RaycastHit YInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.Y;
+        else if (Physics.Raycast(__Ym, out RaycastHit YmInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.Ym;
+        else if (Physics.Raycast(__Z, out RaycastHit ZInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.Z;
+        else if (Physics.Raycast(__Zm, out RaycastHit ZmInfo, 1, DebugLayerMask))
+            _CurrentIceAxis = CurrentIceAxis.Zm;
+    }
+
+    private enum CurrentIceAxis
+    {
+        X,
+        Xm,
+        Y,
+        Ym,
+        Z,
+        Zm
     }
 }

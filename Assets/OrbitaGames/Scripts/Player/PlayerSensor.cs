@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 /// </summary>
 public class PlayerSensor : MonoBehaviour
 {
-    private Transform Target;
+    public Transform Target;
     [SerializeField] private RotateDirection rotator;
    [SerializeField] private Transform IceDirection;
 
