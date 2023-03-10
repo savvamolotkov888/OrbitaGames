@@ -7,9 +7,13 @@ using UnityEngine.Serialization;
 
 public class IceDouble : MonoBehaviour
 {
+    public Transform Target1;
+    public Transform Target2;
+
     [SerializeField] private Transform IceDoubleDirection;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform TargetVertical;
+    [SerializeField] private Transform playerDoubleTarget;
+    [SerializeField] private Transform playerDoubleDirection;
     [SerializeField] private float DebugLength;
 
     [SerializeField] private Transform X;
@@ -75,6 +79,8 @@ public class IceDouble : MonoBehaviour
         }
     }
 
+    private Quaternion quaternion;
+
 
     void FixedUpdate()
     {
@@ -89,6 +95,17 @@ public class IceDouble : MonoBehaviour
         Debug.DrawRay(transform.position, Ym.position - transform.position, Color.green);
         Debug.DrawRay(transform.position, Z.position - transform.position, Color.blue);
         Debug.DrawRay(transform.position, Zm.position - transform.position, Color.blue);
+
+        //
+        // var angle = Vector3.SignedAngle(transform.position + playerDoubleDirection.position,
+        //     transform.position +playerDoubleTarget.position,
+        //     Vector3.up);
+
+        Debug.DrawLine(transform.position, playerDoubleDirection.position, Color.white);
+        Debug.DrawLine(transform.position, playerDoubleTarget.position, Color.yellow);
+        Debug.DrawLine(transform.position, Vector3.up * 8, Color.red);
+
+        Debug.LogError(Quaternion.Angle(Target1.rotation, Target2.rotation));
     }
 
     private void RayUpdate()

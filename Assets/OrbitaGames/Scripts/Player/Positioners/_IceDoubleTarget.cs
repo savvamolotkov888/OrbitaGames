@@ -7,7 +7,7 @@ using Zenject;
 public class _IceDoubleTarget : MonoBehaviour
 {
     [SerializeField] private short ZDistance;
-    [FormerlySerializedAs("playerClonePosition")] [FormerlySerializedAs("playerPosition")] [SerializeField] private Transform playerDoublePosition;
+     [SerializeField] private Transform playerDoublePosition;
     private HUD_Service _HUDService;
     private Camera camera;
 
@@ -31,6 +31,7 @@ public class _IceDoubleTarget : MonoBehaviour
     {
         _targetVector = camera.transform.TransformPoint(0, 0, ZDistance);
         targetVector = new Vector3(_targetVector.x, playerDoublePosition.position.y, _targetVector.z);
+        
     }
 
     private void LateUpdate()
