@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class IceDouble : MonoBehaviour
 {
+    public static float angle;
     public Transform Target1;
     public Transform Target2;
+    [SerializeField] private Transform up;
 
     [SerializeField] private Transform IceDoubleDirection;
     [SerializeField] private Transform player;
@@ -54,27 +57,33 @@ public class IceDouble : MonoBehaviour
             if (_currentIceAxis == CurrentIceAxis.X)
             {
                 IceDoubleDirection.position = Y.position;
+                up.position = Xm.position;
             }
             else if (_currentIceAxis == CurrentIceAxis.Xm)
             {
                 IceDoubleDirection.position = Ym.position;
+                up.position = X.position;
             }
 
             else if (_currentIceAxis == CurrentIceAxis.Y)
             {
                 IceDoubleDirection.position = Xm.position;
+                up.position = Ym.position;
             }
             else if (_currentIceAxis == CurrentIceAxis.Ym)
             {
                 IceDoubleDirection.position = Z.position;
+                up.position = Y.position;
             }
             else if (_currentIceAxis == CurrentIceAxis.Z)
             {
                 IceDoubleDirection.position = Y.position;
+                up.position = Zm.position;
             }
             else if (_currentIceAxis == CurrentIceAxis.Zm)
             {
                 IceDoubleDirection.position = Ym.position;
+                up.position = Z.position;
             }
         }
     }
@@ -103,9 +112,13 @@ public class IceDouble : MonoBehaviour
 
         Debug.DrawLine(transform.position, playerDoubleDirection.position, Color.white);
         Debug.DrawLine(transform.position, playerDoubleTarget.position, Color.yellow);
-        Debug.DrawLine(transform.position, Vector3.up * 8, Color.red);
 
-        Debug.LogError(Quaternion.Angle(Target1.rotation, Target2.rotation));
+        angle = (-Vector3.SignedAngle(playerDoubleTarget.position - transform.position,
+            playerDoubleDirection.position - transform.position, up.position -transform.position));
+
+Debug.LogError(angle);
+        // angle = -Vector3.SignedAngle(Target.position - Ice.transform.position, IceDirection.transform.forward,
+        //     Vector3.up);
     }
 
     private void RayUpdate()
